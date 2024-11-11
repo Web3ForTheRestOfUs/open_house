@@ -1,0 +1,390 @@
+{
+  "address": "B6g6uSjcFRn9U1p1wv4s7eggzUoFCn7koc2cnonrEZGJ",
+  "metadata": {
+    "name": "open_house",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Created with Anchor"
+  },
+  "instructions": [
+    {
+      "name": "distribute_rewards",
+      "discriminator": [
+        97,
+        6,
+        227,
+        255,
+        124,
+        165,
+        3,
+        148
+      ],
+      "accounts": [
+        {
+          "name": "scout",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "account",
+                "path": "scout"
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "handle_location_reveal",
+      "discriminator": [
+        87,
+        149,
+        160,
+        93,
+        8,
+        146,
+        24,
+        103
+      ],
+      "accounts": [
+        {
+          "name": "renter",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "account",
+                "path": "renter"
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "fee",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "register_property",
+      "discriminator": [
+        25,
+        115,
+        131,
+        71,
+        59,
+        22,
+        25,
+        16
+      ],
+      "accounts": [
+        {
+          "name": "property",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "arg",
+                "path": "property_id"
+              }
+            ]
+          }
+        },
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "property_id",
+          "type": "string"
+        },
+        {
+          "name": "details",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "submit_review",
+      "discriminator": [
+        106,
+        30,
+        50,
+        83,
+        89,
+        46,
+        213,
+        239
+      ],
+      "accounts": [
+        {
+          "name": "review",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "arg",
+                "path": "property_id"
+              },
+              {
+                "kind": "account",
+                "path": "renter"
+              }
+            ]
+          }
+        },
+        {
+          "name": "renter",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "review_content",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "update_property",
+      "discriminator": [
+        232,
+        71,
+        59,
+        188,
+        98,
+        74,
+        94,
+        54
+      ],
+      "accounts": [
+        {
+          "name": "property",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "account",
+                "path": "property.property_id",
+                "account": "Property"
+              }
+            ]
+          }
+        },
+        {
+          "name": "owner",
+          "signer": true,
+          "relations": [
+            "property"
+          ]
+        }
+      ],
+      "args": [
+        {
+          "name": "new_details",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "validate_review",
+      "discriminator": [
+        185,
+        156,
+        66,
+        110,
+        212,
+        32,
+        15,
+        35
+      ],
+      "accounts": [
+        {
+          "name": "review",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "account",
+                "path": "review.property_id",
+                "account": "Review"
+              },
+              {
+                "kind": "account",
+                "path": "review.renter",
+                "account": "Review"
+              }
+            ]
+          }
+        },
+        {
+          "name": "verifier",
+          "signer": true
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "verify_property",
+      "discriminator": [
+        155,
+        196,
+        192,
+        102,
+        122,
+        77,
+        122,
+        207
+      ],
+      "accounts": [
+        {
+          "name": "property",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "arg",
+                "path": "property_id"
+              }
+            ]
+          }
+        },
+        {
+          "name": "verifier",
+          "signer": true
+        }
+      ],
+      "args": []
+    }
+  ],
+  "accounts": [
+    {
+      "name": "Property",
+      "discriminator": [
+        195,
+        247,
+        69,
+        181,
+        195,
+        47,
+        152,
+        19
+      ]
+    },
+    {
+      "name": "Review",
+      "discriminator": [
+        124,
+        63,
+        203,
+        215,
+        226,
+        30,
+        222,
+        15
+      ]
+    },
+    {
+      "name": "User",
+      "discriminator": [
+        159,
+        117,
+        95,
+        227,
+        239,
+        151,
+        58,
+        236
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "InsufficientFunds",
+      "msg": "Insufficient Funds"
+    }
+  ],
+  "types": [
+    {
+      "name": "Property",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "owner",
+            "type": "pubkey"
+          },
+          {
+            "name": "property_id",
+            "type": "string"
+          },
+          {
+            "name": "details",
+            "type": "string"
+          },
+          {
+            "name": "verified",
+            "type": "bool"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Review",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "content",
+            "type": "string"
+          },
+          {
+            "name": "validated",
+            "type": "bool"
+          },
+          {
+            "name": "property_id",
+            "type": "string"
+          },
+          {
+            "name": "renter",
+            "type": "pubkey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "User",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "tokens",
+            "type": "u64"
+          }
+        ]
+      }
+    }
+  ]
+}
