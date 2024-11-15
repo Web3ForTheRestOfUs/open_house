@@ -49,10 +49,11 @@ export function UiLayout({
           <ClusterUiSelect />
         </div>
       </div>
-      <ClusterChecker>
+      {/* UNCOMMENT AS IT IS IMPORTANT!! */}
+      {/* <ClusterChecker>
         <AccountChecker />
-      </ClusterChecker>
-      <div className="flex-grow mx-4 lg:mx-auto">
+      </ClusterChecker> */}
+      <div className="flex-grow w-full bg-[#f6f6f6]">
         <Suspense
           fallback={
             <div className="text-center my-32">
