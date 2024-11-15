@@ -3,6 +3,7 @@ import { UiLayout } from '@/components/ui/ui-layout';
 import { ClusterProvider } from '@/components/cluster/cluster-data-access';
 import { SolanaProvider } from '@/components/solana/solana-provider';
 import { ReactQueryProvider } from './react-query-provider';
+// import SimpleMultiStepForm from '@/components/multiStepForm/multi-step-form-feature';
 
 export const metadata = {
   title: 'open-house',
@@ -13,6 +14,7 @@ const links: { label: string; path: string }[] = [
   { label: 'Account', path: '/account' },
   { label: 'Clusters', path: '/clusters' },
   { label: 'Counter Program', path: '/counter' },
+  { label: 'Upload Property', path: '/multiStepForm'}
 ];
 
 export default function RootLayout({
@@ -27,6 +29,7 @@ export default function RootLayout({
           <ClusterProvider>
             <SolanaProvider>
               <UiLayout links={links}>{children}</UiLayout>
+              {/* <SimpleMultiStepForm showStepNumber={true} /> */}
             </SolanaProvider>
           </ClusterProvider>
         </ReactQueryProvider>
