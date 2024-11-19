@@ -7,7 +7,6 @@ import StepD from '../listing_upload_form/stepD';
 import StepE from '../listing_upload_form/stepE';
 import StepFinal from '../listing_upload_form/stepFinal';
 
-
 // Define the type for form data
 interface FormData {
   address: string;
@@ -15,7 +14,7 @@ interface FormData {
   propertyType: string;
   bedroom: number; // Updated to number
   bathroom: number; // Updated to number
-  size: number; 
+  size: number;
   amenities: string[];
   neighbourhoodQuality: string;
   safetyRating: string;
@@ -54,7 +53,9 @@ const initialFormData: FormData = {
 
 const stepsArray = ['A', 'B', 'C', 'D', 'E'];
 
-const SimpleMultiStepForm: React.FC<SimpleMultiStepFormProps> = ({ showStepNumber }) => {
+const SimpleMultiStepForm: React.FC<SimpleMultiStepFormProps> = ({
+  showStepNumber,
+}) => {
   const [step, setStep] = useState<string>('A');
   const [formData, setFormData] = useState<FormData>(initialFormData);
 
@@ -72,16 +73,26 @@ const SimpleMultiStepForm: React.FC<SimpleMultiStepFormProps> = ({ showStepNumbe
     else if (step === 'B') setStep('A');
   };
 
-  const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChangeInput = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value, checked, type } = event.target as HTMLInputElement; // Narrowing for type safety
-  
+
     setFormData((prev) => ({
       ...prev,
-      [name]: type === 'checkbox' ? checked : name === 'bedroom' || name === 'bathroom' || name === 'size' ? Number(value) : value,
+      [name]:
+        type === 'checkbox'
+          ? checked
+          : name === 'bedroom' || name === 'bathroom' || name === 'size'
+          ? Number(value)
+          : value,
     }));
   };
 
-  const handleAmenitiesChange = (event: React.ChangeEvent<HTMLInputElement>, amenity: string) => {
+  const handleAmenitiesChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    amenity: string
+  ) => {
     const updatedAmenities = [...formData.amenities];
     if (event.target.checked) {
       updatedAmenities.push(amenity);
@@ -126,12 +137,16 @@ const SimpleMultiStepForm: React.FC<SimpleMultiStepFormProps> = ({ showStepNumbe
   };
 
   return (
-    <div className="bg-white w-[576px] max-w-full px-[29px] py-[38px] mx-auto rounded-[16px] shadow-[0px_1px_5px_0px_rgba(0,0,0,0.75)]">
+    <div className="bg-white  max-w-full px-[29px] py-[38px] mx-auto rounded-[16px] shado">
       {renderTopStepNumbers()}
 
       {/* Render Steps */}
       {step === 'A' && (
-        <StepA formData={formData} handleChangeInput={handleChangeInput} handleNextStep={handleNextStep} />
+        <StepA
+          formData={formData}
+          handleChangeInput={handleChangeInput}
+          handleNextStep={handleNextStep}
+        />
       )}
       {step === 'B' && (
         <StepB
@@ -143,10 +158,20 @@ const SimpleMultiStepForm: React.FC<SimpleMultiStepFormProps> = ({ showStepNumbe
         />
       )}
       {step === 'C' && (
-        <StepC formData={formData} handleChangeInput={handleChangeInput} handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} />
+        <StepC
+          formData={formData}
+          handleChangeInput={handleChangeInput}
+          handlePrevStep={handlePrevStep}
+          handleNextStep={handleNextStep}
+        />
       )}
       {step === 'D' && (
-        <StepD formData={formData} handleChangeInput={handleChangeInput} handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} />
+        <StepD
+          formData={formData}
+          handleChangeInput={handleChangeInput}
+          handlePrevStep={handlePrevStep}
+          handleNextStep={handleNextStep}
+        />
       )}
       {step === 'E' && (
         <StepE
