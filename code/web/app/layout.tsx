@@ -14,7 +14,7 @@ const links: { label: string; path: string }[] = [
   { label: 'Account', path: '/account' },
   { label: 'Clusters', path: '/clusters' },
   { label: 'Counter Program', path: '/counter' },
-  { label: 'Upload Property', path: '/multiStepForm'}
+  { label: 'Upload Property', path: '/listing/upload'}
 ];
 
 export default function RootLayout({
