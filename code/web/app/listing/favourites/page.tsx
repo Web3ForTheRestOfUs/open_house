@@ -12,11 +12,8 @@ const page = () => {
   return (
     <div>
       <Header />
-      <div className="px-[70px] py-[38px]">
-        <h1 className="text-[#8592AD] text-[14px] mb-[35px]">
-          {' '}
-          Listing {'>'} Favourites
-        </h1>
+      <div className=" ">
+        <h1 className="text-[#8592AD]  "> Listing {'>'} Favourites</h1>
         <div className="flex justify-end">
           <ShareListingPanel />
         </div>

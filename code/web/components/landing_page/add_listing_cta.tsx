@@ -1,7 +1,7 @@
 const AddListingCTA = () => {
   return (
     <div>
-      <div className=" pl-[26px] pr-5 pt-[27px] pb-7 bg-white rounded-lg border border-black justify-end items-center gap-[114px] inline-flex">
+      <div className="  pr-5  pb-7 bg-white rounded-lg border border-black justify-end items-center  inline-flex">
         <div className="text-black text-base font-normal font-['Montserrat']">
           Have a verified property?
         </div>

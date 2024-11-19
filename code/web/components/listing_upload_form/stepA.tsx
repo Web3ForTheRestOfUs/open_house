@@ -17,35 +17,33 @@ const StepA: React.FC<StepAProps> = ({
 }) => {
   return (
     <div>
-      <h1 className="mt-2 text-[16px] text-[#8592AD] mb-[20px]">
-        Step A: Property Info
-      </h1>
-      <div className="mb-[30px]">
-        <label className="mb-[8px] text-[#8592AD]">Address</label>
+      <h1 className="mt-2  text-[#8592AD] ">Step A: Property Info</h1>
+      <div className="">
+        <label className=" text-[#8592AD]">Address</label>
         <input
           type="text"
           name="address"
           value={formData.address}
           onChange={(e) => handleChangeInput(e)}
-          className="  outline-none border-2 border-[#E8F0FC] px-2 py-1 rounded-[8px] bg-transparent"
+          className="  outline-none border-2 border-[#E8F0FC] px-2 py-1  bg-transparent"
         />
       </div>
-      <div className="mb-[30px]">
-        <label className="mb-[8px] text-[#8592AD]">City</label>
+      <div className="">
+        <label className=" text-[#8592AD]">City</label>
         <input
           type="text"
           name="city"
           value={formData.city}
           onChange={(e) => handleChangeInput(e)}
-          className="  outline-none border-2 border-[#E8F0FC] px-2 py-1 rounded-[8px] bg-transparent"
+          className="  outline-none border-2 border-[#E8F0FC] px-2 py-1  bg-transparent"
         />
       </div>
 
       <div className="mb-[10.5rem]">
-        <label className="mb-[24px] text-[#8592AD] block">Property Type</label>
+        <label className=" text-[#8592AD] block">Property Type</label>
         <div className="flex gap-2">
           {['Studio', 'Apartment', 'Condo', 'Bungalow'].map((type) => (
-            <label key={type} className="flex items-center gap-2 mr-[32px]">
+            <label key={type} className="flex items-center gap-2 ">
               <input
                 type="radio"
                 name="propertyType"
@@ -62,7 +60,7 @@ const StepA: React.FC<StepAProps> = ({
 
       <div className="my-2 flex justify-center items-center ">
         <button
-          className="bg-[#F3F7FA] hover:bg-gray-500 py-[15px] rounded-[8px] w-2/5 text-[#317BA0] hover:text-white"
+          className="bg-[#F3F7FA] hover:bg-gray-500   w-2/5 text-[#317BA0] hover:text-white"
           onClick={handleNextStep}
         >
           Continue
