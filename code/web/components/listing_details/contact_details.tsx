@@ -1,29 +1,26 @@
-const ContactDetailsCard = () => {
-  return (
-    <div className="flex">
-      <div className="  relative bg-white rounded-2xl">
-        <div className="  absolute text-[#2f3d46] text-xl font-bold font-['Montserrat']">
-          Contact Information
-        </div>
-        <div className="  absolute">
-          <div className="left-0 top-0 absolute text-[#2f3d46] text-base font-medium font-['Montserrat']">
-            Representative: Ruth Oyamine
-          </div>
-          <div className="left-0  absolute text-[#2f3d46] text-base font-medium font-['Montserrat']">
-            Available for immediate viewing
-          </div>
-          <div className="left-0  absolute text-[#2f3d46] text-base font-medium font-['Montserrat']">
-            Professional property management
-          </div>
-        </div>
-        <div className="  px-4 py-1.5   absolute bg-[#317ba0] rounded-lg justify-center items-center gap-2.5 inline-flex">
-          <div className="text-white text-base font-medium font-['Montserrat']">
-            Call: +234 8095 765 4321
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
+const ContactDetailsCard = () => (
+  <section className="p-6 bg-white rounded-2xl">
+    <h2 className="text-[#2f3d46] text-xl font-bold font-['Montserrat'] mb-6">
+      Contact Information
+    </h2>
+    <ul className="space-y-4 mb-6">
+      <li className="text-[#2f3d46] text-base font-medium font-['Montserrat']">
+        Representative: Ruth Oyamine
+      </li>
+      <li className="text-[#2f3d46] text-base font-medium font-['Montserrat']">
+        Available for immediate viewing
+      </li>
+      <li className="text-[#2f3d46] text-base font-medium font-['Montserrat']">
+        Professional property management
+      </li>
+    </ul>
+    <a
+      href="tel:+2348095765432"
+      className="block w-full px-4 py-1.5 bg-[#317ba0] rounded-lg text-white text-base font-medium font-['Montserrat'] text-center"
+    >
+      Call: +234 8095 765 4321
+    </a>
+  </section>
+);
 
 export default ContactDetailsCard;

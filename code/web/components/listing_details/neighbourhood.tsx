@@ -1,27 +1,13 @@
-const NeighborhoodCard = () => {
-  return (
-    <div className="flex">
-      <div className="   bg-white rounded-2xl">
-        <div className="  absolute text-[#2f3d46] text-xl font-bold font-['Montserrat']">
-          Neighborhood
-        </div>
-        <div className="  absolute">
-          <div className="left-0 top-0 absolute text-[#2f3d46] text-base font-medium font-['Montserrat']">
-            Family-friendly community
-          </div>
-          <div className="left-0  absolute text-[#2f3d46] text-base font-medium font-['Montserrat']">
-            Safe and secure environment
-          </div>
-          <div className="left-0  absolute text-[#2f3d46] text-base font-medium font-['Montserrat']">
-            Well-maintained properties
-          </div>
-          <div className="left-0  absolute text-[#2f3d46] text-base font-medium font-['Montserrat']">
-            Mix of families and professionals
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
+const NeighborhoodCard = () => (
+  <section className="p-6 bg-white rounded-2xl">
+    <h2 className="text-[#2f3d46] text-xl font-bold font-['Montserrat'] mb-6">Neighborhood</h2>
+    <ul className="space-y-4">
+      <li className="text-[#2f3d46] text-base font-medium font-['Montserrat']">Family-friendly community</li>
+      <li className="text-[#2f3d46] text-base font-medium font-['Montserrat']">Safe and secure environment</li>
+      <li className="text-[#2f3d46] text-base font-medium font-['Montserrat']">Well-maintained properties</li>
+      <li className="text-[#2f3d46] text-base font-medium font-['Montserrat']">Mix of families and professionals</li>
+    </ul>
+  </section>
+);
 
 export default NeighborhoodCard;

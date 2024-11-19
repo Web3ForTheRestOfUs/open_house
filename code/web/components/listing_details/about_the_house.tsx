@@ -1,37 +1,32 @@
 const AboutTheHouseCard = () => {
   return (
-    <div className="flex">
-      <div className="   bg-white rounded-2xl">
-        <div className="  absolute text-[#2f3d46] text-xl font-bold font-['Montserrat']">
-          About the House
+    <div className="bg-white rounded-2xl p-6 shadow-md">
+      {/* Title */}
+      <h2 className="text-[#2f3d46] text-xl font-bold font-['Montserrat'] mb-4">
+        About the House
+      </h2>
+
+      {/* List of features */}
+      <ul className="space-y-2 text-[#2f3d46] text-base font-medium font-['Montserrat'] list-disc pl-4">
+        <li>Brand new 2-bedroom flat/apartment</li>
+        <li>1,500 sqm total living space</li>
+        <li>2 bathrooms + extra toilet (3 total)</li>
+        <li>Modern, fully equipped kitchen</li>
+      </ul>
+
+      {/* Service charge section */}
+      <div className="mt-6 bg-[#f8f9fa] rounded-lg p-4">
+        <div>
+          <span className="text-black text-base font-bold font-['Montserrat']">
+            Service Charge:
+          </span>
+          <span className="text-black text-base font-medium font-['Montserrat']">
+            {' '}
+            #1,500,000/year
+          </span>
         </div>
-        <div className="  absolute">
-          <div className="left-0 top-0 absolute text-[#2f3d46] text-base font-medium font-['Montserrat']">
-            Brand new 2-bedroom flat/apartment
-          </div>
-          <div className="left-0  absolute text-[#2f3d46] text-base font-medium font-['Montserrat']">
-            1,500 sqm total living space
-          </div>
-          <div className="left-0  absolute text-[#2f3d46] text-base font-medium font-['Montserrat']">
-            2 bathrooms + extra toilet (3 total)
-          </div>
-          <div className="left-0  absolute text-[#2f3d46] text-base font-medium font-['Montserrat']">
-            Modern, fully equipped kitchen
-          </div>
-        </div>
-        <div className="      absolute bg-[#f8f9fa] rounded-lg flex-col justify-center items-start  inline-flex">
-          <div>
-            <span className="text-black text-base font-bold font-['Montserrat']">
-              Service Charge:
-            </span>
-            <span className="text-black text-base font-medium font-['Montserrat']">
-              {' '}
-              #1,500,000/year
-            </span>
-          </div>
-          <div className="text-[#2f3d46] text-xs font-medium font-['Montserrat']">
-            Includes security, diesel, compound cleaners
-          </div>
+        <div className="text-[#2f3d46] text-xs font-medium font-['Montserrat'] mt-1">
+          Includes security, diesel, compound cleaners
         </div>
       </div>
     </div>

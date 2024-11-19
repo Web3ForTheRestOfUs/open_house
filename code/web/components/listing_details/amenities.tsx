@@ -1,42 +1,28 @@
 const AmenitiesCard = () => {
+  const amenities = [
+    'Air Conditioning',
+    'Swimming Pool',
+    'Pet Friendly',
+    'In-Unit Laundry',
+    '2 Packing Spaces',
+    'Full Kitchen',
+  ];
+
   return (
-    <div className="flex">
-      <div className="   bg-white rounded-2xl">
-        <div className="  absolute text-[#2f3d46] text-xl font-bold font-['Montserrat']">
-          Amenities
-        </div>
-        <div className="       absolute bg-[#f8f9fa] rounded-lg justify-center items-center inline-flex">
-          <div className="text-[#2f3d46] text-sm font-medium font-['Montserrat']">
-            Air Conditioning
-          </div>
-        </div>
-        <div className="      absolute bg-[#f8f9fa] rounded-lg justify-center items-center inline-flex">
-          <div className="text-[#2f3d46] text-sm font-medium font-['Montserrat']">
-            Pet Friendly
-          </div>
-        </div>
-        <div className="      absolute bg-[#f8f9fa] rounded-lg justify-center items-center inline-flex">
-          <div className="text-[#2f3d46] text-sm font-medium font-['Montserrat']">
-            2 Packing Spaces
-          </div>
-        </div>
-        <div className="      absolute bg-[#f8f9fa] rounded-lg justify-center items-center inline-flex">
-          <div className="text-[#2f3d46] text-sm font-medium font-['Montserrat']">
-            Swimming Pool
-          </div>
-        </div>
-        <div className=" pl-6      absolute bg-[#f8f9fa] rounded-lg justify-center items-center inline-flex">
-          <div className="text-[#2f3d46] text-sm font-medium font-['Montserrat']">
-            In-Unit Laundry
-          </div>
-        </div>
-        <div className="       absolute bg-[#f8f9fa] rounded-lg justify-center items-center inline-flex">
-          <div className="text-[#2f3d46] text-sm font-medium font-['Montserrat']">
-            Full Kitchen
-          </div>
-        </div>
-      </div>
-    </div>
+    <section className="p-6 bg-white rounded-2xl">
+      <h2 className="text-[#2f3d46] text-xl font-bold font-['Montserrat'] mb-6">
+        Amenities
+      </h2>
+      <ul className="grid grid-cols-2 gap-4">
+        {amenities.map((amenity, index) => (
+          <li key={index} className="px-4 py-2 bg-[#f8f9fa] rounded-lg">
+            <span className="text-[#2f3d46] text-sm font-medium font-['Montserrat']">
+              {amenity}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </section>
   );
 };
 
