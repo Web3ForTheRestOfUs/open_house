@@ -1,6 +1,6 @@
 const EachHouseListing = () => {
   return (
-    <div>
+    <div className="p-4">
       <div className=" relative rounded-2xl border border-[#d0d5dd] flex-col justify-start items-start inline-flex">
         <div className="pl-3.5 pr-[225px] pt-3 pb-[153px] rounded-lg justify-start items-center inline-flex">
           <div className="w-10  px-[7px] pt-1.5 pb-[5px] bg-[#7c7a7a] rounded-sm justify-center items-center inline-flex">
