@@ -26,11 +26,11 @@ pub fn update_property(
     Ok(())
 }
 
-pub fn verify_property(ctx: Context<VerifyProperty>) -> Result<()> {
-    let property = &mut ctx.accounts.property;
-    property.verified = true;
-    Ok(())
-}
+// pub fn verify_property(ctx: Context<VerifyProperty>) -> Result<()> {
+//     let property = &mut ctx.accounts.property;
+//     property.verified = true;
+//     Ok(())
+// }
 
 #[derive(Accounts)]
 #[instruction(property_id: String)]
@@ -61,17 +61,17 @@ pub struct UpdateProperty<'info> {
     pub owner: Signer<'info>,
 }
 
-#[derive(Accounts)]
-#[instruction(property_id: String)]
-pub struct VerifyProperty<'info> {
-    #[account(
-        mut,
-        seeds = [property_id.as_bytes()],
-        bump
-    )]
-    pub property: Account<'info, Property>,
-    pub verifier: Signer<'info>,
-}
+// #[derive(Accounts)]
+// #[instruction(property_id: String)]
+// pub struct VerifyProperty<'info> {
+//     #[account(
+//         mut,
+//         seeds = [property_id.as_bytes()],
+//         bump
+//     )]
+//     pub property: Account<'info, Property>,
+//     pub verifier: Signer<'info>,
+// }
 
 #[account]
 pub struct Property {
