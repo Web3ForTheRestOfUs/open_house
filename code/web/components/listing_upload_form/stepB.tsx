@@ -7,8 +7,13 @@ interface StepBProps {
     size: number;
     amenities: string[];
   };
-  handleChangeInput: (event: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => void;
-  handleAmenitiesChange: (event: React.ChangeEvent<HTMLInputElement>, amenity: string) => void;
+  handleChangeInput: (
+    event: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>
+  ) => void;
+  handleAmenitiesChange: (
+    event: React.ChangeEvent<HTMLInputElement>,
+    amenity: string
+  ) => void;
   handlePrevStep: () => void;
   handleNextStep: () => void;
 }
@@ -32,7 +37,7 @@ const StepB: React.FC<StepBProps> = ({
           name="bedroom"
           value={formData.bedroom}
           onChange={(e) => handleChangeInput(e)}
-          className="w-[519px] h-[60px] outline-none border border-2 border-[#E8F0FC] px-2 py-1 rounded-[8px] bg-transparent"
+          className="  outline-none border border-2 border-[#E8F0FC] px-2 py-1 rounded-[8px] bg-transparent"
         >
           {[...Array(10)].map((_, index) => (
             <option key={index + 1} value={index + 1}>
@@ -48,7 +53,7 @@ const StepB: React.FC<StepBProps> = ({
           name="bathroom"
           value={formData.bathroom}
           onChange={(e) => handleChangeInput(e)}
-          className="w-[519px] h-[60px] outline-none border border-2 border-[#E8F0FC] px-2 py-1 rounded-[8px] bg-transparent"
+          className="  outline-none border border-2 border-[#E8F0FC] px-2 py-1 rounded-[8px] bg-transparent"
         >
           {[...Array(10)].map((_, index) => (
             <option key={index + 1} value={index + 1}>
@@ -59,12 +64,14 @@ const StepB: React.FC<StepBProps> = ({
       </div>
 
       <div className="mb-[30px]">
-        <label className="mb-[8px] text-[#8592AD]">Size in thousand sqft.</label>
+        <label className="mb-[8px] text-[#8592AD]">
+          Size in thousand sqft.
+        </label>
         <select
           name="size"
           value={formData.size}
           onChange={(e) => handleChangeInput(e)}
-          className="w-[519px] h-[60px] outline-none border border-2 border-[#E8F0FC] px-2 py-1 rounded-[8px] bg-transparent"
+          className="  outline-none border border-2 border-[#E8F0FC] px-2 py-1 rounded-[8px] bg-transparent"
         >
           {[...Array(10)].map((_, index) => (
             <option key={index + 1} value={index + 1}>
@@ -87,7 +94,10 @@ const StepB: React.FC<StepBProps> = ({
             'heating',
             'laundryInUnit',
           ].map((amenity) => (
-            <label key={amenity} className="flex items-center text-[#8592AD] mr-[16px]">
+            <label
+              key={amenity}
+              className="flex items-center text-[#8592AD] mr-[16px]"
+            >
               <input
                 type="checkbox"
                 name={amenity}
@@ -103,7 +113,7 @@ const StepB: React.FC<StepBProps> = ({
         </div>
       </div>
 
-      <div className="my-2 flex w-[519px] justify-between items-center">
+      <div className="my-2 flex  justify-between items-center">
         <button
           className="bg-[#F3F7FA] hover:bg-gray-500 py-[15px] rounded-[8px] w-2/5 text-[#317BA0] hover:text-white"
           onClick={handlePrevStep}

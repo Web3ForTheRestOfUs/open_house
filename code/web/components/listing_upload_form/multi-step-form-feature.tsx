@@ -13,7 +13,7 @@ interface FormData {
   propertyType: string;
   bedroom: number; // Updated to number
   bathroom: number; // Updated to number
-  size: number; 
+  size: number;
   amenities: string[];
   neighbourhoodQuality: string;
   safetyRating: string;
@@ -51,25 +51,36 @@ const initialFormData: FormData = {
 
 const steps = ['A', 'B', 'C', 'D', 'E', 'Final'];
 
-const SimpleMultiStepForm: React.FC<SimpleMultiStepFormProps> = ({ showStepNumber }) => {
+const SimpleMultiStepForm: React.FC<SimpleMultiStepFormProps> = ({
+  showStepNumber,
+}) => {
   const [stepIndex, setStepIndex] = useState<number>(0);
   const [formData, setFormData] = useState<FormData>(initialFormData);
 
-  const handleNextStep = () => setStepIndex((prev) => Math.min(prev + 1, steps.length - 1));
+  const handleNextStep = () =>
+    setStepIndex((prev) => Math.min(prev + 1, steps.length - 1));
   const handlePrevStep = () => setStepIndex((prev) => Math.max(prev - 1, 0));
 
-  const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChangeInput = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value, checked, type } = event.target as HTMLInputElement; // Narrowing for type safety
-  
+
     setFormData((prev) => ({
       ...prev,
-      [name]: type === 'checkbox' ? checked : name === 'bedroom' || name === 'bathroom' || name === 'size' ? Number(value) : value,
+      [name]:
+        type === 'checkbox'
+          ? checked
+          : name === 'bedroom' || name === 'bathroom' || name === 'size'
+          ? Number(value)
+          : value,
     }));
   };
-  
-  
 
-  const handleAmenitiesChange = (event: React.ChangeEvent<HTMLInputElement>, amenity: string) => {
+  const handleAmenitiesChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    amenity: string
+  ) => {
     setFormData((prev) => {
       const updatedAmenities = event.target.checked
         ? [...prev.amenities, amenity]
@@ -94,7 +105,13 @@ const SimpleMultiStepForm: React.FC<SimpleMultiStepFormProps> = ({ showStepNumbe
     const step = steps[stepIndex];
     switch (step) {
       case 'A':
-        return <StepA formData={formData} handleChangeInput={handleChangeInput} handleNextStep={handleNextStep} />;
+        return (
+          <StepA
+            formData={formData}
+            handleChangeInput={handleChangeInput}
+            handleNextStep={handleNextStep}
+          />
+        );
       case 'B':
         return (
           <StepB
@@ -106,9 +123,23 @@ const SimpleMultiStepForm: React.FC<SimpleMultiStepFormProps> = ({ showStepNumbe
           />
         );
       case 'C':
-        return <StepC formData={formData} handleChangeInput={handleChangeInput} handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} />;
+        return (
+          <StepC
+            formData={formData}
+            handleChangeInput={handleChangeInput}
+            handlePrevStep={handlePrevStep}
+            handleNextStep={handleNextStep}
+          />
+        );
       case 'D':
-        return <StepD formData={formData} handleChangeInput={handleChangeInput} handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} />;
+        return (
+          <StepD
+            formData={formData}
+            handleChangeInput={handleChangeInput}
+            handlePrevStep={handlePrevStep}
+            handleNextStep={handleNextStep}
+          />
+        );
       case 'E':
         return (
           <StepE
@@ -146,7 +177,7 @@ const SimpleMultiStepForm: React.FC<SimpleMultiStepFormProps> = ({ showStepNumbe
   };
 
   return (
-    <div className="bg-white w-[576px] max-w-full px-[29px] py-[38px] mx-auto rounded-[16px] shadow-md">
+    <div className="bg-white  max-w-full px-[29px] py-[38px] mx-auto rounded-[16px] shadow-md">
       {renderStepNumbers()}
       {renderStep()}
     </div>

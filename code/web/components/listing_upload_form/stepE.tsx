@@ -5,7 +5,7 @@ interface StepEProps {
     address: string;
     city: string;
     propertyType: string;
-    bedroom: number;  // Change to 'number'
+    bedroom: number; // Change to 'number'
     bathroom: number; // Change to 'number'
     size: number;
     amenities: string[];
@@ -46,7 +46,10 @@ const StepE: React.FC<StepEProps> = ({
       <DataConfirmRow label="Bedroom:" value={formData.bedroom.toString()} />
       <DataConfirmRow label="Bathroom:" value={formData.bathroom.toString()} />
       <DataConfirmRow label="Size:" value={formData.size.toString()} />
-      <DataConfirmRow label="Amenities:" value={formData.amenities.join(", ")} />
+      <DataConfirmRow
+        label="Amenities:"
+        value={formData.amenities.join(', ')}
+      />
       <DataConfirmRow
         label="Neighbourhood Quality:"
         value={formData.neighbourhoodQuality}
@@ -74,7 +77,7 @@ const StepE: React.FC<StepEProps> = ({
         <label htmlFor="agreeToTerms">I Agree to Terms of Services</label>
       </div>
 
-      <div className="my-2 flex w-[519px] justify-between items-center">
+      <div className="my-2 flex  justify-between items-center">
         <button
           className="bg-[#F3F7FA] hover:bg-gray-500 py-[15px] rounded-[8px] w-2/5 text-[#317BA0] hover:text-white"
           onClick={handlePrevStep}
