@@ -13,7 +13,7 @@ export default function Page() {
       <div className="p-4">
         <CarouselImage />
 
-        <SearchPanel />
+        {/* <SearchPanel /> */}
 
         <div className="grid grid-cols-5 gap-3">
           {/* First 3 columns */}
