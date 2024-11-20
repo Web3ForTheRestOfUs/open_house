@@ -3,8 +3,8 @@ import React from 'react';
 import { useParams } from 'next/navigation';
 import Header from '@/components/nav/header';
 import Footer from '@/components/nav/footer';
-import ShareListingPanel from '@/components/favourite/share_panel';
-import EachCartItem from '@/components/favourite/each_cart_item';
+import ShareListingPanel from '@/components/user/favourite/share_panel';
+import EachCartItem from '@/components/user/favourite/each_cart_item';
 
 const page = () => {
   return (
