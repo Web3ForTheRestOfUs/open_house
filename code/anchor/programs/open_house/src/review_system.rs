@@ -101,11 +101,10 @@
 // }
 
 
-
 use anchor_lang::prelude::*;
 
 #[derive(AnchorSerialize, AnchorDeserialize, Clone)]
-pub enum VoteType { // enum to represent the type of vote
+pub enum VoteType {
     Upvote,
     Downvote,
 }
@@ -114,39 +113,64 @@ pub fn submit_review(
     ctx: Context<SubmitReview>,
     review_content: String,
 ) -> Result<()> {
+    // Validate review content length
+    require!(
+        review_content.len() <= 200, 
+        CustomError::ReviewTooLong
+    );
+
     let review = &mut ctx.accounts.review;
     review.content = review_content;
-    review.votes = 0; // initialize votes to 0
-    review.voters = Vec::new(); // initialize empty voters list
+    review.votes = 0;
+    review.voted_users = Vec::new();
     Ok(())
 }
 
-pub fn vote_review(ctx: Context<VoteReview>, vote_type: VoteType) -> Result<()> {
+pub fn vote_review(
+    ctx: Context<VoteReview>, 
+    vote_type: VoteType
+) -> Result<()> {
     let review = &mut ctx.accounts.review;
-    let voter_key = ctx.accounts.voter.key();
+    let voter = &ctx.accounts.voter.key();
 
-    // check if the user has already voted
+    // Prevent duplicate votes
     require!(
-        !review.voters.contains(voter_key),
+        !review.voted_users.contains(voter),
         CustomError::DuplicateVote
     );
 
-    // determine whether it's an increment or decrement based on the vote type
-    let vote = match vote_type {
-        VoteType::Upvote => 1,
-        VoteType::Downvote => -1,
-    };
+    // Update votes based on vote type
+    match vote_type {
+        VoteType::Upvote => {
+            review.votes = review.votes.checked_add(1)
+                .ok_or(CustomError::VoteOverflow)?;
+        },
+        VoteType::Downvote => {
+            review.votes = review.votes.checked_sub(1)
+                .ok_or(CustomError::VoteUnderflow)?;
+        }
+    }
 
-    // safely update the votes with overflow handling
-    review.votes = review
-        .votes
-        .checked_add(vote)
-        .ok_or(CustomError::VoteOverflow)?;
+    // Track voted users
+    review.voted_users.push(*voter);
 
-    // add the voter's key to the list of voters
-    review.voters.push(*voter_key);
+    // Emit vote event
+    emit!(VoteEvent {
+        review: review.key(),
+        voter: *voter,
+        vote_type,
+        new_vote_count: review.votes
+    });
 
     Ok(())
+}
+
+#[event]
+pub struct VoteEvent {
+    review: Pubkey,
+    voter: Pubkey,
+    vote_type: VoteType,
+    new_vote_count: i64,
 }
 
 #[derive(Accounts)]
@@ -156,7 +180,7 @@ pub struct SubmitReview<'info> {
         init,
         payer = renter,
         space = 8 + Review::LEN,
-        seeds = [property_id.as_bytes(), renter.key().as_ref()],  // Using property_id and renter as seeds
+        seeds = [property_id.as_bytes(), renter.key().as_ref()],
         bump
     )]
     pub review: Account<'info, Review>,
@@ -167,36 +191,32 @@ pub struct SubmitReview<'info> {
 
 #[derive(Accounts)]
 pub struct VoteReview<'info> {
-    #[account(
-        mut,
-        seeds = [review.property_id.as_bytes(), review.renter.as_ref()],
-        bump
-    )]
+    #[account(mut)]
     pub review: Account<'info, Review>,
-    pub voter: Signer<'info>, // User voting on the review
+    pub voter: Signer<'info>,
 }
 
 #[account]
 pub struct Review {
-    pub content: String,       
-    pub votes: i64,            // net votes (upvotes - downvotes)
-    pub property_id: String,   
-    pub renter: Pubkey,        // The renter who submitted the review
-    pub voters: Vec<Pubkey>,   // List of users who have voted
+    pub content: String,
+    pub votes: i64,
+    pub property_id: String,
+    pub renter: Pubkey,
+    pub voted_users: Vec<Pubkey>,
 }
 
 impl Review {
-    // Adjusted length to include all fields and voters list
-    const LEN: usize = 4 + 200 + 8 + 4 + 32 + (4 + 32 * MAX_VOTERS);
+    const LEN: usize = 4 + 200 + 8 + 4 + 32 + (4 + 100); // Adjusted for Pubkey vector
 }
-
-const MAX_VOTERS: usize = 100; // Adjust based on space constraints
 
 #[error_code]
 pub enum CustomError {
-    #[msg("review overflow")]
+    #[msg("Review content is too long")]
+    ReviewTooLong,
+    #[msg("Vote overflow occurred")]
     VoteOverflow,
-    #[msg("you already reviewed this property")]
+    #[msg("Vote underflow occurred")]
+    VoteUnderflow,
+    #[msg("Duplicate vote detected")]
     DuplicateVote,
 }
-

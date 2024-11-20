@@ -205,76 +205,6 @@
           "type": "string"
         }
       ]
-    },
-    {
-      "name": "validate_review",
-      "discriminator": [
-        185,
-        156,
-        66,
-        110,
-        212,
-        32,
-        15,
-        35
-      ],
-      "accounts": [
-        {
-          "name": "review",
-          "writable": true,
-          "pda": {
-            "seeds": [
-              {
-                "kind": "account",
-                "path": "review.property_id",
-                "account": "Review"
-              },
-              {
-                "kind": "account",
-                "path": "review.renter",
-                "account": "Review"
-              }
-            ]
-          }
-        },
-        {
-          "name": "verifier",
-          "signer": true
-        }
-      ],
-      "args": []
-    },
-    {
-      "name": "verify_property",
-      "discriminator": [
-        155,
-        196,
-        192,
-        102,
-        122,
-        77,
-        122,
-        207
-      ],
-      "accounts": [
-        {
-          "name": "property",
-          "writable": true,
-          "pda": {
-            "seeds": [
-              {
-                "kind": "arg",
-                "path": "property_id"
-              }
-            ]
-          }
-        },
-        {
-          "name": "verifier",
-          "signer": true
-        }
-      ],
-      "args": []
     }
   ],
   "accounts": [
@@ -318,11 +248,31 @@
       ]
     }
   ],
+  "events": [
+    {
+      "name": "VoteEvent",
+      "discriminator": [
+        195,
+        71,
+        250,
+        105,
+        120,
+        119,
+        234,
+        134
+      ]
+    }
+  ],
   "errors": [
     {
       "code": 6000,
       "name": "InsufficientFunds",
       "msg": "Insufficient Funds"
+    },
+    {
+      "code": 6001,
+      "name": "Overflow",
+      "msg": "Overflow occurred during token operations"
     }
   ],
   "types": [
@@ -360,8 +310,8 @@
             "type": "string"
           },
           {
-            "name": "validated",
-            "type": "bool"
+            "name": "votes",
+            "type": "i64"
           },
           {
             "name": "property_id",
@@ -370,18 +320,73 @@
           {
             "name": "renter",
             "type": "pubkey"
+          },
+          {
+            "name": "voted_users",
+            "type": {
+              "vec": "pubkey"
+            }
           }
         ]
       }
     },
     {
       "name": "User",
+      "docs": [
+        "User account structure"
+      ],
       "type": {
         "kind": "struct",
         "fields": [
           {
             "name": "tokens",
             "type": "u64"
+          },
+          {
+            "name": "upvotes",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "VoteEvent",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "review",
+            "type": "pubkey"
+          },
+          {
+            "name": "voter",
+            "type": "pubkey"
+          },
+          {
+            "name": "vote_type",
+            "type": {
+              "defined": {
+                "name": "VoteType"
+              }
+            }
+          },
+          {
+            "name": "new_vote_count",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "VoteType",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Upvote"
+          },
+          {
+            "name": "Downvote"
           }
         ]
       }
