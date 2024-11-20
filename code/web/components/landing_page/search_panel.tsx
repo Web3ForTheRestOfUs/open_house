@@ -1,50 +1,115 @@
+'use client';
+
+import React, { useState } from 'react';
+import { Search } from 'lucide-react';
+
+interface SearchFilters {
+  location: string;
+  rentType: string;
+  propertyType: string;
+  bedrooms: string;
+  priceRange: string;
+}
+
 const SearchPanel = () => {
+  const [filters, setFilters] = useState<SearchFilters>({
+    location: '',
+    rentType: '',
+    propertyType: '',
+    bedrooms: '',
+    priceRange: '',
+  });
+
+  const handleSearch = async (e: React.FormEvent) => {
+    e.preventDefault();
+    // Handle search logic here
+    console.log('Search filters:', filters);
+  };
+
   return (
-    <div className="flex justify-center">
-      <div className=" justify-start items-center gap-7 inline-flex">
-        <div className="pl-[23px] pr-[100px] py-3.5 rounded border border-[#d0d5dd] justify-start items-center flex">
-          <div className="text-[#98a2b3] text-sm font-normal font-['Montserrat']">
-            Enter a state, locality or area
+    <div className="w-full max-w-6xl mx-auto px-4">
+      <form className="w-full" onSubmit={handleSearch}>
+        <div className="flex flex-wrap items-center gap-4 bg-white p-4 rounded-lg shadow-sm">
+          {/* Location Input */}
+          <div className="flex-1 min-w-[240px]">
+            <input
+              type="text"
+              placeholder="Enter a state, locality or area"
+              value={filters.location}
+              onChange={(e) =>
+                setFilters((prev) => ({ ...prev, location: e.target.value }))
+              }
+              className="w-full px-4 py-3 rounded border border-gray-200 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            />
           </div>
+
+          {/* Rent Type Select */}
+          <select
+            value={filters.rentType}
+            onChange={(e) =>
+              setFilters((prev) => ({ ...prev, rentType: e.target.value }))
+            }
+            className="px-4 py-3 rounded border border-gray-200 text-gray-500 text-sm appearance-none bg-white cursor-pointer hover:border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          >
+            <option value="">Rent</option>
+            <option value="monthly">Monthly</option>
+            <option value="yearly">Yearly</option>
+          </select>
+
+          {/* Property Type Select */}
+          <select
+            value={filters.propertyType}
+            onChange={(e) =>
+              setFilters((prev) => ({ ...prev, propertyType: e.target.value }))
+            }
+            className="px-4 py-3 rounded border border-gray-200 text-gray-500 text-sm appearance-none bg-white cursor-pointer hover:border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          >
+            <option value="">Type</option>
+            <option value="apartment">Apartment</option>
+            <option value="house">House</option>
+            <option value="villa">Villa</option>
+          </select>
+
+          {/* Bedrooms Select */}
+          <select
+            value={filters.bedrooms}
+            onChange={(e) =>
+              setFilters((prev) => ({ ...prev, bedrooms: e.target.value }))
+            }
+            className="px-4 py-3 rounded border border-gray-200 text-gray-500 text-sm appearance-none bg-white cursor-pointer hover:border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          >
+            <option value="">Bedroom</option>
+            <option value="1">1 Bedroom</option>
+            <option value="2">2 Bedrooms</option>
+            <option value="3">3 Bedrooms</option>
+            <option value="4+">4+ Bedrooms</option>
+          </select>
+
+          {/* Price Range Select */}
+          <select
+            value={filters.priceRange}
+            onChange={(e) =>
+              setFilters((prev) => ({ ...prev, priceRange: e.target.value }))
+            }
+            className="px-4 py-3 rounded border border-gray-200 text-gray-500 text-sm appearance-none bg-white cursor-pointer hover:border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          >
+            <option value="">Price</option>
+            <option value="0-1000">$0 - $1,000</option>
+            <option value="1000-2000">$1,000 - $2,000</option>
+            <option value="2000-3000">$2,000 - $3,000</option>
+            <option value="3000+">$3,000+</option>
+          </select>
+
+          {/* Search Button */}
+          <button
+            type="submit"
+            className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors flex items-center gap-2"
+          >
+            <Search className="w-5 h-5" />
+            <span>Search</span>
+          </button>
         </div>
-        <div className=" pl-4 pr-[11px] py-3.5 rounded border border-[#d0d5dd] justify-end items-start gap-[93px] flex">
-          <div className="text-[#98a2b3] text-sm font-normal font-['Montserrat']">
-            Rent
-          </div>
-          <div className="w-4 self-stretch justify-center items-center inline-flex">
-            <div className="w-4 h-4 relative"></div>
-          </div>
-        </div>
-        <div className=" pl-4 pr-[11px] py-3.5 rounded border border-[#d0d5dd] justify-end items-start gap-[93px] flex">
-          <div className="text-[#98a2b3] text-sm font-normal font-['Montserrat']">
-            Type
-          </div>
-          <div className="w-4 self-stretch justify-center items-center inline-flex">
-            <div className="w-4 h-4 relative"></div>
-          </div>
-        </div>
-        <div className=" pl-4 pr-[11px] py-3.5 rounded border border-[#d0d5dd] justify-end items-start gap-[60px] flex">
-          <div className="text-[#98a2b3] text-sm font-normal font-['Montserrat']">
-            Bedroom
-          </div>
-          <div className="w-4 self-stretch justify-center items-center inline-flex">
-            <div className="w-4 h-4 relative"></div>
-          </div>
-        </div>
-        <div className=" pl-4 pr-[11px] py-3.5 rounded border border-[#d0d5dd] justify-end items-start gap-[91px] flex">
-          <div className="text-[#98a2b3] text-sm font-normal font-['Montserrat']">
-            Price
-          </div>
-          <div className="w-4 self-stretch justify-center items-center inline-flex">
-            <div className="w-4 h-4 relative"></div>
-          </div>
-        </div>
-        <div className=" px-4 py-1.5 bg-[#317ba0] rounded-lg justify-center items-center gap-2.5 flex">
-          <div className="text-white text-base font-medium font-['Montserrat']">
-            Search
-          </div>
-        </div>
-      </div>
+      </form>
     </div>
   );
 };

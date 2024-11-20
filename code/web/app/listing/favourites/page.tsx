@@ -7,27 +7,29 @@ import ShareListingPanel from '@/components/favourite/share_panel';
 import EachCartItem from '@/components/favourite/each_cart_item';
 
 const page = () => {
-  // const params = useParams();
-
   return (
     <div>
       <Header />
-      <div className="px-[70px] py-[38px]">
-        <h1 className="text-[#8592AD] text-[14px] mb-[35px]">
-          {' '}
-          Listing {'>'} Favourites
-        </h1>
-        <div className="flex justify-end">
+      <div className="p-4">
+        <h1 className="text-[#8592AD] mb-4">Listing {'>'} Favourites</h1>
+        <div className="flex justify-end mb-4">
           <ShareListingPanel />
         </div>
-        <div>
-          {[1, 2, 3].map((value, index) => {
-            return (
-              <div className="flex flex-col" key={index}>
-                <EachCartItem key={index} />
+
+        <div className='text-start'>
+          <h2 className="text-black text-2xl font-semibold font-['Montserrat']">
+            Rent Cart
+          </h2>
+        </div>
+        <div className="flex flex-col gap-10 items-center border bg-red-50 p-8">
+          {/* Adjust container to center all items */}
+          <div className="flex flex-wrap justify-center gap-8 w-full">
+            {[1, 2, 3, 4].map((value, index) => (
+              <div className="w-full md:w-4/5 lg:w-3/4 p-4" key={index}>
+                <EachCartItem />
               </div>
-            );
-          })}
+            ))}
+          </div>
         </div>
       </div>
       <Footer />

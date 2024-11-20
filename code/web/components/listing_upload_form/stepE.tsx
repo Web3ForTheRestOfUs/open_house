@@ -79,13 +79,13 @@ const StepE: React.FC<StepEProps> = ({
 
       <div className="my-2 flex  justify-between items-center">
         <button
-          className="bg-[#F3F7FA] hover:bg-gray-500 py-[15px] rounded-[8px] w-2/5 text-[#317BA0] hover:text-white"
+          className="bg-[#F3F7FA] hover:bg-gray-500   w-2/5 text-[#317BA0] hover:text-white"
           onClick={handlePrevStep}
         >
           Prev
         </button>
         <button
-          className="bg-[#F3F7FA] hover:bg-gray-500 py-[15px] rounded-[8px] w-2/5 text-[#317BA0] hover:text-white"
+          className="bg-[#F3F7FA] hover:bg-gray-500   w-2/5 text-[#317BA0] hover:text-white"
           onClick={handleSubmitFormData}
         >
           Submit

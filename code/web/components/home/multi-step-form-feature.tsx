@@ -137,7 +137,7 @@ const SimpleMultiStepForm: React.FC<SimpleMultiStepFormProps> = ({
   };
 
   return (
-    <div className="bg-white  max-w-full px-[29px] py-[38px] mx-auto rounded-[16px] shado">
+    <div className="bg-white  max-w-full   mx-auto  shado">
       {renderTopStepNumbers()}
 
       {/* Render Steps */}

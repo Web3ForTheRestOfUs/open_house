@@ -19,17 +19,15 @@ const StepC: React.FC<StepCProps> = ({
 }) => {
   return (
     <div>
-      <h1 className="mt-2 text-[16px] text-[#8592AD] mb-[20px]">
+      <h1 className="mt-2  text-[#8592AD] ">
         Step C: Neighbourhood Assessment
       </h1>
 
-      <div className="mb-[49px]">
-        <label className="mb-[24px] text-[#8592AD] block">
-          Neighbourhood Quality
-        </label>
+      <div className="">
+        <label className=" text-[#8592AD] block">Neighbourhood Quality</label>
         <div className="flex gap-2">
           {['Excellent', 'Good', 'Average', 'Bad', 'Poor'].map((quality) => (
-            <label key={quality} className="flex items-center gap-2 mr-[16px]">
+            <label key={quality} className="flex items-center gap-2 ">
               <input
                 type="radio"
                 name="neighbourhoodQuality"
@@ -44,17 +42,14 @@ const StepC: React.FC<StepCProps> = ({
         </div>
       </div>
 
-      <div className="mb-[49px]">
-        <label className="mb-[24px] text-[#8592AD] block">
+      <div className="">
+        <label className=" text-[#8592AD] block">
           Proximity to Public Transport
         </label>
         <div className="flex gap-2">
           {['Walking Distance', 'Short Drive', 'Not Accessible'].map(
             (proximity) => (
-              <label
-                key={proximity}
-                className="flex items-center gap-2 mr-[16px]"
-              >
+              <label key={proximity} className="flex items-center gap-2 ">
                 <input
                   type="radio"
                   name="proximity"
@@ -70,11 +65,11 @@ const StepC: React.FC<StepCProps> = ({
         </div>
       </div>
 
-      <div className="mb-[50px]">
-        <label className="mb-[24px] text-[#8592AD] block">Safety Rating</label>
+      <div className="">
+        <label className=" text-[#8592AD] block">Safety Rating</label>
         <div className="flex gap-2">
           {['Very Safe', 'Safe', 'Somewhat Safe', 'Unsafe'].map((rating) => (
-            <label key={rating} className="flex items-center gap-2 mr-[16px]">
+            <label key={rating} className="flex items-center gap-2 ">
               <input
                 type="radio"
                 name="safetyRating"
@@ -91,13 +86,13 @@ const StepC: React.FC<StepCProps> = ({
 
       <div className="my-2 flex  justify-between items-center">
         <button
-          className="bg-[#F3F7FA] hover:bg-gray-500 py-[15px] rounded-[8px] w-2/5 text-[#317BA0] hover:text-white"
+          className="bg-[#F3F7FA] hover:bg-gray-500   w-2/5 text-[#317BA0] hover:text-white"
           onClick={handlePrevStep}
         >
           Prev
         </button>
         <button
-          className="bg-[#F3F7FA] hover:bg-gray-500 py-[15px] rounded-[8px] w-2/5 text-[#317BA0] hover:text-white"
+          className="bg-[#F3F7FA] hover:bg-gray-500   w-2/5 text-[#317BA0] hover:text-white"
           onClick={handleNextStep}
         >
           Continue
