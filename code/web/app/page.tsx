@@ -1,9 +1,9 @@
-import SearchPanel from '@/components/landing_page/search_panel';
 import EachHouseListing from '@/components/landing_page/each_house_listing';
 import CarouselImage from '@/components/landing_page/carousel_image';
 import AddListingCTA from '@/components/landing_page/add_listing_cta';
 import PageIndicatorPanel from '@/components/landing_page/page_indicator';
 import Footer from '@/components/nav/footer';
+import SearchPanel from '@/components/landing_page/search_panel';
 
 export default function Page() {
   const numberOfListings = 6;
@@ -13,7 +13,7 @@ export default function Page() {
       <div className="p-4">
         <CarouselImage />
 
-        {/* <SearchPanel /> */}
+        <SearchPanel />
 
         <div className="grid grid-cols-5 gap-3">
           {/* First 3 columns */}
