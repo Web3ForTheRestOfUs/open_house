@@ -211,76 +211,6 @@ export type OpenHouse = {
           "type": "string"
         }
       ]
-    },
-    {
-      "name": "validateReview",
-      "discriminator": [
-        185,
-        156,
-        66,
-        110,
-        212,
-        32,
-        15,
-        35
-      ],
-      "accounts": [
-        {
-          "name": "review",
-          "writable": true,
-          "pda": {
-            "seeds": [
-              {
-                "kind": "account",
-                "path": "review.property_id",
-                "account": "review"
-              },
-              {
-                "kind": "account",
-                "path": "review.renter",
-                "account": "review"
-              }
-            ]
-          }
-        },
-        {
-          "name": "verifier",
-          "signer": true
-        }
-      ],
-      "args": []
-    },
-    {
-      "name": "verifyProperty",
-      "discriminator": [
-        155,
-        196,
-        192,
-        102,
-        122,
-        77,
-        122,
-        207
-      ],
-      "accounts": [
-        {
-          "name": "property",
-          "writable": true,
-          "pda": {
-            "seeds": [
-              {
-                "kind": "arg",
-                "path": "propertyId"
-              }
-            ]
-          }
-        },
-        {
-          "name": "verifier",
-          "signer": true
-        }
-      ],
-      "args": []
     }
   ],
   "accounts": [
@@ -324,11 +254,31 @@ export type OpenHouse = {
       ]
     }
   ],
+  "events": [
+    {
+      "name": "voteEvent",
+      "discriminator": [
+        195,
+        71,
+        250,
+        105,
+        120,
+        119,
+        234,
+        134
+      ]
+    }
+  ],
   "errors": [
     {
       "code": 6000,
       "name": "insufficientFunds",
       "msg": "Insufficient Funds"
+    },
+    {
+      "code": 6001,
+      "name": "overflow",
+      "msg": "Overflow occurred during token operations"
     }
   ],
   "types": [
@@ -366,8 +316,8 @@ export type OpenHouse = {
             "type": "string"
           },
           {
-            "name": "validated",
-            "type": "bool"
+            "name": "votes",
+            "type": "i64"
           },
           {
             "name": "propertyId",
@@ -376,18 +326,73 @@ export type OpenHouse = {
           {
             "name": "renter",
             "type": "pubkey"
+          },
+          {
+            "name": "votedUsers",
+            "type": {
+              "vec": "pubkey"
+            }
           }
         ]
       }
     },
     {
       "name": "user",
+      "docs": [
+        "User account structure"
+      ],
       "type": {
         "kind": "struct",
         "fields": [
           {
             "name": "tokens",
             "type": "u64"
+          },
+          {
+            "name": "upvotes",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "voteEvent",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "review",
+            "type": "pubkey"
+          },
+          {
+            "name": "voter",
+            "type": "pubkey"
+          },
+          {
+            "name": "voteType",
+            "type": {
+              "defined": {
+                "name": "voteType"
+              }
+            }
+          },
+          {
+            "name": "newVoteCount",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "voteType",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "upvote"
+          },
+          {
+            "name": "downvote"
           }
         ]
       }
