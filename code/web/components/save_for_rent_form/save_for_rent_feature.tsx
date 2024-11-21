@@ -14,7 +14,7 @@ interface FormData {
   agreeToTerms: boolean;
 }
 
-interface Save4RentProps {
+interface SaveForRentProps {
   showStepNumber?: boolean;
 }
 
@@ -30,7 +30,7 @@ const initialFormData: FormData = {
 
 const steps = ['A', 'B', 'C'];
 
-const Save4RentFeature: React.FC<Save4RentProps> = ({
+const SaveForRentFeature: React.FC<SaveForRentProps> = ({
   showStepNumber,
 }) => {
   const [stepIndex, setStepIndex] = useState<number>(0);
@@ -115,8 +115,6 @@ const Save4RentFeature: React.FC<Save4RentProps> = ({
         return (
           <SaveC
             formData={formData}
-            // handleChangeInput={handleChangeInput}
-            // handlePrevStep={handlePrevStep}
           />
         );
       default:
@@ -145,11 +143,11 @@ const Save4RentFeature: React.FC<Save4RentProps> = ({
   };
 
   return (
-    <div className="bg-white w-1/2 max-w-full px-[29px] py-[38px] mx-auto rounded-[16px] shadow-md">
+    <div className="bg-white w-1/2 max-w-full px-7 py-10 mx-auto rounded-2xl shadow-md">
       {renderStepNumbers()}
       {renderStep()}
     </div>
   );
 };
 
-export default Save4RentFeature;
+export default SaveForRentFeature;
