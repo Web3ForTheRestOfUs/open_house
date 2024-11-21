@@ -1,11 +1,11 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import StepA from '../listing_upload_form/stepA';
-import StepB from '../listing_upload_form/stepB';
-import StepC from '../listing_upload_form/stepC';
-import StepD from '../listing_upload_form/stepD';
-import StepE from '../listing_upload_form/stepE';
-import StepFinal from '../listing_upload_form/stepFinal';
+import StepA from '../listing/upload_form/stepA';
+import StepB from '../listing/upload_form/stepB';
+import StepC from '../listing/upload_form/stepC';
+import StepD from '../listing/upload_form/stepD';
+import StepE from '../listing/upload_form/stepE';
+import StepFinal from '../listing/upload_form/stepFinal';
 
 // Define the type for form data
 interface FormData {
