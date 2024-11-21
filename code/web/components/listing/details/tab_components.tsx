@@ -1,3 +1,4 @@
+'use client'
 import React, { useState, ReactNode } from 'react';
 import { FileText, Map, Users, Video } from 'lucide-react';
 

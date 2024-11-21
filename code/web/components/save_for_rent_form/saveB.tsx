@@ -45,20 +45,20 @@ const SaveB: React.FC<SaveBProps> = ({
 
   return (
     <div>
-      <h1 className="mt-2 text-[20px] text-[#2A2A2A] mb-[27px] font-medium">
+      <h1 className="mt-2 text-xl text-[#2A2A2A] mb-7 font-medium">
         Save towards the rent
       </h1>
 
-      <h1 className="font-bold mb-[12px] text-[#2F3D46]">
+      <h1 className="font-bold mb-3 text-[#2F3D46]">
         Luxury 2 -Bedroom Apartment in Ikate
       </h1>
 
-      <p className="font-medium text-[14px] text-[#1A2258] mb-[42px]">
+      <p className="font-medium text-sm text-[#1A2258] mb-11">
         #7,000,000/per year
       </p>
 
-      <div className="mb-[22px]">
-        <label className="mb-[8px] text-[#8592AD] block font-medium text-[16px]">
+      <div className="mb-6">
+        <label className="mb-2 text-[#8592AD] block font-medium text-base">
           Set Start Date
         </label>
         <DatePicker
@@ -66,14 +66,14 @@ const SaveB: React.FC<SaveBProps> = ({
           onChange={(date) => handleDateChange(date, 'startdate')} // Pass 'startdate' as an identifier
           minDate={new Date()} // Prevent past dates
           dateFormat="MMMM d, yyyy" // Customize date format
-          className="w-full outline-none border-2 border-[#E8F0FC] px-2 py-3 rounded-[8px] bg-transparent h-[60px] cursor-pointer"
+          className="w-full outline-none border-2 border-[#E8F0FC] px-2 py-3 rounded-lg bg-transparent h-16 cursor-pointer"
           placeholderText="Select a start date"
           wrapperClassName="w-full"
         />
       </div>
 
-      <div className="mb-[42px]">
-        <label className="mb-[8px] text-[#8592AD] block font-medium text-[16px]">
+      <div className="mb-11">
+        <label className="mb-2 text-[#8592AD] block font-medium text-base">
           Set End Date
         </label>
         <DatePicker
@@ -81,32 +81,32 @@ const SaveB: React.FC<SaveBProps> = ({
           onChange={(date) => handleDateChange(date, 'enddate')} // Pass 'enddate' as an identifier
           minDate={formData.startdate || new Date()} // Prevent selecting before startdate
           dateFormat="MMMM d, yyyy" // Customize date format
-          className="w-full outline-none border-2 border-[#E8F0FC] px-2 py-3 rounded-[8px] bg-transparent h-[60px] cursor-pointer"
+          className="w-full outline-none border-2 border-[#E8F0FC] px-2 py-3 rounded-lg bg-transparent h-16 cursor-pointer"
           placeholderText="Select an end date"
           wrapperClassName="w-full"
         />
       </div>
 
-      <div className="mb-[32px]">
-        <label className="mb-[8px] text-[#8592AD] block">How much do you want to contribute Weekly?</label>
+      <div className="mb-8">
+        <label className="mb-2 text-[#8592AD] block">How much do you want to contribute Weekly?</label>
         <input
           type="number"
           name="weeklyTarget"
           value={formData.weeklyTarget}
           onChange={(e) => handleChangeInput(e)}
-          className="w-full outline-none border-2 border-[#E8F0FC] px-2 py-1 rounded-[8px] bg-transparent h-[60px]"
+          className="w-full outline-none border-2 border-[#E8F0FC] px-2 py-1 rounded-lg bg-transparent h-16"
           min="0"
         />
       </div>
 
-      <div className='mb-[88px]'>
-        <p className='text-[#8592AD] font-medium mb-[16px]'>Set Primary Source Of Funds</p>
+      <div className='mb-24'>
+        <p className='text-[#8592AD] font-medium mb-4'>Set Primary Source Of Funds</p>
         <div className='flex flex-wrap justify-between'>
-          <div className='w-[240px] h-[100px] flex justify-center items-center bg-[#F3F7FA] rounded-[8px] cursor-pointer hover:bg-gray-500' onClick={() => setIsModalOpen(true)}>
+          <div className='w-1/3 h-28 flex justify-center items-center bg-[#F3F7FA] rounded-lg cursor-pointer hover:bg-gray-500' onClick={() => setIsModalOpen(true)}>
             <p>Add Card</p>
           </div>
 
-          <div className='w-[240px] h-[100px] flex justify-center items-center bg-[#F3F7FA] rounded-[8px] cursor-pointer hover:bg-gray-500' onClick={() => setIsWalletModalOpen(true)}>
+          <div className='w-1/3 h-28 flex justify-center items-center bg-[#F3F7FA] rounded-lg cursor-pointer hover:bg-gray-500' onClick={() => setIsWalletModalOpen(true)}>
             <p>Connect Wallet</p>
           </div>
         </div>
@@ -139,13 +139,13 @@ const SaveB: React.FC<SaveBProps> = ({
       {/* Other sections remain unchanged */}
       <div className="my-2 flex justify-between items-center">
         <button
-          className="bg-[#F3F7FA] hover:bg-gray-500 py-[15px] rounded-[8px] w-2/5 text-[#317BA0] hover:text-white"
+          className="bg-[#F3F7FA] hover:bg-gray-500 py-4 rounded-lg w-2/5 text-[#317BA0] hover:text-white"
           onClick={handlePrevStep}
         >
           Prev
         </button>
         <button
-          className="bg-[#F3F7FA] hover:bg-gray-500 py-[15px] rounded-[8px] w-2/5 text-[#317BA0] hover:text-white"
+          className="bg-[#F3F7FA] hover:bg-gray-500 py-4 rounded-lg w-2/5 text-[#317BA0] hover:text-white"
           onClick={handleSubmitFormData}
         >
           Save
