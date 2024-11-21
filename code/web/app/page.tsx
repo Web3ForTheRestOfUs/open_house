@@ -1,3 +1,4 @@
+'use client'
 import EachHouseListing from '@/components/landing_page/each_house_listing';
 import CarouselImage from '@/components/landing_page/carousel_image';
 import AddListingCTA from '@/components/landing_page/add_listing_cta';
