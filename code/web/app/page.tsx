@@ -11,30 +11,31 @@ export default function Page() {
 
   return (
     <div>
-      <div className="p-4">
-        <CarouselImage />
 
+      <CarouselImage />
+
+      
+      <div className="pt-12 px-16 bg-[#F6F6F6] border-t-2 border-[#D0D5DD]">
+        
         <SearchPanel />
 
-        <div className="grid grid-cols-5 gap-3">
+        <div className="flex w-full justify-between">
           {/* First 3 columns */}
-          <div className="col-span-3 grid grid-rows-2 gap-4">
+          <div className="w-3/5 mr-10">
             {Array.from({ length: numberOfListings }, (_, index) => (
               <EachHouseListing key={`first-row-${index}`} />
             ))}
           </div>
 
           {/* Last 2 columns */}
-          <div className="col-span-2 grid grid-cols-2 gap-3">
+          <div className='w-2/5'>
             <AddListingCTA />
           </div>
         </div>
-        <div className="my-10"></div>
 
         <PageIndicatorPanel currentPage={5} lastPage={10} />
-        <div className="my-36"></div>
+        <div className="py-36"></div>
       </div>
-      <Footer />
     </div>
   );
 }

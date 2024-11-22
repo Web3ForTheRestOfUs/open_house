@@ -5,7 +5,7 @@ import SaveForRentFeature from '@/components/save_for_rent_form/save_for_rent_fe
 
 const page = () => {
   return (
-    <div className='px-16 py-10'>
+    <div className='px-16 py-10 bg-[#f6f6f6]'>
       <h1 className='text-[#8592AD] text-xs mb-9'> Home {'>'} Post Property</h1>
      
       <SaveForRentFeature showStepNumber={false} />
