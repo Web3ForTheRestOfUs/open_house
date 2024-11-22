@@ -9,8 +9,13 @@ import StepFinal from './stepFinal';
 
 interface FormData {
   address: string;
-  city: string;
-  propertyType: string;
+  area: string;
+  houseType: string;
+  meterSituation: string;
+  waterSituation: string;
+  houseAge: number;
+  homeSize: number;
+
   bedroom: number; // Updated to number
   bathroom: number; // Updated to number
   size: number;
@@ -24,6 +29,8 @@ interface FormData {
   utilities: string;
   serviceCharge: string;
   agreeToTerms: boolean;
+
+  //for date use Date | null
 }
 
 interface SimpleMultiStepFormProps {
@@ -32,8 +39,13 @@ interface SimpleMultiStepFormProps {
 
 const initialFormData: FormData = {
   address: '',
-  city: '',
-  propertyType: '',
+  area:'',  
+  houseType: '',
+  meterSituation: '',
+  waterSituation: '',
+  houseAge: 0,
+  homeSize: 0,
+
   bedroom: 0,
   bathroom: 0,
   size: 0,
@@ -47,6 +59,8 @@ const initialFormData: FormData = {
   utilities: '',
   serviceCharge: '',
   agreeToTerms: false,
+
+  //for date, use null
 };
 
 const steps = ['A', 'B', 'C', 'D', 'E', 'Final'];
@@ -177,7 +191,7 @@ const SimpleMultiStepForm: React.FC<SimpleMultiStepFormProps> = ({
   };
 
   return (
-    <div className="bg-white  max-w-full   mx-auto  shadow-md">
+    <div className="bg-white w-1/2 mx-auto rounded-lg shadow-md pt-10 pb-3 px-7">
       {renderStepNumbers()}
       {renderStep()}
     </div>

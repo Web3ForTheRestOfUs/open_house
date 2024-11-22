@@ -3,8 +3,8 @@ import React from 'react';
 interface StepEProps {
   formData: {
     address: string;
-    city: string;
-    propertyType: string;
+    // city: string;
+    // propertyType: string;
     bedroom: number; // Change to 'number'
     bathroom: number; // Change to 'number'
     size: number;
@@ -41,8 +41,8 @@ const StepE: React.FC<StepEProps> = ({
         Step E: Confirm Form Data
       </h1>
       <DataConfirmRow label="Address:" value={formData.address} />
-      <DataConfirmRow label="City:" value={formData.city} />
-      <DataConfirmRow label="Property Type:" value={formData.propertyType} />
+      {/* <DataConfirmRow label="City:" value={formData.city} />
+      <DataConfirmRow label="Property Type:" value={formData.propertyType} /> */}
       <DataConfirmRow label="Bedroom:" value={formData.bedroom.toString()} />
       <DataConfirmRow label="Bathroom:" value={formData.bathroom.toString()} />
       <DataConfirmRow label="Size:" value={formData.size.toString()} />

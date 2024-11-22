@@ -1,12 +1,19 @@
 import React from 'react';
+import SelectField from './components/SelectField';
 
 interface StepAProps {
   formData: {
     address: string;
-    city: string;
-    propertyType: string;
+    area: string;
+    houseType: string;
+    meterSituation: string;
+    waterSituation: string;
+    houseAge: number;
+    homeSize: number;
   };
-  handleChangeInput: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handleChangeInput: (
+    event: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>
+  ) => void;
   handleNextStep: () => void;
 }
 
@@ -16,51 +23,71 @@ const StepA: React.FC<StepAProps> = ({
   handleNextStep,
 }) => {
   return (
-    <div>
-      <h1 className="mt-2  text-[#8592AD] ">Step A: Property Info</h1>
-      <div className="">
-        <label className=" text-[#8592AD]">Address</label>
+    <div className=''>
+      <h1 className="mb-8 text-[#8592AD] ">Step A: Property Info</h1>
+
+      <div className="mb-8">
+        <label className="text-[#8592AD] block mb-2">Address</label>
         <input
           type="text"
           name="address"
           value={formData.address}
           onChange={(e) => handleChangeInput(e)}
-          className="  outline-none border-2 border-[#E8F0FC] px-2 py-1  bg-transparent"
-        />
-      </div>
-      <div className="">
-        <label className=" text-[#8592AD]">City</label>
-        <input
-          type="text"
-          name="city"
-          value={formData.city}
-          onChange={(e) => handleChangeInput(e)}
-          className="  outline-none border-2 border-[#E8F0FC] px-2 py-1  bg-transparent"
+          className="w-full h-16 outline-none border-2 border-[#E8F0FC] px-2 py-1 rounded-lg bg-transparent"
         />
       </div>
 
-      <div className="mb-[10.5rem]">
-        <label className=" text-[#8592AD] block">Property Type</label>
-        <div className="flex gap-2">
-          {['Studio', 'Apartment', 'Condo', 'Bungalow'].map((type) => (
-            <label key={type} className="flex items-center gap-2 ">
-              <input
-                type="radio"
-                name="propertyType"
-                value={type}
-                checked={formData.propertyType === type}
-                onChange={(e) => handleChangeInput(e)}
-                className="w-5 h-5"
-              />
-              <span className="text-[#8592AD]">{type}</span>
-            </label>
-          ))}
-        </div>
-      </div>
+      <SelectField
+         label='Area'
+         name='area'
+         value={formData.area}
+         options={['Option 1', 'Option 2', 'Option 3']}
+         onChange={handleChangeInput}
+      />
 
-      <div className="my-2 flex justify-center items-center ">
+      <SelectField
+         label='House Type'
+         name='houseType'
+         value={formData.houseType}
+         options={['Option 1', 'Option 2', 'Option 3']}
+         onChange={handleChangeInput}
+      />
+
+      <SelectField
+         label='Meter Situation'
+         name='meterSituation'
+         value={formData.meterSituation}
+         options={['Option 1', 'Option 2', 'Option 3']}
+         onChange={handleChangeInput}
+      />
+
+      <SelectField
+         label='Water Situation'
+         name='waterSituation'
+         value={formData.waterSituation}
+         options={['Option 1', 'Option 2', 'Option 3']}
+         onChange={handleChangeInput}
+      />
+ 
+      <SelectField
+         label='House Age'
+         name='houseAge'
+         value={formData.houseAge}
+         options={[0,1,2,3,4,5]}
+         onChange={handleChangeInput}
+      />
+
+      <SelectField
+         label='Home Size'
+         name='homeSize'
+         value={formData.homeSize}
+         options={[0,1,2,3,4,5]}
+         onChange={handleChangeInput}
+      />
+
+      <div className="flex justify-center items-center ">
         <button
-          className="bg-[#F3F7FA] hover:bg-gray-500   w-2/5 text-[#317BA0] hover:text-white"
+          className="w-full rounded-lg bg-[#F3F7FA] hover:bg-gray-500  py-5 text-[#317BA0] hover:text-white font-medium"
           onClick={handleNextStep}
         >
           Continue
