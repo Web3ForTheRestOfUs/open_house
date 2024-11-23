@@ -4,8 +4,10 @@ interface SelectFieldProps<T> {
   label: string;
   name: string;
   value: T;
-  options: T[];
+  options: Array<T | { value: string; label: string }>;
   onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+  required?: boolean;
+  placeholder?: string;
 }
 
 const SelectField = <T extends string | number>({
@@ -14,21 +16,40 @@ const SelectField = <T extends string | number>({
   value,
   options,
   onChange,
+  required = false,
+  placeholder
 }: SelectFieldProps<T>) => {
   return (
     <div className="mb-8">
-      <label className="text-[#8592AD] mb-2">{label}</label>
+      <label className="text-[#8592AD] block mb-2">
+        {label}{required && '*'}
+      </label>
       <select
         name={name}
         value={value}
         onChange={onChange}
-        className="outline-none border border-2 border-[#E8F0FC] px-2 py-1 bg-transparent w-full h-16 rounded-lg"
+        required={required}
+        className="w-full h-16 outline-none border-2 border-[#E8F0FC] px-4 py-1 rounded-lg bg-transparent"
       >
-        {options.map((option, index) => (
-          <option key={index} value={option}>
-            {typeof option === 'number' ? option : option.toString()}
+        {placeholder && (
+          <option value="" disabled>
+            {placeholder}
           </option>
-        ))}
+        )}
+        {options.map((option, index) => {
+          if (typeof option === 'object' && option !== null) {
+            return (
+              <option key={index} value={option.value}>
+                {option.label}
+              </option>
+            );
+          }
+          return (
+            <option key={index} value={option}>
+              {typeof option === 'number' ? option : option.toString()}
+            </option>
+          );
+        })}
       </select>
     </div>
   );
