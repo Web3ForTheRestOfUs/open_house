@@ -102,11 +102,11 @@ const SaveB: React.FC<SaveBProps> = ({
       <div className='mb-24'>
         <p className='text-[#8592AD] font-medium mb-4'>Set Primary Source Of Funds</p>
         <div className='flex flex-wrap justify-between'>
-          <div className='w-1/3 h-28 flex justify-center items-center bg-[#F3F7FA] rounded-lg cursor-pointer hover:bg-gray-500' onClick={() => setIsModalOpen(true)}>
+          <div className='w-1/3 h-28 flex justify-center items-center bg-[#F3F7FA] rounded-lg cursor-pointer hover:bg-[#317BA0] hover:text-white' onClick={() => setIsModalOpen(true)}>
             <p>Add Card</p>
           </div>
 
-          <div className='w-1/3 h-28 flex justify-center items-center bg-[#F3F7FA] rounded-lg cursor-pointer hover:bg-gray-500' onClick={() => setIsWalletModalOpen(true)}>
+          <div className='w-1/3 h-28 flex justify-center items-center bg-[#F3F7FA] rounded-lg cursor-pointer hover:bg-[#317BA0] hover:text-white' onClick={() => setIsWalletModalOpen(true)}>
             <p>Connect Wallet</p>
           </div>
         </div>
@@ -139,13 +139,13 @@ const SaveB: React.FC<SaveBProps> = ({
       {/* Other sections remain unchanged */}
       <div className="my-2 flex justify-between items-center">
         <button
-          className="bg-[#F3F7FA] hover:bg-gray-500 py-4 rounded-lg w-2/5 text-[#317BA0] hover:text-white"
+          className="bg-[#F3F7FA] hover:bg-[#317BA0] py-4 rounded-lg w-2/5 text-[#317BA0] hover:text-white"
           onClick={handlePrevStep}
         >
           Prev
         </button>
         <button
-          className="bg-[#F3F7FA] hover:bg-gray-500 py-4 rounded-lg w-2/5 text-[#317BA0] hover:text-white"
+          className="bg-[#F3F7FA] hover:bg-[#317BA0] py-4 rounded-lg w-2/5 text-[#317BA0] hover:text-white"
           onClick={handleSubmitFormData}
         >
           Save

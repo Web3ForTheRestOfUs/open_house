@@ -81,7 +81,7 @@ const SaveA: React.FC<SaveAProps> = ({
 
       <div className="my-2 flex justify-center items-center ">
         <button
-          className="bg-[#F3F7FA] hover:bg-gray-500 py-4 rounded-lg w-full text-[#317BA0] hover:text-white"
+          className="bg-[#F3F7FA] hover:bg-[#317BA0] py-4 rounded-lg w-full text-[#317BA0] hover:text-white"
           onClick={handleNextStep}
         >
           Continue
