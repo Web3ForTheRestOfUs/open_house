@@ -1,56 +1,37 @@
+// app/listing/[id]/page.tsx
 import React from 'react';
-
-
-import { useParams } from 'next/navigation';
-import TabComponents from '@/components/listing/details/tab_components';
-import BriefOverview from '@/components/listing/details/short_overview';
-import AboutTheHouseCard from '@/components/listing/details/about_the_house';
-import AmenitiesCard from '@/components/listing/details/amenities';
-import LocationAndEnvironmentCard from '@/components/listing/details/location_and_environment';
-import NeighborhoodCard from '@/components/listing/details/neighbourhood';
-import ContactDetailsCard from '@/components/listing/details/contact_details';
-import Footer from '@/components/nav/footer';
-import Header from '@/components/nav/header';
 import TopDetails from '@/components/listing/details/details_top';
+import PropertyDetails from '@/components/listing/reveal/PropertyDetails/PropertyDetails';
+import { mockPropertyData } from '@/components/listing/reveal/PropertyDetails/mockPropertyData';
 
-const page = () => {
+
+export default function ListingDetailsPage() {
+  // Since you're using Next.js App Router, we need to handle params differently
   // const params = useParams();
 
   return (
     <div className='bg-[#F6F6F6] pt-5 pb-8 px-16'>
       <TopDetails />
 
-      {/* <div className="">
-        
+      <PropertyDetails property={mockPropertyData} />
 
-        <div>
+      {/* Uncomment these when you want to use them */}
+
+      {/* <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
+        <div className="lg:col-span-3">
           <BriefOverview />
+          <TabComponents />
         </div>
-        <div className="flex border-1">
-          <div className="mb-10">
-            <TabComponents /> 
-          </div>
-          <div className="grid grid-cols-3 gap-4">
-            <div>
-              <AboutTheHouseCard />
-            </div>
-            <div>
-              <AmenitiesCard />
-            </div>
-            <div>
-              <LocationAndEnvironmentCard />
-            </div>
-            <div>
-              <NeighborhoodCard />
-            </div>
-            <div>
-              <ContactDetailsCard />
-            </div>
+        <div className="lg:col-span-2">
+          <div className="grid grid-cols-1 gap-6">
+            <AboutTheHouseCard />
+            <AmenitiesCard />
+            <LocationAndEnvironmentCard />
+            <NeighborhoodCard />
+            <ContactDetailsCard />
           </div>
         </div>
       </div> */}
     </div>
   );
-};
-
-export default page;
+}

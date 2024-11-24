@@ -118,7 +118,7 @@ const StepB: React.FC<StepBProps> = ({
           onClick={handleNextStep}
         >
           Continue
-        </button>
+        </button>``
       </div>
     </div>
   );

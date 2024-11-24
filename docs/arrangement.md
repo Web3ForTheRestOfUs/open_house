@@ -1,17 +1,5 @@
 # Rentpal Multi-Page Form Structure
 
-## Page 1: Basic Information & Identity
-[the scout would already have this on signup,
-but if they don't ask them to create an account after
-they've uploaded the listing info]
-**Progress: [1/7] - Let's get to know you**
-- First Name*
-- Last Name*
-- Email*
-- Phone*
-- WhatsApp Number (optional)
-- Gender*
-
 *UX Note: Simple, non-intimidating start to build form momentum*
 
 ## Page 2: Location & Property Type

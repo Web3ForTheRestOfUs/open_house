@@ -1,10 +1,20 @@
 use anchor_lang::prelude::*;
 
+const MAX_PROPERTY_ID_LENGTH: usize = 50;  // Maximum length for property ID
+const MAX_DETAILS_LENGTH: usize = 500;  // Maximum length for property details
+
 pub fn register_property(
     ctx: Context<RegisterProperty>,
     property_id: String,
     details: String,
 ) -> Result<()> {
+
+    // Validate property ID length
+    require!(property_id.len() <= MAX_PROPERTY_ID_LENGTH, CustomError::PropertyIdTooLong);
+    require!(details.len() <= MAX_DETAILS_LENGTH, CustomError::DetailsTooLong);
+
+
+
     let property = &mut ctx.accounts.property;
     property.owner = *ctx.accounts.owner.key;
     property.property_id = property_id;
@@ -17,6 +27,9 @@ pub fn update_property(
     ctx: Context<UpdateProperty>,
     new_details: String,
 ) -> Result<()> {
+    // Validate new details length
+    require!(new_details.len() <= MAX_DETAILS_LENGTH, CustomError::DetailsTooLong);
+
     let property = &mut ctx.accounts.property;
     require!(
         property.owner == *ctx.accounts.owner.key,
@@ -26,19 +39,18 @@ pub fn update_property(
     Ok(())
 }
 
-// pub fn verify_property(ctx: Context<VerifyProperty>) -> Result<()> {
-//     let property = &mut ctx.accounts.property;
-//     property.verified = true;
-//     Ok(())
-// }
 
 #[derive(Accounts)]
-#[instruction(property_id: String)]
+#[instruction(property_id: String, details: String)]
 pub struct RegisterProperty<'info> {
     #[account(
         init,
         payer = owner,
-        space = 8 + Property::LEN,
+        space = 8 + // discriminator
+            32 + // pubkey
+            4 + MAX_PROPERTY_ID_LENGTH + // String length prefix + content
+            4 + MAX_DETAILS_LENGTH + // String length prefix + content
+            1,
         seeds = [property_id.as_bytes()],  // Using property_id as the seed
         bump
     )]
@@ -61,18 +73,6 @@ pub struct UpdateProperty<'info> {
     pub owner: Signer<'info>,
 }
 
-// #[derive(Accounts)]
-// #[instruction(property_id: String)]
-// pub struct VerifyProperty<'info> {
-//     #[account(
-//         mut,
-//         seeds = [property_id.as_bytes()],
-//         bump
-//     )]
-//     pub property: Account<'info, Property>,
-//     pub verifier: Signer<'info>,
-// }
-
 #[account]
 pub struct Property {
     pub owner: Pubkey,
@@ -81,12 +81,13 @@ pub struct Property {
     pub verified: bool,
 }
 
-impl Property {
-    const LEN: usize = 32 + 4 + 100 + 1; // Adjust this as needed for actual data size
-}
 
 #[error_code]
 pub enum CustomError {
     #[msg("Unauthorized action")]
     Unauthorized,
+    #[msg("Property ID exceeds maximum length")]
+    PropertyIdTooLong,
+    #[msg("Property details exceed maximum length")]
+    DetailsTooLong,
 }

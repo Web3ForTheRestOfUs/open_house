@@ -1,0 +1,683 @@
+{
+  "listingId": "L-2024-11-24-ABC123",
+  "version": "1.0.0",
+  "timestamp": {
+    "created": "2024-11-24T12:00:00Z",
+    "lastModified": "2024-11-24T12:00:00Z",
+    "expiresAt": "2025-11-24T12:00:00Z"
+  },
+  "blockchain": {
+    "network": "solana-mainnet",
+    "listerWallet": "solana-wallet-address",
+    "contractAddress": "contract-address",
+    "tokensMinted": "100",
+    "verificationStatus": "pending",
+    "listingStatus": "active"
+  },
+  "media": {
+    "images": [
+      {
+        "id": "IMG-001",
+        "category": "exterior",
+        "type": "building-front",
+        "ipfsHash": "ipfs://hash-exterior-front",
+        "thumbnailHash": "ipfs://thumb-exterior-front",
+        "description": "Front view of the building",
+        "metadata": {
+          "dimensions": {
+            "width": 3840,
+            "height": 2160
+          },
+          "fileSize": 2048576,
+          "fileType": "image/jpeg",
+          "takenAt": "2024-11-23T10:00:00Z",
+          "deviceInfo": "iPhone 15 Pro",
+          "coordinates": {
+            "latitude": "6.5244",
+            "longitude": "3.3792"
+          }
+        },
+        "order": 1,
+        "verificationStatus": "verified",
+        "tags": ["exterior", "front-view", "day-time"]
+      }
+    ],
+    "videos": [
+      {
+        "id": "VID-001",
+        "category": "walkthrough",
+        "type": "full-tour",
+        "ipfsHash": "ipfs://hash-walkthrough",
+        "thumbnailHash": "ipfs://thumb-walkthrough",
+        "description": "Complete property walkthrough",
+        "metadata": {
+          "duration": 180,
+          "dimensions": {
+            "width": 3840,
+            "height": 2160
+          },
+          "fileSize": 256000000,
+          "fileType": "video/mp4",
+          "recordedAt": "2024-11-23T10:30:00Z",
+          "deviceInfo": "iPhone 15 Pro",
+          "coordinates": {
+            "latitude": "6.5244",
+            "longitude": "3.3792"
+          }
+        },
+        "order": 1,
+        "verificationStatus": "verified",
+        "tags": ["walkthrough", "full-tour", "interior"]
+      }
+    ],
+    "virtualTour": {
+      "enabled": true,
+      "provider": "matterport",
+      "ipfsHash": "ipfs://hash-360-tour",
+      "thumbnailHash": "ipfs://thumb-360-tour",
+      "description": "Interactive 360° virtual tour",
+      "metadata": {
+        "tourId": "360-TOUR-001",
+        "createdAt": "2024-11-23T11:00:00Z",
+        "lastAccessed": "2024-11-24T12:00:00Z",
+        "totalViews": 0
+      }
+    },
+    "floorPlan": {
+      "enabled": true,
+      "ipfsHash": "ipfs://hash-floorplan",
+      "thumbnailHash": "ipfs://thumb-floorplan",
+      "description": "Detailed floor plan with measurements",
+      "metadata": {
+        "dimensions": {
+          "width": 2000,
+          "height": 1500
+        },
+        "fileSize": 1048576,
+        "fileType": "image/png",
+        "scale": "1:100"
+      }
+    }
+  },
+  "basicInfo": {
+    "propertyType": {
+      "houseType": "Mini Flat / 1bed",
+      "buildingType": "Two Storey Building",
+      "floorLevel": 2,
+      "totalFloors": 4
+    },
+    "location": {
+      "nearestBusStop": "Lekki Phase 1",
+      "mainRoadAccess": "Main Road Nearby",
+      "estate": "Palm View Estate",
+      "street": "Hidden for privacy",
+      "area": "Lekki",
+      "lga": "Eti-Osa",
+      "state": "Lagos",
+      "coordinates": {
+        "latitude": "6.5244",
+        "longitude": "3.3792",
+        "accuracy": "100m"
+      },
+      "landmarks": ["Next to XYZ Plaza", "Opposite ABC Bank"]
+    },
+    "pricing": {
+      "yearlyRent": "900000",
+      "currency": "NGN",
+      "paymentTerms": "Annual",
+      "negotiable": true,
+      "priceRange": "800k-1m"
+    },
+    "availability": {
+      "status": "occupied",
+      "expiryMonth": "December",
+      "expiryYear": "2024",
+      "intentToLeave": "3-6months",
+      "moveInDate": "2025-01-01",
+      "minimumStayPeriod": "1 year",
+      "viewingHours": "9AM - 6PM"
+    },
+    "overviewStats": {
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "toilets": 1,
+      "parkingSpaces": 1,
+      "approximateSize": "65 sqm"
+    }
+  },
+  "detailedInfo": {
+    "utilities": {
+      "power": {
+        "lightSituation": "24/7",
+        "meterType": "Personal Meter",
+        "meterNumber": "hidden",
+        "averageMonthlyBill": "15000",
+        "lastBillAmount": "14500",
+        "lastBillDate": "2024-10-31",
+        "electricityBand": "Band A",
+        "powerCompany": "EKEDC",
+        "loadLimit": "60A",
+        "powerRating": "4.5KVA"
+      },
+      "water": {
+        "situation": "Steady Running Water",
+        "source": ["Borehole", "Water Corporation"],
+        "storage": {
+          "groundTank": "2000L",
+          "overheadTank": "1000L"
+        },
+        "waterPressure": "Good",
+        "pumpingSchedule": "6AM - 10PM",
+        "treatmentSystem": "Available",
+        "backup": "Additional Storage Tank"
+      },
+      "internet": {
+        "fiberOptic": {
+          "available": true,
+          "providers": ["Spectranet", "Swift"],
+          "maxSpeed": "200Mbps",
+          "installationStatus": "Pre-installed"
+        },
+        "telcos": {
+          "status": "Major Telcos Good",
+          "networks": {
+            "mtn": 5,
+            "airtel": 4,
+            "glo": 4,
+            "9mobile": 3
+          },
+          "averageSpeed": "4G/LTE"
+        }
+      },
+      "generator": {
+        "type": "Personal Generator Allowed",
+        "details": {
+          "capacity": "3.5KVA",
+          "brand": "Any",
+          "maxAllowedSize": "5KVA",
+          "housingLocation": "Back of building",
+          "operatingHours": "No restriction"
+        },
+        "fuelPolicy": {
+          "type": "Individual Purchase",
+          "storageAllowed": true,
+          "maxStorageLimit": "25L"
+        },
+        "sharedGenerator": {
+          "available": false,
+          "capacity": null,
+          "schedule": null,
+          "monthlyFee": null
+        }
+      },
+      "cooking": {
+        "gasAllowed": true,
+        "gasType": ["Cylinder", "Piped"],
+        "electricCookingAllowed": true,
+        "keroseneAllowed": false
+      },
+      "waste": {
+        "managementSystem": "LAWMA",
+        "collectionDays": ["Monday", "Thursday"],
+        "monthlyFee": "2000",
+        "segregationRequired": false,
+        "binLocation": "Front of building"
+      }
+    },
+    "propertyDetails": {
+      "age": {
+        "category": "1-3 Years",
+        "yearBuilt": "2022",
+        "lastMajorRenovation": "2023"
+      },
+      "size": {
+        "category": "Medium",
+        "dimensions": {
+          "totalArea": "65 sqm",
+          "livingRoom": "16 sqm",
+          "bedroom": "12 sqm",
+          "kitchen": "8 sqm",
+          "bathroom": "4 sqm",
+          "balcony": "6 sqm"
+        },
+        "ceilingHeight": "2.7m"
+      },
+      "condition": {
+        "needsRepair": "Needs No Repair",
+        "maintenanceHistory": {
+          "lastInspection": "2024-10-15",
+          "regularMaintenance": true,
+          "lastPainted": "2023-06",
+          "structuralIssues": false,
+          "recentRepairs": [],
+          "ongoingIssues": [],
+          "plannedMaintenance": [
+            {
+              "type": "Routine Painting",
+              "scheduledDate": "2025-06"
+            }
+          ]
+        }
+      },
+      "rooms": {
+        "livingRoom": {
+          "size": "Medium",
+          "features": ["Air Conditioning", "Ceiling Fan", "TV Point"],
+          "windows": 2,
+          "flooring": "Tiles",
+          "orientation": "North-facing"
+        },
+        "bedroom": {
+          "size": "Medium",
+          "features": [
+            "Built-in Wardrobe",
+            "Air Conditioning Point",
+            "Ceiling Fan"
+          ],
+          "windows": 2,
+          "flooring": "Tiles",
+          "orientation": "South-facing"
+        },
+        "kitchen": {
+          "size": "Medium Kitchen",
+          "features": [
+            "Built-in Cabinets",
+            "Cooker Hood Point",
+            "Tiled Backsplash"
+          ],
+          "windows": 1,
+          "countertops": "Granite",
+          "storage": "Adequate",
+          "ventilation": "Good"
+        },
+        "bathroom": {
+          "size": "Medium Bathroom",
+          "features": ["Water Heater", "Shower Cubicle", "Modern Fittings"],
+          "windows": 1,
+          "waterPressure": "Good",
+          "ventilation": "Good"
+        },
+        "toilet": {
+          "separate": true,
+          "size": "Standard",
+          "features": ["Modern Fittings", "Tiled Walls"]
+        },
+        "balcony": {
+          "type": "Normal Balcony",
+          "size": "6 sqm",
+          "features": ["Tiled Floor", "Good View"],
+          "orientation": "South-facing"
+        }
+      },
+      "finishes": {
+        "walls": {
+          "exterior": "Painted Cement Render",
+          "interior": "Smooth Painted",
+          "condition": "Excellent"
+        },
+        "floors": {
+          "material": "Tiles",
+          "type": "Ceramic",
+          "condition": "Excellent"
+        },
+        "windows": {
+          "type": "Aluminum Sliding",
+          "glazing": "Single",
+          "nets": "Yes",
+          "burglarProof": "Yes"
+        },
+        "doors": {
+          "main": "Solid Wood with Security Features",
+          "internal": "HDF",
+          "condition": "Excellent"
+        }
+      }
+    },
+    "compound": {
+      "size": "Medium Compound",
+      "features": {
+        "parking": {
+          "type": "Gated Car Parking",
+          "spaces": 1,
+          "covered": false,
+          "secured": true,
+          "dimensions": "2.5m x 5m"
+        },
+        "accessibility": {
+          "vehicular": "Accessible by Car",
+          "pedestrian": "Good",
+          "handicap": false
+        },
+        "landscaping": {
+          "garden": true,
+          "paved": true,
+          "greenArea": "20 sqm"
+        }
+      },
+      "shared": {
+        "laundry": {
+          "available": true,
+          "type": "Hanging Lines",
+          "location": "Back of building"
+        },
+        "storage": {
+          "available": false
+        }
+      }
+    },
+    "security": {
+      "type": "Gate Security",
+      "personnel": {
+        "gateGuard": true,
+        "estateSecuirty": true,
+        "workingHours": "24/7",
+        "numberOfGuards": 2
+      },
+      "features": [
+        "Burglary proof",
+        "Security doors",
+        "Window nets",
+        "Security Lights",
+        "CCTV"
+      ],
+      "access": {
+        "gatePass": false,
+        "intercom": false,
+        "visitorParking": true,
+        "gateClosingTime": "10:00 PM"
+      },
+      "emergency": {
+        "exitRoutes": 2,
+        "fireExtinguisher": true,
+        "firstAidKit": false,
+        "emergencyContacts": [
+          "Security Room: hidden",
+          "Estate Management: hidden"
+        ]
+      }
+    },
+    "environment": {
+      "flooding": {
+        "status": "No Flooding",
+        "history": [],
+        "preventiveMeasures": ["Good Drainage", "Elevated Ground"]
+      },
+      "noise": {
+        "level": "Little to No Noise",
+        "sources": [],
+        "distanceToMainRoad": "200m"
+      },
+      "pollution": {
+        "air": "Low",
+        "dust": "Medium",
+        "industrial": "None Nearby"
+      },
+      "neighbors": {
+        "type": "Mostly Working Class",
+        "demographics": "Mixed Age Groups",
+        "density": "Medium",
+        "commercialActivity": "Low"
+      },
+      "amenities": {
+        "distances": {
+          "mainRoad": "200m",
+          "busStop": "400m",
+          "market": "1km",
+          "hospital": "2km",
+          "school": "1.5km",
+          "mall": "3km",
+          "airport": "25km"
+        },
+        "nearbyFacilities": [
+          "Grocery Store - 200m",
+          "Pharmacy - 300m",
+          "ATM - 400m"
+        ]
+      }
+    },
+    "landlordDetails": {
+      "wahalaLevel": "None",
+      "responseTime": "Within 24 hours",
+      "maintenanceResponse": "Prompt",
+      "visitFrequency": "Quarterly",
+      "rules": {
+        "petPolicy": {
+          "allowed": "Small Pets Only",
+
+          "restrictions": [
+            "No dogs above 10kg",
+            "Must be kept indoors",
+            "Additional deposit required"
+          ],
+          "deposit": "50000"
+        },
+        "visitorPolicy": {
+          "overnightStays": true,
+          "maxDuration": "1 week",
+          "visitorParking": true,
+          "registration": {
+            "required": false,
+            "process": "Inform security"
+          },
+          "restrictions": ["No large gatherings", "Quiet hours after 10 PM"]
+        },
+        "businessUse": {
+          "homeOffice": true,
+          "businessVisitors": false,
+          "restrictions": [
+            "No retail activities",
+            "No signage",
+            "No staff on premises"
+          ]
+        },
+        "modifications": {
+          "painting": "Allowed with permission",
+          "nailing": "Allowed",
+          "structuralChanges": "Not allowed",
+          "applianceInstallation": "Allowed with notice"
+        }
+      },
+      "preferences": {
+        "occupation": ["Working Professional", "Family"],
+        "maxOccupants": 2,
+        "minimumStayPeriod": "1 year"
+      }
+    },
+    "financials": {
+      "rent": {
+        "amount": "900000",
+        "currency": "NGN",
+        "paymentSchedule": "Annual",
+        "paymentMethods": ["Bank Transfer", "Online Payment"],
+        "lastIncrement": {
+          "date": "2023-12",
+          "percentage": 10
+        }
+      },
+      "serviceCharge": {
+        "amount": "150000",
+        "frequency": "Annual",
+        "covers": [
+          "Security",
+          "Cleaning",
+          "Waste Management",
+          "Generator Maintenance",
+          "General Maintenance"
+        ],
+        "exclusions": ["Electricity Bills", "Water Bills", "Internet"]
+      },
+      "additionalFees": {
+        "agreementFee": "50000",
+        "agencyFee": {
+          "percentage": 10,
+          "amount": "90000"
+        },
+        "cautionDeposit": {
+          "amount": "500000",
+          "refundable": true,
+          "refundTerms": [
+            "After property inspection",
+            "Minus damages",
+            "Within 30 days of moveout"
+          ]
+        },
+        "legalFee": "50000",
+        "infrastructureFee": "0"
+      },
+      "utilities": {
+        "electricity": {
+          "averageMonthly": "15000",
+          "paymentStructure": "Pay as you go",
+          "meterNumber": "hidden"
+        },
+        "water": {
+          "averageMonthly": "5000",
+          "paymentStructure": "Monthly"
+        },
+        "waste": {
+          "monthlyFee": "2000",
+          "includedInServiceCharge": true
+        }
+      },
+      "history": {
+        "rentIncreases": [
+          {
+            "date": "2023-12",
+            "previousAmount": "800000",
+            "newAmount": "900000",
+            "percentage": 12.5
+          }
+        ],
+        "serviceChargeHistory": [
+          {
+            "year": "2023",
+            "amount": "120000"
+          }
+        ]
+      }
+    },
+    "documentation": {
+      "required": [
+        "Valid ID",
+        "Proof of Income",
+        "Utility Bill",
+        "Passport Photograph"
+      ],
+      "propertyDocuments": {
+        "buildingApproval": {
+          "available": true,
+          "number": "hidden",
+          "verified": true
+        },
+        "surveyPlan": {
+          "available": true,
+          "verified": true
+        },
+        "deedOfAssignment": {
+          "available": true,
+          "verified": true
+        }
+      },
+      "agreements": {
+        "tenancyAgreement": {
+          "available": true,
+          "duration": "1 year",
+          "renewable": true
+        },
+        "houseRules": {
+          "available": true,
+          "version": "2024-v1"
+        }
+      }
+    },
+    "maintenance": {
+      "schedule": {
+        "cleaning": "Weekly",
+        "pestControl": "Quarterly",
+        "generalInspection": "Quarterly"
+      },
+      "responsibilities": {
+        "tenant": [
+          "Internal Painting",
+          "Light Bulb Replacement",
+          "Basic Plumbing"
+        ],
+        "landlord": [
+          "Structural Repairs",
+          "Major Plumbing",
+          "Electrical Systems"
+        ]
+      },
+      "contacts": {
+        "emergency": "hidden",
+        "generalMaintenance": "hidden",
+        "estateFacility": "hidden"
+      },
+      "history": {
+        "lastMajorRepairs": [
+          {
+            "date": "2023-06",
+            "type": "Painting",
+            "description": "Full interior painting"
+          }
+        ],
+        "upcomingMaintenance": [
+          {
+            "scheduled": "2024-12",
+            "type": "General Inspection",
+            "description": "Annual property review"
+          }
+        ]
+      }
+    }
+  },
+  "metadata": {
+    "listing": {
+      "id": "L-2024-11-24-ABC123",
+      "status": "active",
+      "visibility": "public",
+      "featured": false,
+      "verificationStatus": "verified",
+      "qualityScore": 95,
+      "completenessScore": 98
+    },
+    "views": {
+      "total": 150,
+      "lastWeek": 25,
+      "uniqueVisitors": 120
+    },
+    "engagement": {
+      "savedBy": 15,
+      "inquiries": 8,
+      "reportedIssues": 0
+    },
+    "verification": {
+      "status": "verified",
+      "verifiedAt": "2024-11-23T15:00:00Z",
+      "verifiedBy": "admin-id",
+      "documents": ["ID", "Proof of Ownership"],
+      "physicalInspection": {
+        "completed": true,
+        "date": "2024-11-22T10:00:00Z",
+        "inspector": "inspector-id",
+        "report": "ipfs://hash-inspection-report"
+      }
+    },
+    "timestamps": {
+      "created": "2024-11-24T12:00:00Z",
+      "lastModified": "2024-11-24T12:00:00Z",
+      "lastVerified": "2024-11-23T15:00:00Z",
+      "expiresAt": "2025-11-24T12:00:00Z"
+    },
+    "system": {
+      "version": "1.0.0",
+      "platform": "RentPal",
+      "listingFormat": "comprehensive-v1",
+      "dataQuality": {
+        "completeness": 98,
+        "accuracy": 95,
+        "verificationLevel": "gold"
+      }
+    }
+  }
+}

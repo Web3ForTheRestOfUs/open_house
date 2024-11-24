@@ -1,113 +1,8 @@
-// use anchor_lang::prelude::*;
-
-// pub fn submit_review(
-//     ctx: Context<SubmitReview>,
-//     review_content: String,
-// ) -> Result<()> {
-//     let review = &mut ctx.accounts.review;
-//     review.content = review_content;
-//     review.validated = false;
-//     Ok(())
-// }
-
-// pub fn validate_review(ctx: Context<ValidateReview>) -> Result<()> {
-//     let review = &mut ctx.accounts.review;
-//     review.validated = true;
-//     Ok(())
-// }
-
-// #[derive(Accounts)]
-// pub struct SubmitReview<'info> {
-//     #[account(init, payer = renter, space = 8 + Review::LEN)]
-//     pub review: Account<'info, Review>,
-//     #[account(mut)]
-//     pub renter: Signer<'info>,
-//     pub system_program: Program<'info, System>,
-// }
-
-// #[derive(Accounts)]
-// pub struct ValidateReview<'info> {
-//     #[account(mut)]
-//     pub review: Account<'info, Review>,
-//     pub verifier: Signer<'info>,
-// }
-
-// #[account]
-// pub struct Review {
-//     pub content: String,
-//     pub validated: bool,
-// }
-
-// impl Review {
-//     const LEN: usize = 4 + 200 + 1; // Adjust this based on actual data size
-// }
-
-//WITH PDAs
-// use anchor_lang::prelude::*;
-
-// pub fn submit_review(
-//     ctx: Context<SubmitReview>,
-//     review_content: String,
-// ) -> Result<()> {
-//     let review = &mut ctx.accounts.review;
-//     review.content = review_content;
-//     review.validated = false;
-//     Ok(())
-// }
-
-// pub fn validate_review(ctx: Context<ValidateReview>) -> Result<()> {
-//     let review = &mut ctx.accounts.review;
-//     review.validated = true;
-//     Ok(())
-// }
-
-// #[derive(Accounts)]
-// #[instruction(property_id: String)]
-// pub struct SubmitReview<'info> {
-//     #[account(
-//         init,
-//         payer = renter,
-//         space = 8 + Review::LEN,
-//         seeds = [property_id.as_bytes(), renter.key().as_ref()],  // Using property_id and renter as seeds
-//         bump
-//     )]
-//     pub review: Account<'info, Review>,
-//     #[account(mut)]
-//     pub renter: Signer<'info>,
-//     pub system_program: Program<'info, System>,
-// }
-
-// #[derive(Accounts)]
-// pub struct ValidateReview<'info> {
-//     #[account(
-//         mut,
-//         seeds = [review.property_id.as_bytes(), review.renter.as_ref()],
-//         bump
-//     )]
-//     pub review: Account<'info, Review>,
-//     pub verifier: Signer<'info>,
-// }
-
-// #[account]
-// pub struct Review {
-//     pub content: String,
-//     pub validated: bool,
-//     pub property_id: String,   // Added field for property_id
-//     pub renter: Pubkey,        // Added field for renter
-// }
-
-// impl Review {
-//     const LEN: usize = 4 + 200 + 1 + 4 + 32; // Adjusted length to include property_id and renter (32 bytes for Pubkey)
-// }
-
-
 use anchor_lang::prelude::*;
 
-#[derive(AnchorSerialize, AnchorDeserialize, Clone)]
-pub enum VoteType {
-    Upvote,
-    Downvote,
-}
+const MAX_REVIEW_CONTENT_LENGTH: usize = 200;  // Maximum length for review content
+const MAX_PROPERTY_ID_LENGTH: usize = 50;      // Maximum length for property ID
+const MAX_DETAILS_LENGTH: usize = 500;  // Maximum length for property details
 
 pub fn submit_review(
     ctx: Context<SubmitReview>,
@@ -115,7 +10,7 @@ pub fn submit_review(
 ) -> Result<()> {
     // Validate review content length
     require!(
-        review_content.len() <= 200, 
+        review_content.len() <= MAX_REVIEW_CONTENT_LENGTH, 
         CustomError::ReviewTooLong
     );
 
@@ -174,12 +69,16 @@ pub struct VoteEvent {
 }
 
 #[derive(Accounts)]
-#[instruction(property_id: String)]
+#[instruction(property_id: String, review_content: String)]
 pub struct SubmitReview<'info> {
     #[account(
         init,
         payer = renter,
-        space = 8 + Review::LEN,
+        space = 8 + // discriminator
+            32 + // pubkey
+            4 + MAX_PROPERTY_ID_LENGTH + // String length prefix + content
+            4 + MAX_DETAILS_LENGTH + // String length prefix + content
+            1,
         seeds = [property_id.as_bytes(), renter.key().as_ref()],
         bump
     )]
@@ -193,7 +92,14 @@ pub struct SubmitReview<'info> {
 pub struct VoteReview<'info> {
     #[account(mut)]
     pub review: Account<'info, Review>,
+    #[account(mut)]
     pub voter: Signer<'info>,
+}
+
+#[derive(AnchorSerialize, AnchorDeserialize, Clone)]
+pub enum VoteType {
+    Upvote,
+    Downvote,
 }
 
 #[account]
@@ -205,9 +111,6 @@ pub struct Review {
     pub voted_users: Vec<Pubkey>,
 }
 
-impl Review {
-    const LEN: usize = 4 + 200 + 8 + 4 + 32 + (4 + 100); // Adjusted for Pubkey vector
-}
 
 #[error_code]
 pub enum CustomError {

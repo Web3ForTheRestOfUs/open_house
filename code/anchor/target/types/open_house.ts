@@ -256,6 +256,32 @@ export type OpenHouse = {
   ],
   "events": [
     {
+      "name": "locationRevealed",
+      "discriminator": [
+        103,
+        211,
+        103,
+        62,
+        164,
+        133,
+        251,
+        18
+      ]
+    },
+    {
+      "name": "rewardDistributed",
+      "discriminator": [
+        36,
+        65,
+        223,
+        38,
+        136,
+        162,
+        10,
+        30
+      ]
+    },
+    {
       "name": "voteEvent",
       "discriminator": [
         195,
@@ -282,6 +308,26 @@ export type OpenHouse = {
     }
   ],
   "types": [
+    {
+      "name": "locationRevealed",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "renter",
+            "type": "pubkey"
+          },
+          {
+            "name": "feePaid",
+            "type": "u64"
+          },
+          {
+            "name": "remainingBalance",
+            "type": "u64"
+          }
+        ]
+      }
+    },
     {
       "name": "property",
       "type": {
@@ -332,6 +378,30 @@ export type OpenHouse = {
             "type": {
               "vec": "pubkey"
             }
+          }
+        ]
+      }
+    },
+    {
+      "name": "rewardDistributed",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "scout",
+            "type": "pubkey"
+          },
+          {
+            "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "previousBalance",
+            "type": "u64"
+          },
+          {
+            "name": "newBalance",
+            "type": "u64"
           }
         ]
       }
