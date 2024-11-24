@@ -69,14 +69,16 @@ export function UiLayout({
         <AccountChecker />
       </ClusterChecker> */}
       <div className="flex-grow w-full">
+
         <Suspense
           fallback={
-            <div className="text-center my-32">
+            <div className="text-center">
               <span className="loading loading-spinner loading-lg"></span>
             </div>
           }
         >
           {children}
+
         </Suspense>
         <Toaster position="bottom-right" />
       </div>

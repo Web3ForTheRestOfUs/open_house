@@ -1,20 +1,12 @@
 // pages/property/[id].tsx
-// import { PropertyHeader } from '@/components/PropertyDetails/PropertyHeader';
-// import { Section } from '@/components/PropertyDetails/Section';
-// import { InfoItem } from '@/components/PropertyDetails/InfoItem';
-// import { StatusBadge } from '@/components/PropertyDetails/StatusBadge';
-// import { AmenitiesList } from '@/components/PropertyDetails/AmenitiesList';
-// import { PropertyImages } from '@/components/PropertyDetails/PropertyImages';
+import { PropertyHeader } from '@/components/listing/reveal/PropertyDetails/components/PropertyHeader';
+import { Section } from '@/components/listing/reveal/PropertyDetails/components/Section';
+import { InfoItem } from '@/components/listing/reveal/PropertyDetails/components/InfoItem';
+import { StatusBadge } from '@/components/listing/reveal/PropertyDetails/components/StatusBadge';
+import { AmenitiesList } from '@/components/listing/reveal/PropertyDetails/components/AmenitiesList';
 // import type { PropertyData } from '@/types';
 
-import {
-  AmenitiesList,
-  InfoItem,
-  PropertyHeader,
-  PropertyImages,
-  Section,
-  StatusBadge,
-} from './status_badge';
+
 import { PropertyData } from './types';
 
 export default function PropertyDetails({
@@ -23,7 +15,7 @@ export default function PropertyDetails({
   property: PropertyData;
 }) {
   return (
-    <div className="container max-w-7xl mx-auto bg-white rounded-xl shadow-lg p-8">
+    <div className="container max-w-full mx-auto bg-[#F6F6F6] rounded-xl px-4 border border-[#D0D5DD]">
       <PropertyHeader title={property.title} price={property.price} />
 
       <Section title="Property Overview">
@@ -110,21 +102,8 @@ export default function PropertyDetails({
         </div>
       </Section>
 
-      <Section title="Property Images">
-        <div className="col-span-full">
-          <PropertyImages
-            images={[
-              { src: '/api/placeholder/400/300', alt: 'Living Room' },
-              { src: '/api/placeholder/400/300', alt: 'Kitchen' },
-              { src: '/api/placeholder/400/300', alt: 'Bedroom' },
-              { src: '/api/placeholder/400/300', alt: 'Bathroom' },
-            ]}
-          />
-        </div>
-      </Section>
-
       <Section title="Current Tenant's Comments">
-        <div className="col-span-full whitespace-pre-line">
+        <div className="col-span-full whitespace-pre-line text-[#414042]">
           {property.tenantComments}
         </div>
       </Section>

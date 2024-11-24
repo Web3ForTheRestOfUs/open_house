@@ -9,7 +9,6 @@ import EachCartItem from '@/components/user/favourite/each_cart_item';
 const page = () => {
   return (
     <div>
-      <Header />
       <div className="p-4">
         <h1 className="text-[#8592AD] mb-4">Listing {'>'} Favourites</h1>
         <div className="flex justify-end mb-4">
@@ -32,7 +31,6 @@ const page = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };

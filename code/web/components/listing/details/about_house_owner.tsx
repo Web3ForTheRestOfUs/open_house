@@ -7,13 +7,11 @@ const HouseOwnerCard = () => (
       House Owner
     </header>
 
-    <article className="p-6 space-y-6">
-      <div className="flex flex-col items-center">
-        <div className="w-24 h-24 bg-gray-200 rounded-full mb-4" />
-        <h2 className="text-[#2f3d46] text-lg font-bold font-['Montserrat']">
-          BAR. Caleb Gabriel
-        </h2>
-      </div>
+    <article className="p-6 space-y-6 mb-40">
+      <div className="w-24 h-24 bg-gray-200 rounded-full mb-4" />
+      <h2 className="text-[#2f3d46] text-lg font-bold font-['Montserrat']">
+        BAR. Caleb Gabriel
+      </h2>
 
       <ul className="space-y-4">
         <li>
