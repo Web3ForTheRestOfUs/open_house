@@ -250,6 +250,32 @@
   ],
   "events": [
     {
+      "name": "LocationRevealed",
+      "discriminator": [
+        103,
+        211,
+        103,
+        62,
+        164,
+        133,
+        251,
+        18
+      ]
+    },
+    {
+      "name": "RewardDistributed",
+      "discriminator": [
+        36,
+        65,
+        223,
+        38,
+        136,
+        162,
+        10,
+        30
+      ]
+    },
+    {
       "name": "VoteEvent",
       "discriminator": [
         195,
@@ -276,6 +302,26 @@
     }
   ],
   "types": [
+    {
+      "name": "LocationRevealed",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "renter",
+            "type": "pubkey"
+          },
+          {
+            "name": "fee_paid",
+            "type": "u64"
+          },
+          {
+            "name": "remaining_balance",
+            "type": "u64"
+          }
+        ]
+      }
+    },
     {
       "name": "Property",
       "type": {
@@ -326,6 +372,30 @@
             "type": {
               "vec": "pubkey"
             }
+          }
+        ]
+      }
+    },
+    {
+      "name": "RewardDistributed",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "scout",
+            "type": "pubkey"
+          },
+          {
+            "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "previous_balance",
+            "type": "u64"
+          },
+          {
+            "name": "new_balance",
+            "type": "u64"
           }
         ]
       }

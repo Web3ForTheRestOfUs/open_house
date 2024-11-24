@@ -30,24 +30,12 @@ pub mod open_house {
         property_registry::update_property(ctx, new_details)
     }
 
-    // pub fn verify_property(
-    //     ctx: Context<VerifyProperty>,
-    // ) -> Result<()> {
-    //     property_registry::verify_property(ctx)
-    // }
-
     pub fn submit_review(
         ctx: Context<SubmitReview>,
         review_content: String,
     ) -> Result<()> {
         review_system::submit_review(ctx, review_content)
     }
-
-    // pub fn validate_review(
-    //     ctx: Context<ValidateReview>,
-    // ) -> Result<()> {
-    //     review_system::validate_review(ctx)
-    // }
 
     pub fn distribute_rewards(
         ctx: Context<DistributeRewards>,
