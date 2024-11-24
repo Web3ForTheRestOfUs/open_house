@@ -2,15 +2,6 @@
 
 ## Form Fields
 
-### Personal Information
-- First Name* (text)
-- Last Name* (text) 
-- Email* (text, with email validation)
-- Phone* (text, with phone number validation)
-- Phone (WhatsApp) (text, optional)
-- Gender* (select)
-
-
 ### Property Details
 - House Type* (select)
   - Options:
