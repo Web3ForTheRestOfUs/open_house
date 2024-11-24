@@ -1,5 +1,5 @@
 import React from 'react';
-import SimpleMultiStepForm from '@/components/listing_upload_form/multi-step-form-feature';
+import SimpleMultiStepForm from '@/components/listing/upload_form/multi-step-form-feature';
 
 const page = () => {
   return (

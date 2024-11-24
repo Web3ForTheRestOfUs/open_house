@@ -1,12 +1,12 @@
 import React from 'react';
 import { useParams } from 'next/navigation';
-import TabComponents from '@/components/listing_details/tab_components';
-import BriefOverview from '@/components/listing_details/short_overview';
-import AboutTheHouseCard from '@/components/listing_details/about_the_house';
-import AmenitiesCard from '@/components/listing_details/amenities';
-import LocationAndEnvironmentCard from '@/components/listing_details/location_and_environment';
-import NeighborhoodCard from '@/components/listing_details/neighbourhood';
-import ContactDetailsCard from '@/components/listing_details/contact_details';
+import TabComponents from '@/components/listing/details/tab_components';
+import BriefOverview from '@/components/listing/details/short_overview';
+import AboutTheHouseCard from '@/components/listing/details/about_the_house';
+import AmenitiesCard from '@/components/listing/details/amenities';
+import LocationAndEnvironmentCard from '@/components/listing/details/location_and_environment';
+import NeighborhoodCard from '@/components/listing/details/neighbourhood';
+import ContactDetailsCard from '@/components/listing/details/contact_details';
 import Footer from '@/components/nav/footer';
 import Header from '@/components/nav/header';
 
