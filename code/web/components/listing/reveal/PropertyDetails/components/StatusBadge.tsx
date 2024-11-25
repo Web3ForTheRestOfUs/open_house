@@ -1,4 +1,4 @@
-import { Status } from "../types";
+import { Status } from "../../types";
 
 // components/PropertyDetails/StatusBadge.tsx
 interface StatusBadgeProps {

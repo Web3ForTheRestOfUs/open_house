@@ -1,8 +1,7 @@
 // app/listing/[id]/page.tsx
 import React from 'react';
 import TopDetails from '@/components/listing/details/details_top';
-import PropertyDetails from '@/components/listing/reveal/PropertyDetails/PropertyDetails';
-import { mockPropertyData } from '@/components/listing/reveal/PropertyDetails/mockPropertyData';
+import TabComponents from '@/components/listing/details/tab_components';
 
 
 export default function ListingDetailsPage() {
@@ -13,7 +12,8 @@ export default function ListingDetailsPage() {
     <div className='bg-[#F6F6F6] pt-5 pb-8 px-16'>
       <TopDetails />
 
-      <PropertyDetails property={mockPropertyData} />
+      <TabComponents />
+
 
       {/* Uncomment these when you want to use them */}
 

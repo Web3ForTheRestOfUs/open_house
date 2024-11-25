@@ -1,6 +1,6 @@
 // src/data/mockPropertyData.ts
 
-import { PropertyData } from '@/components/listing/reveal/PropertyDetails/types';
+import { PropertyData } from '@/components/listing/reveal/types';
 
 export const mockPropertyData: PropertyData = {
   title: 'Newly Built 2 -Bedroom Apartment in Ikate, Lekki, Lagos',

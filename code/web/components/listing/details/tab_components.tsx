@@ -1,6 +1,11 @@
 'use client'
 import React, { useState, ReactNode } from 'react';
 import { FileText, Map, Users, Video } from 'lucide-react';
+import PropertyDetails from '../reveal/PropertyDetails/PropertyDetails';
+import { mockPropertyData } from '../reveal/mockPropertyData';
+import MapDetails from '../reveal/MapDetails/MapDetails';
+import AreaDetails from '../reveal/AreaDetails/AreaDetails';
+import VirtualTourDetails from '../reveal/VirtualTourDetails/VirtualTourDetails';
 
 interface TabsListProps {
   children: ReactNode;
@@ -22,7 +27,7 @@ interface Tab {
 
 // Custom Tab Components
 const TabsList: React.FC<TabsListProps> = ({ children, className = '' }) => (
-  <div className={`flex border-b border-gray-200 ${className}`}>
+  <div className={`flex border-[#D0D5DD] rounded-t-xl ${className}`}>
     {children}
   </div>
 );
@@ -33,25 +38,53 @@ const TabsTrigger: React.FC<TabsTriggerProps> = ({
   onClick, 
   className = '' 
 }) => (
-  <button
-    className={`
-      flex items-center gap-2 px-6 py-4 text-lg font-semibold transition-all
-      ${isSelected 
-        ? 'border-b-2 border-gray-900 text-gray-900' 
-        : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
-      }
-      ${className}
-    `}
-    onClick={onClick}
-    role="tab"
-    aria-selected={isSelected}
-  >
-    {children}
-  </button>
+  <div className='w-full border-b border-[#D0D5DD]'>
+    <button
+      className={`
+        flex items-center gap-2 px-6 py-4 text-lg font-semibold w-full transition-all
+        ${isSelected 
+          ? 'border-b-2 border-gray-900 text-gray-900' 
+          : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+        }
+        ${className}
+      `}
+      onClick={onClick}
+      role="tab"
+      aria-selected={isSelected}
+    >
+      {children}
+    </button>
+  </div>
+);
+
+const RevealPopup: React.FC<{ onReveal: () => void }> = ({ onReveal }) => (
+  <div className="absolute inset-0 z-20 flex items-center justify-center bg-black bg-opacity-50">
+    <div className="bg-white p-8 rounded-lg w-4/5 max-w-lg text-center text-black">
+      <h3 className="text-xl font-semibold mb-4">WANT TO REVEAL MORE DETAILS?</h3>
+      <p className="text-lg mb-6">Unlock full details for just 50 Tokens</p>
+      <p className="mb-6">
+        <strong className='mb-4'>What you’ll get:</strong>
+        <ul className="list-disc list-inside text-center">
+          <li>Full property details</li>
+          <li>Property address</li>
+        </ul>
+      </p>
+      <button
+        className="w-full bg-[#F3F7FA] text-[#414042] py-3 px-4 rounded-lg font-semibold hover:bg-gray-500 hover:text-white"
+        onClick={onReveal}
+      >
+        Pay 50 Tokens to Unlock
+      </button>
+      <p className="mt-4 text-sm text-gray-500">
+        Don’t have enough tokens? <a href="#" className="text-blue-600">Become a Scout</a>
+      </p>
+    </div>
+  </div>
 );
 
 const TabComponents: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>('details');
+  const [isRevealed, setIsRevealed] = useState(false);
 
   const tabs: Tab[] = [
     {
@@ -76,8 +109,12 @@ const TabComponents: React.FC = () => {
     }
   ];
 
+  const handleReveal = () => setIsRevealed(true);
+
   return (
-    <div className="w-full max-w-4xl mx-auto">
+    <div className="w-full border border-[#D0D5DD] rounded-xl mb-32">
+      
+
       <TabsList>
         {tabs.map((tab) => (
           <TabsTrigger
@@ -91,19 +128,19 @@ const TabComponents: React.FC = () => {
         ))}
       </TabsList>
 
-      <div className="p-6">
-        {activeTab === 'details' && (
-          <div>Property Details Content</div>
-        )}
-        {activeTab === 'map' && (
-          <div>Map Content</div>
-        )}
-        {activeTab === 'guide' && (
-          <div>Area Guide Content</div>
-        )}
-        {activeTab === 'tour' && (
-          <div>Virtual Tour Content</div>
-        )}
+      <div className="px-6 relative">
+        
+        {!isRevealed && <RevealPopup onReveal={handleReveal} />}
+
+        <div
+          className={`transition-all duration-300 ${!isRevealed ? 'blur-sm pointer-events-none' : ''}`}
+        >
+          {/* Tab content */}
+          {activeTab === 'details' && <PropertyDetails property={mockPropertyData} />}
+          {activeTab === 'map' && <MapDetails property={mockPropertyData} />}
+          {activeTab === 'guide' && <AreaDetails property={mockPropertyData} />}
+          {activeTab === 'tour' && <VirtualTourDetails property={mockPropertyData} />}
+        </div>
       </div>
     </div>
   );
