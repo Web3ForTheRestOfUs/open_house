@@ -43,7 +43,7 @@ const TopDetails = () => (
                     className="ml-4 px-6 py-2 bg-[#317BA0] hover:bg-blue-700 text-white font-medium rounded-lg transition-colors"
                     aria-label="Post your property listing"
                     >
-                    Save for
+                    Save for Rent
                     </button>
                 </Link>
             </div>
