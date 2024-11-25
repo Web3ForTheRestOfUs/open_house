@@ -36,7 +36,7 @@ const HouseOwnerCard: React.FC = () => {
           className="absolute inset-0 z-10 flex items-center justify-center bg-black bg-opacity-50 text-white text-xl font-semibold cursor-pointer"
           onClick={handleReveal}
         >
-          Click to Reveal
+          Pay to Reveal
         </div>
       )}
 

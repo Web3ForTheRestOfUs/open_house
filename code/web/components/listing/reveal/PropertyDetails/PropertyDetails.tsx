@@ -7,7 +7,7 @@ import { AmenitiesList } from '@/components/listing/reveal/PropertyDetails/compo
 // import type { PropertyData } from '@/types';
 
 
-import { PropertyData } from './types';
+import { PropertyData } from '../types';
 
 export default function PropertyDetails({
   property,
@@ -15,7 +15,7 @@ export default function PropertyDetails({
   property: PropertyData;
 }) {
   return (
-    <div className="container max-w-full mx-auto bg-[#F6F6F6] rounded-xl px-4 border border-[#D0D5DD]">
+    <div className="container max-w-full mx-auto bg-[#F6F6F6]">
       <PropertyHeader title={property.title} price={property.price} />
 
       <Section title="Property Overview">
