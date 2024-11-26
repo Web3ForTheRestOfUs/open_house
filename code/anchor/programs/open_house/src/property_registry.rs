@@ -1,17 +1,19 @@
 use anchor_lang::prelude::*;
+use crate::space::*;
 
-const MAX_PROPERTY_ID_LENGTH: usize = 50;  // Maximum length for property ID
-const MAX_DETAILS_LENGTH: usize = 500;  // Maximum length for property details
 
 pub fn register_property(
     ctx: Context<RegisterProperty>,
     property_id: String,
-    details: String,
+    details: Vec<String>,
+    encrypted_location: Vec<u8>,
+
 ) -> Result<()> {
 
     // Validate property ID length
-    require!(property_id.len() <= MAX_PROPERTY_ID_LENGTH, CustomError::PropertyIdTooLong);
-    require!(details.len() <= MAX_DETAILS_LENGTH, CustomError::DetailsTooLong);
+    require!(
+        property_id.len() <= MAX_PROPERTY_ID_LENGTH, 
+        CustomError::PropertyIdTooLong);
 
 
 
@@ -19,16 +21,15 @@ pub fn register_property(
     property.owner = *ctx.accounts.owner.key;
     property.property_id = property_id;
     property.details = details;
-    property.verified = false;
+    property.encrypted_location = encrypted_location;
+
     Ok(())
 }
 
 pub fn update_property(
     ctx: Context<UpdateProperty>,
-    new_details: String,
+    new_details: Vec<String>,
 ) -> Result<()> {
-    // Validate new details length
-    require!(new_details.len() <= MAX_DETAILS_LENGTH, CustomError::DetailsTooLong);
 
     let property = &mut ctx.accounts.property;
     require!(
@@ -41,17 +42,16 @@ pub fn update_property(
 
 
 #[derive(Accounts)]
-#[instruction(property_id: String, details: String)]
+#[instruction(property_id: String, details: Vec<String>)]
 pub struct RegisterProperty<'info> {
     #[account(
         init,
         payer = owner,
-        space = 8 + // discriminator
-            32 + // pubkey
-            4 + MAX_PROPERTY_ID_LENGTH + // String length prefix + content
-            4 + MAX_DETAILS_LENGTH + // String length prefix + content
-            1,
-        seeds = [property_id.as_bytes()],  // Using property_id as the seed
+        space = DISCRIMINATOR_SIZE +      // 8 bytes discriminator
+            PUBKEY_SIZE +                 // 32 bytes owner
+            STRING_PREFIX_SIZE + 
+            MAX_PROPERTY_ID_LENGTH,
+        seeds = [property_id.as_bytes()],
         bump
     )]
     pub property: Account<'info, Property>,
@@ -61,7 +61,7 @@ pub struct RegisterProperty<'info> {
 }
 
 #[derive(Accounts)]
-#[instruction(property_id: String)]
+#[instruction(property_id: String, new_details: Vec<String>)]
 pub struct UpdateProperty<'info> {
     #[account(
         mut,
@@ -77,8 +77,8 @@ pub struct UpdateProperty<'info> {
 pub struct Property {
     pub owner: Pubkey,
     pub property_id: String,
-    pub details: String,
-    pub verified: bool,
+    pub details: Vec<String>,
+    pub encrypted_location: Vec<u8>, // encrypted location of the property, only revealed after payment, see how to implement
 }
 
 
@@ -88,6 +88,4 @@ pub enum CustomError {
     Unauthorized,
     #[msg("Property ID exceeds maximum length")]
     PropertyIdTooLong,
-    #[msg("Property details exceed maximum length")]
-    DetailsTooLong,
 }

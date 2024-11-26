@@ -37,6 +37,15 @@ export type OpenHouse = {
               }
             ]
           }
+        },
+        {
+          "name": "scoutWallet",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "systemProgram",
+          "address": "11111111111111111111111111111111"
         }
       ],
       "args": [
@@ -61,15 +70,45 @@ export type OpenHouse = {
       "accounts": [
         {
           "name": "renter",
+          "writable": true
+        },
+        {
+          "name": "scout",
+          "writable": true
+        },
+        {
+          "name": "property",
           "writable": true,
           "pda": {
             "seeds": [
+              {
+                "kind": "account",
+                "path": "property.property_id",
+                "account": "property"
+              }
+            ]
+          }
+        },
+        {
+          "name": "accessRecord",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "account",
+                "path": "property.property_id",
+                "account": "property"
+              },
               {
                 "kind": "account",
                 "path": "renter"
               }
             ]
           }
+        },
+        {
+          "name": "systemProgram",
+          "address": "11111111111111111111111111111111"
         }
       ],
       "args": [
@@ -121,7 +160,13 @@ export type OpenHouse = {
         },
         {
           "name": "details",
-          "type": "string"
+          "type": {
+            "vec": "string"
+          }
+        },
+        {
+          "name": "encryptedLocation",
+          "type": "bytes"
         }
       ]
     },
@@ -168,6 +213,10 @@ export type OpenHouse = {
         {
           "name": "reviewContent",
           "type": "string"
+        },
+        {
+          "name": "propertyId",
+          "type": "string"
         }
       ]
     },
@@ -208,9 +257,59 @@ export type OpenHouse = {
       "args": [
         {
           "name": "newDetails",
-          "type": "string"
+          "type": {
+            "vec": "string"
+          }
         }
       ]
+    },
+    {
+      "name": "verifyAccess",
+      "discriminator": [
+        198,
+        35,
+        119,
+        166,
+        140,
+        214,
+        241,
+        222
+      ],
+      "accounts": [
+        {
+          "name": "accessRecord",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "account",
+                "path": "property.property_id",
+                "account": "property"
+              },
+              {
+                "kind": "account",
+                "path": "user"
+              }
+            ]
+          }
+        },
+        {
+          "name": "user",
+          "signer": true
+        },
+        {
+          "name": "property",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "account",
+                "path": "property.property_id",
+                "account": "property"
+              }
+            ]
+          }
+        }
+      ],
+      "args": []
     }
   ],
   "accounts": [
@@ -225,6 +324,19 @@ export type OpenHouse = {
         47,
         152,
         19
+      ]
+    },
+    {
+      "name": "propertyAccess",
+      "discriminator": [
+        19,
+        7,
+        218,
+        222,
+        166,
+        66,
+        79,
+        255
       ]
     },
     {
@@ -298,13 +410,28 @@ export type OpenHouse = {
   "errors": [
     {
       "code": 6000,
-      "name": "insufficientFunds",
-      "msg": "Insufficient Funds"
+      "name": "reviewTooLong",
+      "msg": "Review content is too long"
     },
     {
       "code": 6001,
-      "name": "overflow",
-      "msg": "Overflow occurred during token operations"
+      "name": "propertyIdTooLong",
+      "msg": "Property ID is too long"
+    },
+    {
+      "code": 6002,
+      "name": "voteOverflow",
+      "msg": "Vote overflow occurred"
+    },
+    {
+      "code": 6003,
+      "name": "voteUnderflow",
+      "msg": "Vote underflow occurred"
+    },
+    {
+      "code": 6004,
+      "name": "duplicateVote",
+      "msg": "Duplicate vote detected"
     }
   ],
   "types": [
@@ -343,11 +470,33 @@ export type OpenHouse = {
           },
           {
             "name": "details",
+            "type": {
+              "vec": "string"
+            }
+          },
+          {
+            "name": "encryptedLocation",
+            "type": "bytes"
+          }
+        ]
+      }
+    },
+    {
+      "name": "propertyAccess",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "propertyId",
             "type": "string"
           },
           {
-            "name": "verified",
-            "type": "bool"
+            "name": "user",
+            "type": "pubkey"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
           }
         ]
       }
@@ -408,9 +557,6 @@ export type OpenHouse = {
     },
     {
       "name": "user",
-      "docs": [
-        "User account structure"
-      ],
       "type": {
         "kind": "struct",
         "fields": [
@@ -421,6 +567,10 @@ export type OpenHouse = {
           {
             "name": "upvotes",
             "type": "u64"
+          },
+          {
+            "name": "key",
+            "type": "pubkey"
           }
         ]
       }

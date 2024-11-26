@@ -31,6 +31,15 @@
               }
             ]
           }
+        },
+        {
+          "name": "scout_wallet",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
         }
       ],
       "args": [
@@ -55,15 +64,45 @@
       "accounts": [
         {
           "name": "renter",
+          "writable": true
+        },
+        {
+          "name": "scout",
+          "writable": true
+        },
+        {
+          "name": "property",
           "writable": true,
           "pda": {
             "seeds": [
+              {
+                "kind": "account",
+                "path": "property.property_id",
+                "account": "Property"
+              }
+            ]
+          }
+        },
+        {
+          "name": "access_record",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "account",
+                "path": "property.property_id",
+                "account": "Property"
+              },
               {
                 "kind": "account",
                 "path": "renter"
               }
             ]
           }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
         }
       ],
       "args": [
@@ -115,7 +154,13 @@
         },
         {
           "name": "details",
-          "type": "string"
+          "type": {
+            "vec": "string"
+          }
+        },
+        {
+          "name": "encrypted_location",
+          "type": "bytes"
         }
       ]
     },
@@ -162,6 +207,10 @@
         {
           "name": "review_content",
           "type": "string"
+        },
+        {
+          "name": "property_id",
+          "type": "string"
         }
       ]
     },
@@ -202,9 +251,59 @@
       "args": [
         {
           "name": "new_details",
-          "type": "string"
+          "type": {
+            "vec": "string"
+          }
         }
       ]
+    },
+    {
+      "name": "verify_access",
+      "discriminator": [
+        198,
+        35,
+        119,
+        166,
+        140,
+        214,
+        241,
+        222
+      ],
+      "accounts": [
+        {
+          "name": "access_record",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "account",
+                "path": "property.property_id",
+                "account": "Property"
+              },
+              {
+                "kind": "account",
+                "path": "user"
+              }
+            ]
+          }
+        },
+        {
+          "name": "user",
+          "signer": true
+        },
+        {
+          "name": "property",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "account",
+                "path": "property.property_id",
+                "account": "Property"
+              }
+            ]
+          }
+        }
+      ],
+      "args": []
     }
   ],
   "accounts": [
@@ -219,6 +318,19 @@
         47,
         152,
         19
+      ]
+    },
+    {
+      "name": "PropertyAccess",
+      "discriminator": [
+        19,
+        7,
+        218,
+        222,
+        166,
+        66,
+        79,
+        255
       ]
     },
     {
@@ -292,13 +404,28 @@
   "errors": [
     {
       "code": 6000,
-      "name": "InsufficientFunds",
-      "msg": "Insufficient Funds"
+      "name": "ReviewTooLong",
+      "msg": "Review content is too long"
     },
     {
       "code": 6001,
-      "name": "Overflow",
-      "msg": "Overflow occurred during token operations"
+      "name": "PropertyIdTooLong",
+      "msg": "Property ID is too long"
+    },
+    {
+      "code": 6002,
+      "name": "VoteOverflow",
+      "msg": "Vote overflow occurred"
+    },
+    {
+      "code": 6003,
+      "name": "VoteUnderflow",
+      "msg": "Vote underflow occurred"
+    },
+    {
+      "code": 6004,
+      "name": "DuplicateVote",
+      "msg": "Duplicate vote detected"
     }
   ],
   "types": [
@@ -337,11 +464,33 @@
           },
           {
             "name": "details",
+            "type": {
+              "vec": "string"
+            }
+          },
+          {
+            "name": "encrypted_location",
+            "type": "bytes"
+          }
+        ]
+      }
+    },
+    {
+      "name": "PropertyAccess",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "property_id",
             "type": "string"
           },
           {
-            "name": "verified",
-            "type": "bool"
+            "name": "user",
+            "type": "pubkey"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
           }
         ]
       }
@@ -402,9 +551,6 @@
     },
     {
       "name": "User",
-      "docs": [
-        "User account structure"
-      ],
       "type": {
         "kind": "struct",
         "fields": [
@@ -415,6 +561,10 @@
           {
             "name": "upvotes",
             "type": "u64"
+          },
+          {
+            "name": "key",
+            "type": "pubkey"
           }
         ]
       }
