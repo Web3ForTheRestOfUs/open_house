@@ -72,19 +72,43 @@ const TopDetails = () => (
                     </div>
                 </div>
 
-                <div className='w-full h-[441px] bg-white mb-4'>
-                    {/* BIG IMAGE */}
+                <div className='w-full h-[441px] bg-white mb-4 relative'>
+                    <Image
+                        src="/realEstate1.jpg" 
+                        alt="Landing Image"
+                        layout="fill"
+                        objectFit="cover" 
+                        className="absolute" 
+                    />
                 </div>
 
                 <div className='flex mb-8'>
-                    <div className='bg-white w-full h-40'>
-                            {/* FIRST IMAGE */}
+                    <div className='bg-white w-full h-40 relative'>
+                        <Image
+                            src="/livingRoom.jpg" 
+                            alt="Living Room"
+                            layout="fill"
+                            objectFit="cover" 
+                            className="absolute" 
+                        />
                     </div>
-                    <div className='bg-white w-full h-40 mx-4'>
-                            {/* SECOND IMAGE */}
+                    <div className='bg-white w-full h-40 relative mx-4'>
+                        <Image
+                            src="/real-estate.jpg" 
+                            alt="Landing Image"
+                            layout="fill"
+                            objectFit="cover" 
+                            className="absolute" 
+                        />
                     </div>
-                    <div className='bg-white w-full h-40'>
-                            {/* THIRD IMAGE */}
+                    <div className='bg-white w-full h-40 relative'>
+                        <Image
+                            src="/diningRoom.jpg" 
+                            alt="Landing Image"
+                            layout="fill"
+                            objectFit="cover" 
+                            className="absolute" 
+                        />
                     </div>
                 </div>
 

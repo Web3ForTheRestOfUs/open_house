@@ -1,36 +1,22 @@
 // 'use client';
 import React from 'react';
-import { useParams } from 'next/navigation';
-import Header from '@/components/nav/header';
-import Footer from '@/components/nav/footer';
-import ShareListingPanel from '@/components/user/favourite/share_panel';
+// import ShareListingPanel from '@/components/user/favourite/share_panel';
 import EachCartItem from '@/components/user/favourite/each_cart_item';
 
 const page = () => {
+  const numberOfListings = 3;
   return (
-    <div>
-      <div className="p-4">
-        <h1 className="text-[#8592AD] mb-4">Listing {'>'} Favourites</h1>
-        <div className="flex justify-end mb-4">
-          <ShareListingPanel />
-        </div>
 
-        <div className='text-start'>
-          <h2 className="text-black text-2xl font-semibold font-['Montserrat']">
-            Rent Cart
-          </h2>
-        </div>
-        <div className="flex flex-col gap-10 items-center border bg-red-50 p-8">
-          {/* Adjust container to center all items */}
-          <div className="flex flex-wrap justify-center gap-8 w-full">
-            {[1, 2, 3, 4].map((value, index) => (
-              <div className="w-full md:w-4/5 lg:w-3/4 p-4" key={index}>
-                <EachCartItem />
-              </div>
-            ))}
-          </div>
+    <div className="pt-12 px-16 bg-[#F6F6F6] border-t-2 border-[#D0D5DD]">
+      <h1 className="text-[#8592AD] mb-16">Listing {'>'} Favourites</h1>
+      <div className='w-full flex justify-center bg-white py-10'>
+        <div className='w-1/2'>
+          {Array.from({ length: numberOfListings }, (_, index) => (
+            <EachCartItem key={`first-row-${index}`}/>
+          ))}
         </div>
       </div>
+      <div className='py-20'></div>
     </div>
   );
 };
