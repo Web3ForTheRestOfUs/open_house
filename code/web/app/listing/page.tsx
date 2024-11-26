@@ -11,12 +11,9 @@ export default function Page() {
 
   return (
     <div>
-
       <CarouselImage />
 
-      
       <div className="pt-12 px-16 bg-[#F6F6F6] border-t-2 border-[#D0D5DD]">
-        
         <SearchPanel />
 
         <div className="flex w-full justify-between">
@@ -28,7 +25,7 @@ export default function Page() {
           </div>
 
           {/* Last 2 columns */}
-          <div className='w-2/5'>
+          <div className="w-2/5">
             <AddListingCTA />
           </div>
         </div>
