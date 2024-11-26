@@ -1,7 +1,9 @@
+import Image from 'next/image';
+
 const LandingPageCTA = () => {
   return (
-    <section className="bg-white py-20">
-      <div className="container mx-auto px-4 flex items-center justify-between">
+    <section className="bg-white py-20 px-16">
+      <div className="container mx-auto flex items-center justify-center">
         <div className="max-w-[432px]">
           <h2 className="text-[32px] font-semibold text-[#317ba0] font-['Montserrat'] mb-8">
             Join The Revolution
@@ -14,11 +16,15 @@ const LandingPageCTA = () => {
             Create Account
           </button>
         </div>
-        <img
-          className="w-[726px] h-[485px]"
-          src="https://via.placeholder.com/726x485"
-          alt="CTA illustration"
-        />
+        <div className="bg-white h-96 relative w-1/3">
+          <Image
+            src="/joinRevolution.svg" 
+            alt="Join Image"
+            layout="fill"
+            objectFit="cover" 
+            className="absolute" 
+          />
+        </div>
       </div>
     </section>
   );
