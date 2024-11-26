@@ -1,7 +1,12 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 const EachHouseListing = () => {
   return (
+    <Link 
+    href="/listing/1"
+    className="block mt-4 transition-transform hover:scale-[1.02] focus:scale-[1.02]"
+  >
     <div className="w-full border border-[#D0D5DD] p-6 rounded-lg mb-10 flex">
       <div className='mr-4 w-72'>
         <Image
@@ -90,6 +95,7 @@ const EachHouseListing = () => {
         </div>
       </div>
     </div>
+    </Link>
   );
 };
 

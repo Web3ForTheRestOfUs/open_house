@@ -15,13 +15,14 @@ const HeroSection = () => {
           Find your perfect rental property, earn tokens as a scout, and
           experience community-driven trust and transparency
         </p>
-        <button className="px-8 py-4 bg-[#317ba0] rounded-lg text-white font-medium">
-          Explore Properties
-        </button>
+        <a href="/listing/all">
+          <button className="px-8 py-4 bg-[#317ba0] rounded-lg text-white font-medium">
+            Explore Properties
+          </button>
+        </a>
       </div>
     </section>
   );
 };
-
 
 export default HeroSection;
