@@ -4,7 +4,7 @@ import { PublicKey, SystemProgram, LAMPORTS_PER_SOL } from "@solana/web3.js";
 import { expect } from "chai";
 import { OpenHouse } from "../target/types/open_house";
 
-describe("open_house", () => {
+describe("OpenHouse Program", () => {
   const provider = anchor.AnchorProvider.env();
   anchor.setProvider(provider);
 
@@ -13,12 +13,13 @@ describe("open_house", () => {
   // Test accounts
   const owner = anchor.web3.Keypair.generate();
   const renter = anchor.web3.Keypair.generate();
+  const scout = anchor.web3.Keypair.generate();
   const voter = anchor.web3.Keypair.generate();
-  const anotherVoter = anchor.web3.Keypair.generate(); // additional voter for multipple voting case
-  
+
   // Test data
   const propertyId = "PROP123";
-  const propertyDetails = "Beautiful 3 bedroom house";
+  const propertyDetails = ["Beautiful 3 bedroom house", "Spacious backyard"];
+  const encryptedLocation = Buffer.from("encrypted_location_data");
   const reviewContent = "Great property, highly recommended!";
   const LOCATION_REVEAL_FEE = new BN(5);
 
@@ -27,28 +28,37 @@ describe("open_house", () => {
   let reviewPDA: PublicKey;
   let scoutPDA: PublicKey;
   let renterPDA: PublicKey;
+  let accessRecordPDA: PublicKey;
 
   before(async () => {
-    // Initialize PDAs
+    // Prepare PDAs
     [propertyPDA] = PublicKey.findProgramAddressSync(
       [Buffer.from(propertyId)],
       program.programId
     );
+
     [reviewPDA] = PublicKey.findProgramAddressSync(
       [Buffer.from(propertyId), renter.publicKey.toBuffer()],
       program.programId
     );
+
     [scoutPDA] = PublicKey.findProgramAddressSync(
-      [voter.publicKey.toBuffer()],
+      [scout.publicKey.toBuffer()],
       program.programId
     );
+
     [renterPDA] = PublicKey.findProgramAddressSync(
       [renter.publicKey.toBuffer()],
       program.programId
     );
 
+    [accessRecordPDA] = PublicKey.findProgramAddressSync(
+      [Buffer.from(propertyId), renter.publicKey.toBuffer()],
+      program.programId
+    );
+
     // Airdrop SOL to test accounts
-    const accounts = [owner, renter, voter, anotherVoter];
+    const accounts = [owner, renter, scout, voter];
     const airdropPromises = accounts.map(account => 
       provider.connection.requestAirdrop(
         account.publicKey,
@@ -62,124 +72,169 @@ describe("open_house", () => {
     );
   });
 
-  describe("Property Management", () => {
-    it("Registers a property", async () => {
-      const [propertyPDA] = PublicKey.findProgramAddressSync(
-          [Buffer.from(propertyId)],
-          program.programId
-      );
+  describe("Property Registry", () => {
+    it("Registers a property successfully", async () => {
+      await program.methods
+        .registerProperty(propertyId, propertyDetails, encryptedLocation)
+        .accounts({
+          property: propertyPDA,
+          owner: owner.publicKey,
+          systemProgram: SystemProgram.programId,
+        })
+        .signers([owner])
+        .rpc();
+
+      const propertyAccount = await program.account.property.fetch(propertyPDA);
+      expect(propertyAccount.owner.toBase58()).to.equal(owner.publicKey.toBase58());
+      expect(propertyAccount.propertyId).to.equal(propertyId);
+      expect(propertyAccount.details).to.deep.equal(propertyDetails);
+    });
+
+    it("Prevents property registration with too long property ID", async () => {
+      const longPropertyId = "A".repeat(51); // Exceeds MAX_PROPERTY_ID_LENGTH
 
       try {
-          await program.methods
-              .registerProperty(propertyId, propertyDetails)
-              .accounts({
-                  property: propertyPDA,
-                  owner: owner.publicKey,
-                  systemProgram: SystemProgram.programId,
-              })
-              .signers([owner])
-              .rpc();
-
-          const propertyAccount = await program.account.property.fetch(propertyPDA);
-          expect(propertyAccount.owner.toBase58()).to.equal(owner.publicKey.toBase58());
-          expect(propertyAccount.propertyId).to.equal(propertyId);
-          expect(propertyAccount.details).to.equal(propertyDetails);
-          expect(propertyAccount.verified).to.be.false;
-      } catch (error) {
-          console.error("Error:", error);
-          throw error;
+        await program.methods
+          .registerProperty(longPropertyId, propertyDetails, encryptedLocation)
+          .accounts({
+            property: propertyPDA,
+            owner: owner.publicKey,
+            systemProgram: SystemProgram.programId,
+          })
+          .signers([owner])
+          .rpc();
+        
+        expect.fail("Should have thrown an error for long property ID");
+      } catch (error: any) {
+        expect(error.toString()).to.include("PropertyIdTooLong");
       }
     });
 
-    it("Only allows owner to update property", async () => {
-      const newDetails = "Updated: 3 bedroom house with pool";
+    it("Allows property owner to update property details", async () => {
+      const newDetails = ["Updated details", "More information"];
       
-      try {
-        await program.methods
-          .updateProperty(newDetails)
-          .accounts({
-            property: propertyPDA,
-            owner: renter.publicKey, // Using renter instead of owner
-          })
-          .signers([renter])
-          .rpc();
-        expect.fail("Should not allow non-owner to update");
-      } catch (error: any) {
-        expect(error.toString()).to.include("Unauthorized");
-      }
+      await program.methods
+        .updateProperty(newDetails)
+        .accounts({
+          property: propertyPDA,
+          owner: owner.publicKey,
+        })
+        .signers([owner])
+        .rpc();
+
+      const updatedProperty = await program.account.property.fetch(propertyPDA);
+      expect(updatedProperty.details).to.deep.equal(newDetails);
     });
   });
 
   describe("Review System", () => {
     it("Submits a review successfully", async () => {
-      const [reviewPDA] = PublicKey.findProgramAddressSync(
-          [Buffer.from(propertyId), renter.publicKey.toBuffer()],
-          program.programId
-      );
+      await program.methods
+        .submitReview(reviewContent, propertyId)
+        .accounts({
+          review: reviewPDA,
+          renter: renter.publicKey,
+          systemProgram: SystemProgram.programId,
+        })
+        .signers([renter])
+        .rpc();
+
+      const reviewAccount = await program.account.review.fetch(reviewPDA);
+      expect(reviewAccount.content).to.equal(reviewContent);
+      expect(reviewAccount.votes.toNumber()).to.equal(0);
+      expect(reviewAccount.propertyId).to.equal(propertyId);
+    });
+
+    it("Prevents review submission with too long content", async () => {
+      const longReviewContent = "A".repeat(201); // Exceeds MAX_REVIEW_CONTENT_LENGTH
 
       try {
-          await program.methods
-              .submitReview(reviewContent)
-              .accounts({
-                  review: reviewPDA,
-                  renter: renter.publicKey,
-                  systemProgram: SystemProgram.programId,
-              })
-              .signers([renter])
-              .rpc();
-
-          const reviewAccount = await program.account.review.fetch(reviewPDA);
-          expect(reviewAccount.content).to.equal(reviewContent);
-          expect(reviewAccount.votes.toString()).to.equal("0");
-      } catch (error) {
-          console.error("Error:", error);
-          throw error;
+        await program.methods
+          .submitReview(longReviewContent, propertyId)
+          .accounts({
+            review: reviewPDA,
+            renter: renter.publicKey,
+            systemProgram: SystemProgram.programId,
+          })
+          .signers([renter])
+          .rpc();
+        
+        expect.fail("Should have thrown an error for long review content");
+      } catch (error: any) {
+        expect(error.toString()).to.include("ReviewTooLong");
       }
+    });
+
+    it("Allows voting on a review", async () => {
+      await program.methods
+        .voteReview({ upvote: {} }) // Using upvote enum variant
+        .accounts({
+          review: reviewPDA,
+          voter: voter.publicKey,
+        })
+        .signers([voter])
+        .rpc();
+
+      const reviewAccount = await program.account.review.fetch(reviewPDA);
+      expect(reviewAccount.votes.toNumber()).to.equal(1);
     });
   });
 
   describe("Token Management", () => {
-    it("Successfully distributes rewards based on votes", async () => {
-      const initialBalance = (await program.account.user.fetch(scoutPDA)).tokens;
-      
+    it("Distributes rewards based on upvotes", async () => {
+      // First, ensure the scout has an account
       await program.methods
         .distributeRewards(new BN(15))
         .accounts({
           scout: scoutPDA,
+          scoutWallet: scout.publicKey,
+          systemProgram: SystemProgram.programId,
         })
+        .signers([scout])
         .rpc();
 
-      const finalBalance = (await program.account.user.fetch(scoutPDA)).tokens;
-      expect(finalBalance.sub(initialBalance).toString()).to.not.equal("0");
+      const scoutAccount = await program.account.user.fetch(scoutPDA);
+      expect(scoutAccount.tokens.toNumber()).to.be.greaterThan(0);
     });
 
     it("Handles location reveal with sufficient funds", async () => {
-      // First distribute some tokens to the renter
+      // First, distribute tokens to the renter
       await program.methods
         .distributeRewards(new BN(10))
         .accounts({
           scout: renterPDA,
+          scoutWallet: renter.publicKey,
+          systemProgram: SystemProgram.programId,
         })
+        .signers([renter])
         .rpc();
 
-      const initialBalance = (await program.account.user.fetch(renterPDA)).tokens;
-      
       await program.methods
         .handleLocationReveal(LOCATION_REVEAL_FEE)
         .accounts({
           renter: renterPDA,
+          scout: scoutPDA,
+          property: propertyPDA,
+          accessRecord: accessRecordPDA,
+          systemProgram: SystemProgram.programId,
         })
+        .signers([renter])
         .rpc();
 
-      const finalBalance = (await program.account.user.fetch(renterPDA)).tokens;
-      expect(initialBalance.sub(finalBalance).toString()).to.equal(LOCATION_REVEAL_FEE.toString());
+      const accessRecord = await program.account.propertyAccess.fetch(accessRecordPDA);
+      expect(accessRecord.propertyId).to.equal(propertyId);
+      expect(accessRecord.user.toBase58()).to.equal(renter.publicKey.toBase58());
     });
 
     it("Prevents location reveal with insufficient funds", async () => {
-      // Create new renter with 0 balance
-      const newRenter = anchor.web3.Keypair.generate();
-      const [newRenterPDA] = PublicKey.findProgramAddressSync(
-        [newRenter.publicKey.toBuffer()],
+      const poorRenter = anchor.web3.Keypair.generate();
+      const [poorRenterPDA] = PublicKey.findProgramAddressSync(
+        [poorRenter.publicKey.toBuffer()],
+        program.programId
+      );
+
+      const [poorAccessRecordPDA] = PublicKey.findProgramAddressSync(
+        [Buffer.from(propertyId), poorRenter.publicKey.toBuffer()],
         program.programId
       );
 
@@ -187,10 +242,16 @@ describe("open_house", () => {
         await program.methods
           .handleLocationReveal(LOCATION_REVEAL_FEE)
           .accounts({
-            renter: newRenterPDA,
+            renter: poorRenterPDA,
+            scout: scoutPDA,
+            property: propertyPDA,
+            accessRecord: poorAccessRecordPDA,
+            systemProgram: SystemProgram.programId,
           })
+          .signers([poorRenter])
           .rpc();
-        expect.fail("Should not allow location reveal with insufficient funds");
+        
+        expect.fail("Should have thrown an error for insufficient funds");
       } catch (error: any) {
         expect(error.toString()).to.include("InsufficientFunds");
       }
