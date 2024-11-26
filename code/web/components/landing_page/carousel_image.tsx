@@ -1,11 +1,15 @@
+import Image from 'next/image';
+
 const CarouselImage = () => {
   return (
-    <div className="flex flex-col m-10">
-      <div className="     bg-white justify-start items-center inline-flex">
-        <div className="text-black text-5xl font-normal font-['Montserrat']">
-          An Image
-        </div>
-      </div>
+    <div className="bg-white h-[37.1875rem] relative">
+      <Image
+        src="/real-estate.jpg" 
+        alt="Landing Image"
+        layout="fill"
+        objectFit="cover" 
+        className="absolute" 
+      />
     </div>
   );
 };

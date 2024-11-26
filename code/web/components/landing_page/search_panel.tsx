@@ -27,9 +27,11 @@ const SearchPanel = () => {
   };
 
   return (
-    <div className="w-full max-w-6xl mx-auto px-4">
+    <div className="w-full mx-auto mb-28">
       <form className="w-full" onSubmit={handleSearch}>
-        <div className="flex flex-wrap items-center gap-4 bg-white p-4 rounded-lg shadow-sm">
+
+
+        <div className="flex flex-wrap items-center gap-x-7">
           {/* Location Input */}
           <div className="flex-1 min-w-[240px]">
             <input
@@ -39,7 +41,7 @@ const SearchPanel = () => {
               onChange={(e) =>
                 setFilters((prev) => ({ ...prev, location: e.target.value }))
               }
-              className="w-full px-4 py-3 rounded border border-gray-200 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-6 py-3 rounded border border-gray-200 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-transparent"
             />
           </div>
 
@@ -49,7 +51,7 @@ const SearchPanel = () => {
             onChange={(e) =>
               setFilters((prev) => ({ ...prev, rentType: e.target.value }))
             }
-            className="px-4 py-3 rounded border border-gray-200 text-gray-500 text-sm appearance-none bg-white cursor-pointer hover:border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="px-4 py-3 rounded border border-gray-200 text-gray-500 text-sm cursor-pointer hover:border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-transparent w-44"
           >
             <option value="">Rent</option>
             <option value="monthly">Monthly</option>
@@ -62,7 +64,7 @@ const SearchPanel = () => {
             onChange={(e) =>
               setFilters((prev) => ({ ...prev, propertyType: e.target.value }))
             }
-            className="px-4 py-3 rounded border border-gray-200 text-gray-500 text-sm appearance-none bg-white cursor-pointer hover:border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="px-4 py-3 rounded border border-gray-200 text-gray-500 text-sm cursor-pointer hover:border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-transparent w-44"
           >
             <option value="">Type</option>
             <option value="apartment">Apartment</option>
@@ -76,7 +78,7 @@ const SearchPanel = () => {
             onChange={(e) =>
               setFilters((prev) => ({ ...prev, bedrooms: e.target.value }))
             }
-            className="px-4 py-3 rounded border border-gray-200 text-gray-500 text-sm appearance-none bg-white cursor-pointer hover:border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="px-4 py-3 rounded border border-gray-200 text-gray-500 text-sm cursor-pointer hover:border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-transparent w-44"
           >
             <option value="">Bedroom</option>
             <option value="1">1 Bedroom</option>
@@ -91,7 +93,7 @@ const SearchPanel = () => {
             onChange={(e) =>
               setFilters((prev) => ({ ...prev, priceRange: e.target.value }))
             }
-            className="px-4 py-3 rounded border border-gray-200 text-gray-500 text-sm appearance-none bg-white cursor-pointer hover:border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="px-4 py-3 rounded border border-gray-200 text-gray-500 text-sm cursor-pointer hover:border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-transparent w-44"
           >
             <option value="">Price</option>
             <option value="0-1000">$0 - $1,000</option>
@@ -103,7 +105,7 @@ const SearchPanel = () => {
           {/* Search Button */}
           <button
             type="submit"
-            className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors flex items-center gap-2"
+            className="px-6 py-3 bg-[#317BA0] hover:bg-blue-700 text-white font-medium rounded-lg transition-colors flex items-center gap-2 w-40"
           >
             <Search className="w-5 h-5" />
             <span>Search</span>

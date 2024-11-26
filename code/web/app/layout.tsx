@@ -3,6 +3,7 @@ import { UiLayout } from '@/components/ui/ui-layout';
 import { ClusterProvider } from '@/components/cluster/cluster-data-access';
 import { SolanaProvider } from '@/components/solana/solana-provider';
 import { ReactQueryProvider } from './react-query-provider';
+import { Head } from 'next/document';
 // import SimpleMultiStepForm from '@/components/multiStepForm/multi-step-form-feature';
 
 export const metadata = {
@@ -11,10 +12,15 @@ export const metadata = {
 };
 
 const links: { label: string; path: string }[] = [
-  { label: 'Account', path: '/account' },
-  { label: 'Clusters', path: '/clusters' },
-  { label: 'Counter Program', path: '/counter' },
-  { label: 'Upload Property', path: '/listing/upload'}
+  { label: 'Home', path: '/'},
+  { label: 'For Sale', path: '/'},
+  { label: 'For Rent', path: '/'},
+  { label: 'Shortlet', path: '/'},
+  // { label: 'Account', path: '/account' },
+  // { label: 'Clusters', path: '/clusters' },
+  // { label: 'Counter Program', path: '/counter' }, //to check how counter works
+  // { label: 'Upload Property', path: '/listing/upload'}
+
 ];
 
 export default function RootLayout({
@@ -24,16 +30,24 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       <body>
         <ReactQueryProvider>
           <ClusterProvider>
             <SolanaProvider>
               <UiLayout links={links}>{children}</UiLayout>
-              {/* <SimpleMultiStepForm showStepNumber={true} /> */}
             </SolanaProvider>
           </ClusterProvider>
         </ReactQueryProvider>
       </body>
     </html>
+
   );
 }
