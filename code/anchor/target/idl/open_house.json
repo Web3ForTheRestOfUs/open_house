@@ -1,5 +1,5 @@
 {
-  "address": "B6g6uSjcFRn9U1p1wv4s7eggzUoFCn7koc2cnonrEZGJ",
+  "address": "HVFBvRcqeSAvZRYMnqoAe3MyLaabQHimdMEfW2mTiX6j",
   "metadata": {
     "name": "open_house",
     "version": "0.1.0",
@@ -404,28 +404,18 @@
   "errors": [
     {
       "code": 6000,
-      "name": "ReviewTooLong",
-      "msg": "Review content is too long"
+      "name": "InsufficientFunds",
+      "msg": "Insufficient Funds"
     },
     {
       "code": 6001,
-      "name": "PropertyIdTooLong",
-      "msg": "Property ID is too long"
+      "name": "Overflow",
+      "msg": "Overflow occurred during token operations"
     },
     {
       "code": 6002,
-      "name": "VoteOverflow",
-      "msg": "Vote overflow occurred"
-    },
-    {
-      "code": 6003,
-      "name": "VoteUnderflow",
-      "msg": "Vote underflow occurred"
-    },
-    {
-      "code": 6004,
-      "name": "DuplicateVote",
-      "msg": "Duplicate vote detected"
+      "name": "UnauthorizedAccess",
+      "msg": "Unauthorized Access"
     }
   ],
   "types": [

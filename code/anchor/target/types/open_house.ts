@@ -410,28 +410,18 @@ export type OpenHouse = {
   "errors": [
     {
       "code": 6000,
-      "name": "reviewTooLong",
-      "msg": "Review content is too long"
+      "name": "insufficientFunds",
+      "msg": "Insufficient Funds"
     },
     {
       "code": 6001,
-      "name": "propertyIdTooLong",
-      "msg": "Property ID is too long"
+      "name": "overflow",
+      "msg": "Overflow occurred during token operations"
     },
     {
       "code": 6002,
-      "name": "voteOverflow",
-      "msg": "Vote overflow occurred"
-    },
-    {
-      "code": 6003,
-      "name": "voteUnderflow",
-      "msg": "Vote underflow occurred"
-    },
-    {
-      "code": 6004,
-      "name": "duplicateVote",
-      "msg": "Duplicate vote detected"
+      "name": "unauthorizedAccess",
+      "msg": "Unauthorized Access"
     }
   ],
   "types": [
