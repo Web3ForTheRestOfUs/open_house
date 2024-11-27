@@ -1,15 +1,19 @@
 use anchor_lang::prelude::*;
+use serde_json;
 use crate::space::*;
 
+mod details;
+use details::PropertyDetails;
 
 pub fn register_property(
     ctx: Context<RegisterProperty>,
     property_id: String,
-    details: Vec<String>,
+    details: PropertyDetails,
     encrypted_location: Vec<u8>,
 
-) -> Result<()> {
 
+) -> Result<()> {
+    
     // Validate property ID length
     require!(
         property_id.len() <= MAX_PROPERTY_ID_LENGTH, 
@@ -20,7 +24,10 @@ pub fn register_property(
     let property = &mut ctx.accounts.property;
     property.owner = *ctx.accounts.owner.key;
     property.property_id = property_id;
-    property.details = details;
+
+    property.details = serde_json::to_string(&details)
+    .map_err(|_| CustomError::SerializationError)?;
+    
     property.encrypted_location = encrypted_location;
 
     Ok(())
@@ -28,7 +35,7 @@ pub fn register_property(
 
 pub fn update_property(
     ctx: Context<UpdateProperty>,
-    new_details: Vec<String>,
+    new_details: PropertyDetails,
 ) -> Result<()> {
 
     let property = &mut ctx.accounts.property;
@@ -36,7 +43,9 @@ pub fn update_property(
         property.owner == *ctx.accounts.owner.key,
         CustomError::Unauthorized
     );
-    property.details = new_details;
+    property.details = serde_json::to_string(&new_details)
+    ``.map_err(|_| CustomError::SerializationError)?;
+
     Ok(())
 }
 
@@ -73,6 +82,9 @@ pub struct UpdateProperty<'info> {
     pub owner: Signer<'info>,
 }
 
+
+
+// STRUCTS, LFG?
 #[account]
 pub struct Property {
     pub owner: Pubkey,
@@ -82,10 +94,19 @@ pub struct Property {
 }
 
 
+
+
+
+
+
+
+// ERROR ENUM
 #[error_code]
 pub enum CustomError {
     #[msg("Unauthorized action")]
     Unauthorized,
     #[msg("Property ID exceeds maximum length")]
     PropertyIdTooLong,
+    #[msg("Failed to serialize property details")]
+    SerializationError,
 }
