@@ -1,14 +1,12 @@
 use anchor_lang::prelude::*;
-use serde_json;
 use crate::space::*;
 
-mod details;
-use details::PropertyDetails;
+
 
 pub fn register_property(
     ctx: Context<RegisterProperty>,
     property_id: String,
-    details: PropertyDetails,
+    details: Vec<String>,
     encrypted_location: Vec<u8>,
 
 
@@ -25,8 +23,7 @@ pub fn register_property(
     property.owner = *ctx.accounts.owner.key;
     property.property_id = property_id;
 
-    property.details = serde_json::to_string(&details)
-    .map_err(|_| CustomError::SerializationError)?;
+    property.details = details;
     
     property.encrypted_location = encrypted_location;
 
@@ -35,7 +32,7 @@ pub fn register_property(
 
 pub fn update_property(
     ctx: Context<UpdateProperty>,
-    new_details: PropertyDetails,
+    new_details: Vec<String>,
 ) -> Result<()> {
 
     let property = &mut ctx.accounts.property;
@@ -43,8 +40,7 @@ pub fn update_property(
         property.owner == *ctx.accounts.owner.key,
         CustomError::Unauthorized
     );
-    property.details = serde_json::to_string(&new_details)
-    ``.map_err(|_| CustomError::SerializationError)?;
+    property.details = new_details;
 
     Ok(())
 }
@@ -92,10 +88,6 @@ pub struct Property {
     pub details: Vec<String>,
     pub encrypted_location: Vec<u8>, // encrypted location of the property, only revealed after payment, see how to implement
 }
-
-
-
-
 
 
 
