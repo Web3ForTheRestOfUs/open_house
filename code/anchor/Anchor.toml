@@ -2,15 +2,15 @@
 seeds = false
 skip-lint = false
 
-[programs.localnet]
+[programs.testnet]
 open_house = "H1L8bkSuCsSvs7ZMzHtLaA6iK4zZhCKxkLhx7VfUpA9x"
 
 [registry]
 url = "https://api.apr.dev"
 
 [provider]
-cluster = "https://api.devnet.solana.com"
-wallet = "~/.config/solana/id.json"
+cluster = "https://rpc.testnet.soo.network/rpc"
+wallet = "~/.config/solana/soon.json"
 
 [scripts]
 test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"

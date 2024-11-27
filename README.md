@@ -1,4 +1,5 @@
-# OpenHouse: Decentralizing Home Rentals
+# OpenHouse: Decentralizing the Housing Process in Nigeria
+![logo name](./docs/open%20house%20brand%20assets/logo-name-without-bg.png)
 ## Design Story
 
 ### The Problem
