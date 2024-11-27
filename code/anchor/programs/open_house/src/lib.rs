@@ -1,10 +1,11 @@
 use anchor_lang::prelude::*;
-declare_id!("B6g6uSjcFRn9U1p1wv4s7eggzUoFCn7koc2cnonrEZGJ");
+declare_id!("H1L8bkSuCsSvs7ZMzHtLaA6iK4zZhCKxkLhx7VfUpA9x");
 
 pub mod property_registry;
 pub mod review_system;
 pub mod token_management;
 pub mod space;
+
 
 use property_registry::*;
 use review_system::*;
