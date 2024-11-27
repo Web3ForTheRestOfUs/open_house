@@ -10,7 +10,7 @@ const TopDetails = () => (
             <h1 className="text-[#8592AD]"> Listing {'>'} Individual</h1>
 
             <div className='flex items-center'>
-                <Link href={'/listing/favourites'}>
+                <Link href={'/user/favourites'}>
                     <div className='flex items-center'>
                     <Image
                         src="/heart.jpg" 
@@ -38,7 +38,7 @@ const TopDetails = () => (
                     </div>
                 </Link>
 
-                <Link href="/listing/saveforrent">
+                <Link href="/user/save_for_rent">
                     <button
                     className="ml-4 px-6 py-2 bg-[#317BA0] hover:bg-blue-700 text-white font-medium rounded-lg transition-colors"
                     aria-label="Post your property listing"
