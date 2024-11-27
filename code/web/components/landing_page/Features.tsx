@@ -8,7 +8,7 @@ interface FeatureProps {
 
 const Feature: React.FC<FeatureProps> = ({ icon, title, description }) => {
   return (
-    <article className="w-full max-w-md h-80 p-6 bg-white border border-gray-300 flex flex-col items-center">
+    <article className="w-full max-w-md h-80 p-6 bg-white border border-gray-300 flex flex-col items-center flex-wrap">
       <div className="w-12 h-12 bg-sky-100 rounded-full mb-8">{icon}</div>
       <h3 className="text-2xl font-semibold text-black font-['Montserrat'] mb-8">
         {title}
@@ -55,7 +55,7 @@ const FeaturesSection = () => {
   ];
 
   return (
-    <section className="container mx-auto px-4 py-20">
+    <section className="container mx-auto px-16 py-20">
       <h2 className="text-[32px] font-semibold text-[#317ba0] font-['Montserrat'] text-center mb-16">
         OpenHouse Features
       </h2>
