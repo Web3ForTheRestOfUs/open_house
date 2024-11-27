@@ -2,10 +2,13 @@ import { Facebook, Instagram, Youtube, Twitter } from 'lucide-react';
 import Link from 'next/link';
 
 const icons = [
-  { Component: Facebook, href: '#'  },
-  { Component: Instagram, href: '#'   },
-  { Component: Youtube, href: '#'  },
-  { Component: Twitter, href: 'https://x.com/openhousexyz?t=bh93-qQxuZekVitRh71HjA&s=09' },
+  { Component: Facebook, href: '#' },
+  { Component: Instagram, href: '#' },
+  { Component: Youtube, href: '#' },
+  {
+    Component: Twitter,
+    href: 'https://x.com/openhousexyz?t=bh93-qQxuZekVitRh71HjA&s=09',
+  },
 ];
 const Footer = () => {
   return (
@@ -50,11 +53,11 @@ const Footer = () => {
             {[
               { name: 'Home', href: '/' },
               { name: 'About Us', href: '/under_construction' },
-              { name: 'Browse Listing', href: '/listing/all' },
+              { name: 'Browse Listing', href: '/listing' },
               { name: 'Become a Scout', href: '/under_construction' },
               { name: 'FAQ', href: '/faq' },
               { name: 'Terms of Use', href: '/terms' },
-              { name: 'Privacy Policy', href: '/privacy' },
+              { name: 'Privacy Policy', href: '/privacy_and_policy' },
             ].map(({ name, href }) => (
               <Link key={name} href={href}>
                 <p className="text-white text-xs font-normal font-['Montserrat'] mb-2">
@@ -71,16 +74,18 @@ const Footer = () => {
           </h2>
           <div className="space-y-2">
             {[
-              'Properties for Rent',
-              'Properties for Sale',
-              'Short Let Destination',
-            ].map((item) => (
-              <p
-                key={item}
-                className="text-white text-xs font-normal font-['Montserrat']"
-              >
-                {item}
-              </p>
+              { name: 'Properties for Rent', href: '/listing' },
+              { name: 'Properties for Sale', href: '/under_construction' },
+              { name: 'Short Let Destination', href: '/under_construction' },
+            ].map(({ name, href }) => (
+              <Link key={name} href={href}>
+                <p
+                  key={name}
+                  className="text-white text-xs font-normal font-['Montserrat'] mb-2"
+                >
+                  {name}
+                </p>
+              </Link>
             ))}
           </div>
         </div>
