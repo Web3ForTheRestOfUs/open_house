@@ -1,5 +1,6 @@
 import { Facebook, Instagram, Youtube, Twitter } from 'lucide-react';
 import Link from 'next/link';
+import ContactSection from './contact';
 
 const icons = [
   { Component: Facebook, href: '#' },
@@ -27,22 +28,7 @@ const Footer = () => {
             </p>
           </div>
 
-          <div className="space-y-2">
-            <h2 className="text-white text-sm font-semibold font-['Montserrat']">
-              Contact Enquiries
-            </h2>
-            <div className="space-y-1">
-              <p className="text-white text-xs font-normal font-['Montserrat']">
-                Email: info@openhouse.ng
-              </p>
-              <p className="text-white text-xs font-normal font-['Montserrat']">
-                Phone: +234 8012 345 6789
-              </p>
-              <p className="text-white text-xs font-normal font-['Montserrat']">
-                Address: 789 Market St, Suite 10, Lagos Island, Nigeria
-              </p>
-            </div>
-          </div>
+          <ContactSection/>
         </div>
 
         <div className="w-1/4">
