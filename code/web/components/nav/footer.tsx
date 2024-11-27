@@ -1,10 +1,11 @@
 import { Facebook, Instagram, Youtube, Twitter } from 'lucide-react';
+import Link from 'next/link';
 
 const icons = [
-  { Component: Facebook },
-  { Component: Instagram },
-  { Component: Youtube },
-  { Component: Twitter },
+  { Component: Facebook, href: '#'  },
+  { Component: Instagram, href: '#'   },
+  { Component: Youtube, href: '#'  },
+  { Component: Twitter, href: 'https://x.com/openhousexyz?t=bh93-qQxuZekVitRh71HjA&s=09' },
 ];
 const Footer = () => {
   return (
@@ -47,20 +48,19 @@ const Footer = () => {
           </h2>
           <div className="space-y-2">
             {[
-              'Home',
-              'About Us',
-              'Browse Listing',
-              'Become a Scout',
-              'FAQ',
-              'Terms of Use',
-              'Privacy Policy',
-            ].map((item) => (
-              <p
-                key={item}
-                className="text-white text-xs font-normal font-['Montserrat']"
-              >
-                {item}
-              </p>
+              { name: 'Home', href: '/' },
+              { name: 'About Us', href: '/under_construction' },
+              { name: 'Browse Listing', href: '/listing/all' },
+              { name: 'Become a Scout', href: '/under_construction' },
+              { name: 'FAQ', href: '/faq' },
+              { name: 'Terms of Use', href: '/terms' },
+              { name: 'Privacy Policy', href: '/privacy' },
+            ].map(({ name, href }) => (
+              <Link key={name} href={href}>
+                <p className="text-white text-xs font-normal font-['Montserrat'] mb-2">
+                  {name}
+                </p>
+              </Link>
             ))}
           </div>
         </div>
@@ -91,10 +91,12 @@ const Footer = () => {
       <div className="flex justify-start items-start flex-col">
         <div className="flex gap-4">
           <div className="flex space-x-2">
-            {icons.map(({ Component }, index) => (
-              <div key={index} className="border border-white rounded-md p-1">
-                <Component className="w-3 h-3 text-white" />
-              </div>
+            {icons.map(({ Component, href }, index) => (
+              <Link href={href} key={index}>
+                <div key={index} className="border border-white rounded-md p-1">
+                  <Component className="w-3 h-3 text-white" />
+                </div>
+              </Link>
             ))}
           </div>
         </div>
