@@ -10,7 +10,7 @@
     "feature": "nx generate @solana-developers/preset-react:feature",
     "build": "nx build web --skip-nx-cache",
     "dev": "nx serve web",
-    "start": "next start -p ${PORT:=3000}"
+    "start": "next start -p ${PORT:=10000}"
   },
   "private": true,
   "dependencies": {
