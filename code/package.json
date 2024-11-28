@@ -8,8 +8,9 @@
     "anchor-localnet": "nx run anchor:anchor localnet",
     "anchor-test": "nx run anchor:anchor test",
     "feature": "nx generate @solana-developers/preset-react:feature",
-    "build": "nx build web",
-    "dev": "nx serve web"
+    "build": "nx build web --skip-nx-cache",
+    "dev": "nx serve web",
+    "start": "next start -p ${PORT:=3000}"
   },
   "private": true,
   "dependencies": {
