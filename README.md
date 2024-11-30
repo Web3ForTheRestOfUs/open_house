@@ -21,7 +21,7 @@ Imagine instead a world where Sarah opens the OpenHouse dApp:
 3. Each listing has anonymous, verified reviews from previous viewers and tenants
 4. Virtual tours and detailed neighborhood information help her narrow down choices
 5. When she finds a property she likes, she pays a small fee to get the location and contact details
-6. After viewing, she contributes her own review, earning tokens and helping others
+6. After viewing, she contributes her review, earning tokens and helping others
 
 ### The Revolution
 
@@ -34,7 +34,7 @@ OpenHouse isn't just another rental platform – it's a community-driven ecosyst
 - Creates new earning opportunities for community members
 
 ### Try the Demo!
-Follow the steps below the reproduce the environment and try Open House
+Follow the steps below to reproduce the environment and try Open House
 
 ## Requirements
 Ensure you have the following installed on your local machine:
@@ -44,11 +44,11 @@ Ensure you have the following installed on your local machine:
 - Rust (via rustup)
 - Anchor CLI (version 0.29.0 or later)
 - Solana CLI (version 1.16.0 or later)
-- A Solana wallet (for devnet testing)
+- A Solana wallet (for testing)
 
 ## Project Setup
 1. **Clone the Repository**
-Clone the GitHub repository to your local machine:
+Clone the forked GitHub repository to your local machine:
 
 ```bash
 git clone https://github.com/yourusername/open-house.git
@@ -73,7 +73,7 @@ If you don't have an existing keypair, run:
 ```bash
 solana-keygen new --outfile ~/.config/solana/id.json
 ```
-> To create a new one, remember to use to `--force` flag or just change the name and/or path of the json file
+> To create a new one, remember to use to `--force` flag or change the name and/or path of the JSON file
 
 
 Airdrop SOL for testing:
@@ -83,7 +83,7 @@ This program is currently deployed on SOON testnet. To get some tokens, head ove
 Run `solana config get` to confirm that your configuration is properly set up, it should return output below:
 ![alt text](./docs/open%20house%20brand%20assets/image.png)
 
-Update the `Anchor.toml` file with SOON testnet configuration, follow [network sheet](https://docs.soo.network/using-soon/network-info) the official :
+Update the `Anchor.toml` file with SOON testnet configuration, follow the official [network information sheet](https://docs.soo.network/using-soon/network-info):
 ```bash
 [provider]
 cluster = "https://rpc.testnet.soo.network/rpc"
@@ -93,7 +93,7 @@ wallet = "~/.config/solana/id.json" # filepath to the generated keypair
 Deploy the program by running `anchor deploy` in your anchor project folder. After deployment, note the program ID from the output or your `target/deploy/open_house-keypair.json file`
 
 3. Frontend (React/Vercel App)
-The frontend is built with React and deployed on Vercel.
+The front end is built with React and deployed on Vercel.
 
 *Step 3.1: Navigate to the Frontend Directory*
 
@@ -118,11 +118,6 @@ Replace `<YOUR_PROGRAM_ID>` with the program ID from Step 2.3.
 
 *Step 3.4: Start the Development Server*
 Run the React app locally: Use `yarn dev` or `npm run dev`. Visit http://localhost:3000 in your browser to see the app in action.
-
-## Testing Locally
-Ensure the backend program is deployed to the network.
-Interact with the smart contract using the frontend UI.
-For example: register property access, or test other housing-related functionalities.
 
 ## Troubleshooting
 - **Anchor CLI Errors**: Ensure your Anchor CLI is up-to-date:

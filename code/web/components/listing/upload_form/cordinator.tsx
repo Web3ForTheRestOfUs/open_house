@@ -400,6 +400,20 @@ const MultiPageForm: React.FC<MultiPageFormProps> = ({
       case 6:
         return (
           <PageSeven
+            handleSubmit2={function (
+              category:
+                | 'exterior'
+                | 'livingRoom'
+                | 'kitchen'
+                | 'bathroom'
+                | 'bedroom'
+                | 'balcony'
+                | 'compound'
+                | 'streetView',
+              files: FileList
+            ): void {
+              throw new Error('Function not implemented.');
+            }}
             {...props}
             handleImageUpload={handleImageUpload}
             handleVideoUpload={handleVideoUpload}
@@ -460,7 +474,6 @@ const MultiPageForm: React.FC<MultiPageFormProps> = ({
 };
 
 export default MultiPageForm;
-
 
 // 'use client';
 // import React, { useEffect, useState } from 'react';
@@ -823,7 +836,7 @@ export default MultiPageForm;
 //           //   handleVideoRemove={handleVideoRemove}
 //           // />
 
-//           <PageSeven 
+//           <PageSeven
 //             {...props}
 //             handleChangeInput={handleChangeInput}
 //             handlePrevStep={handlePrevPage}

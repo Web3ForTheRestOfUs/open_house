@@ -25,7 +25,15 @@ interface FormData {
   utilities: string;
   serviceCharge: string;
   agreeToTerms: boolean;
+  area: string;
+  houseType: string;
+  meterSituation: string;
+  waterSituation: string;
+  houseAge: number;
+  homeSize: number;
 }
+
+
 
 // Define the props for the component
 interface SimpleMultiStepFormProps {
@@ -49,6 +57,12 @@ const initialFormData: FormData = {
   utilities: '',
   serviceCharge: '',
   agreeToTerms: false,
+  area: '',
+  houseType: '',
+  meterSituation: '',
+  waterSituation: '',
+  houseAge: 0,
+  homeSize: 0,
 };
 
 const stepsArray = ['A', 'B', 'C', 'D', 'E'];
