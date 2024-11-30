@@ -174,18 +174,6 @@ pub struct PropertyAccess {
 }
 
 
-
-
-// // Property structure
-// #[account]
-// pub struct Property {
-//     pub owner: Pubkey,
-//     pub property_id: String,
-//     pub details: Vec<String>, // shouldn't pose any issues since strings are expected to be short?
-//     pub encrypted_location: Vec<u8>, // Encrypted location of the property
-// }
-
-
 // Event for tracking reward distribution
 #[event]
 pub struct RewardDistributed {

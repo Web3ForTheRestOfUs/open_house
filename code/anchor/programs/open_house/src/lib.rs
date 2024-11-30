@@ -1,5 +1,5 @@
 use anchor_lang::prelude::*;
-declare_id!("H1L8bkSuCsSvs7ZMzHtLaA6iK4zZhCKxkLhx7VfUpA9x");
+declare_id!("B9jEbbSFoDZpmwqnRghE6zvUGQEZ3Bq2FVALL4FQYZPM");
 
 pub mod property_registry;
 pub mod review_system;
