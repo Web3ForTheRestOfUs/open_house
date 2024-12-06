@@ -4,20 +4,15 @@
 resolution = true
 skip-lint = false
 
-[programs.devnet]
-open_house = "B9jEbbSFoDZpmwqnRghE6zvUGQEZ3Bq2FVALL4FQYZPM"
+[programs.localnet]
+open_house_redone = "J4B6mY3BfhpXmthVpdY6R315RTKxQnzitjYafwQZ8he"
 
 [registry]
 url = "https://api.apr.dev"
 
 [provider]
-cluster = "https://api.devnet.solana.com"
+cluster = "Localnet"
 wallet = "~/.config/solana/id.json"
 
 [scripts]
 test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"
-
-[test]
-startup_wait = 5000
-shutdown_wait = 2000
-upgradeable = false
