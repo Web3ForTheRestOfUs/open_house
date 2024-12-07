@@ -1,5 +1,6 @@
 import React from 'react';
 import MultiPageForm from '@/components/listing/upload_form/cordinator';
+import ListingsUI from '@/components/listing/upload_form/cordinator';
 
 // /listing/upload
 
@@ -9,7 +10,8 @@ const page = () => {
       <h1 className="text-[#8592AD] mb-20"> Listing {'>'} Upload Property</h1>
 
       {/* <SimpleMultiStepForm showStepNumber={false} /> */}
-      <MultiPageForm />
+      {/* <MultiPageForm /> */}
+      <ListingsUI />
     </div>
   );
 };
