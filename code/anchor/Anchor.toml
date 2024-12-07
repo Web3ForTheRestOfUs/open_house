@@ -5,13 +5,13 @@ resolution = true
 skip-lint = false
 
 [programs.devnet]
-open_house = "B9jEbbSFoDZpmwqnRghE6zvUGQEZ3Bq2FVALL4FQYZPM"
+open_house = "AtYkYubaFzxfaKkU6DUa4RK1U9DC8krqaNyEA9e9RNmW"
 
 [registry]
 url = "https://api.apr.dev"
 
 [provider]
-cluster = "https://api.devnet.solana.com"
+cluster = "Localnet"
 wallet = "~/.config/solana/id.json"
 
 [scripts]

@@ -1,14 +1,20 @@
-{
-  "address": "AtYkYubaFzxfaKkU6DUa4RK1U9DC8krqaNyEA9e9RNmW",
+/**
+ * Program IDL in camelCase format in order to be used in JS/TS.
+ *
+ * Note that this is only a type helper and is not the actual IDL. The original
+ * IDL can be found at `target/idl/open_house_redone.json`.
+ */
+export type OpenHouse = {
+  "address": "J4B6mY3BfhpXmthVpdY6R315RTKxQnzitjYafwQZ8he",
   "metadata": {
-    "name": "open_house",
+    "name": "OpenHouse",
     "version": "0.1.0",
     "spec": "0.1.0",
     "description": "Created with Anchor"
   },
   "instructions": [
     {
-      "name": "create_comment",
+      "name": "createComment",
       "discriminator": [
         236,
         232,
@@ -58,7 +64,7 @@
           }
         },
         {
-          "name": "system_program",
+          "name": "systemProgram",
           "address": "11111111111111111111111111111111"
         }
       ],
@@ -70,7 +76,7 @@
       ]
     },
     {
-      "name": "create_listing",
+      "name": "createListing",
       "discriminator": [
         18,
         168,
@@ -120,7 +126,7 @@
           }
         },
         {
-          "name": "system_program",
+          "name": "systemProgram",
           "address": "11111111111111111111111111111111"
         }
       ],
@@ -129,14 +135,14 @@
           "name": "listing",
           "type": {
             "defined": {
-              "name": "ListingData"
+              "name": "listingData"
             }
           }
         }
       ]
     },
     {
-      "name": "update_listing",
+      "name": "updateListing",
       "discriminator": [
         192,
         174,
@@ -180,12 +186,12 @@
               {
                 "kind": "account",
                 "path": "listing.location.long",
-                "account": "Listing"
+                "account": "listing"
               },
               {
                 "kind": "account",
                 "path": "listing.location.lat",
-                "account": "Listing"
+                "account": "listing"
               }
             ]
           }
@@ -193,21 +199,21 @@
       ],
       "args": [
         {
-          "name": "new_location",
+          "name": "newLocation",
           "type": {
             "option": {
               "defined": {
-                "name": "Location"
+                "name": "location"
               }
             }
           }
         },
         {
-          "name": "new_status",
+          "name": "newStatus",
           "type": {
             "option": {
               "defined": {
-                "name": "ListingStatus"
+                "name": "listingStatus"
               }
             }
           }
@@ -215,7 +221,7 @@
       ]
     },
     {
-      "name": "vote_on_listing",
+      "name": "voteOnListing",
       "discriminator": [
         58,
         58,
@@ -270,19 +276,19 @@
           "signer": true
         },
         {
-          "name": "system_program",
+          "name": "systemProgram",
           "address": "11111111111111111111111111111111"
         }
       ],
       "args": [
         {
-          "name": "is_up_vote",
+          "name": "isUpVote",
           "type": "bool"
         }
       ]
     },
     {
-      "name": "vote_on_listing_comment",
+      "name": "voteOnListingComment",
       "discriminator": [
         245,
         164,
@@ -337,13 +343,13 @@
           "signer": true
         },
         {
-          "name": "system_program",
+          "name": "systemProgram",
           "address": "11111111111111111111111111111111"
         }
       ],
       "args": [
         {
-          "name": "is_up_vote",
+          "name": "isUpVote",
           "type": "bool"
         }
       ]
@@ -351,7 +357,7 @@
   ],
   "accounts": [
     {
-      "name": "Comment",
+      "name": "comment",
       "discriminator": [
         150,
         135,
@@ -364,7 +370,7 @@
       ]
     },
     {
-      "name": "Listing",
+      "name": "listing",
       "discriminator": [
         218,
         32,
@@ -377,7 +383,7 @@
       ]
     },
     {
-      "name": "Vote",
+      "name": "vote",
       "discriminator": [
         96,
         91,
@@ -392,7 +398,7 @@
   ],
   "types": [
     {
-      "name": "Comment",
+      "name": "comment",
       "type": {
         "kind": "struct",
         "fields": [
@@ -409,7 +415,7 @@
             "type": "string"
           },
           {
-            "name": "vote_count",
+            "name": "voteCount",
             "type": "i64"
           },
           {
@@ -420,7 +426,7 @@
       }
     },
     {
-      "name": "Listing",
+      "name": "listing",
       "type": {
         "kind": "struct",
         "fields": [
@@ -432,7 +438,7 @@
             "name": "location",
             "type": {
               "defined": {
-                "name": "Location"
+                "name": "location"
               }
             }
           },
@@ -448,19 +454,19 @@
             "name": "status",
             "type": {
               "defined": {
-                "name": "ListingStatus"
+                "name": "listingStatus"
               }
             }
           },
           {
-            "name": "vote_count",
+            "name": "voteCount",
             "type": "i16"
           }
         ]
       }
     },
     {
-      "name": "ListingData",
+      "name": "listingData",
       "type": {
         "kind": "struct",
         "fields": [
@@ -468,7 +474,7 @@
             "name": "location",
             "type": {
               "defined": {
-                "name": "Location"
+                "name": "location"
               }
             }
           },
@@ -488,7 +494,7 @@
             "name": "status",
             "type": {
               "defined": {
-                "name": "ListingStatus"
+                "name": "listingStatus"
               }
             }
           }
@@ -496,24 +502,24 @@
       }
     },
     {
-      "name": "ListingStatus",
+      "name": "listingStatus",
       "type": {
         "kind": "enum",
         "variants": [
           {
-            "name": "Active"
+            "name": "active"
           },
           {
-            "name": "Sold"
+            "name": "sold"
           },
           {
-            "name": "Deleted"
+            "name": "deleted"
           }
         ]
       }
     },
     {
-      "name": "Location",
+      "name": "location",
       "type": {
         "kind": "struct",
         "fields": [
@@ -529,7 +535,7 @@
       }
     },
     {
-      "name": "Vote",
+      "name": "vote",
       "type": {
         "kind": "struct",
         "fields": [
@@ -542,7 +548,7 @@
             "type": "pubkey"
           },
           {
-            "name": "is_upvote",
+            "name": "isUpvote",
             "type": "bool"
           },
           {
@@ -553,4 +559,4 @@
       }
     }
   ]
-}
+};
