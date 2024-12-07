@@ -9,7 +9,6 @@ pub fn register_property(
     details: Vec<String>,
     encrypted_location: Vec<u8>,
 
-
 ) -> Result<()> {
     
     // Validate property ID length
@@ -17,14 +16,24 @@ pub fn register_property(
         property_id.len() <= MAX_PROPERTY_ID_LENGTH, 
         CustomError::PropertyIdTooLong);
 
-
+    // Validate details count and length
+    require!(
+        details.len() <= MAX_DETAILS_COUNT,
+        CustomError::DetailsTooLong
+    );
+    
+    for detail in details.iter() {
+        require!(
+            detail.len() <= MAX_DETAIL_LENGTH,
+            CustomError::DetailStringTooLong
+        );
+    }
 
     let property = &mut ctx.accounts.property;
     property.owner = *ctx.accounts.owner.key;
     property.property_id = property_id;
 
-    property.details = details;
-    
+    property.details = details;    
     property.encrypted_location = encrypted_location;
 
     Ok(())
@@ -47,15 +56,19 @@ pub fn update_property(
 
 
 #[derive(Accounts)]
-#[instruction(property_id: String, details: Vec<String>)]
+#[instruction(property_id: String, details: Vec<String>, encrypted_location: Vec<u8>)]
 pub struct RegisterProperty<'info> {
     #[account(
         init,
         payer = owner,
-        space = DISCRIMINATOR_SIZE +      // 8 bytes discriminator
-            PUBKEY_SIZE +                 // 32 bytes owner
-            STRING_PREFIX_SIZE + 
-            MAX_PROPERTY_ID_LENGTH,
+        space = DISCRIMINATOR_SIZE +         // 8 bytes
+                PUBKEY_SIZE +               // 32 bytes
+                STRING_PREFIX_SIZE +        // 4 bytes
+                MAX_PROPERTY_ID_LENGTH +    // e.g., 32 bytes
+                VECTOR_PREFIX_SIZE +        // 4 bytes
+                (MAX_DETAILS_COUNT * (STRING_PREFIX_SIZE + MAX_DETAIL_LENGTH)) + // Details
+                VECTOR_PREFIX_SIZE +        // 4 bytes
+                MAX_ENCRYPTED_LOCATION_SIZE, // 256 bytes
         seeds = [property_id.as_bytes()],
         bump
     )]
@@ -101,4 +114,8 @@ pub enum CustomError {
     PropertyIdTooLong,
     #[msg("Failed to serialize property details")]
     SerializationError,
+    #[msg("Details count exceeds maximum length")]
+    DetailsTooLong,
+    #[msg("Detail string exceeds maximum length")]
+    DetailStringTooLong,
 }

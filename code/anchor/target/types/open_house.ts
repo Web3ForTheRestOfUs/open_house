@@ -5,7 +5,7 @@
  * IDL can be found at `target/idl/open_house.json`.
  */
 export type OpenHouse = {
-  "address": "H1L8bkSuCsSvs7ZMzHtLaA6iK4zZhCKxkLhx7VfUpA9x",
+  "address": "B9jEbbSFoDZpmwqnRghE6zvUGQEZ3Bq2FVALL4FQYZPM",
   "metadata": {
     "name": "openHouse",
     "version": "0.1.0",
