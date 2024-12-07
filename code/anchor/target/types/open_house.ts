@@ -5,7 +5,7 @@
  * IDL can be found at `target/idl/open_house.json`.
  */
 export type OpenHouse = {
-  "address": "H1L8bkSuCsSvs7ZMzHtLaA6iK4zZhCKxkLhx7VfUpA9x",
+  "address": "AtYkYubaFzxfaKkU6DUa4RK1U9DC8krqaNyEA9e9RNmW",
   "metadata": {
     "name": "openHouse",
     "version": "0.1.0",
@@ -14,439 +14,391 @@ export type OpenHouse = {
   },
   "instructions": [
     {
-      "name": "distributeRewards",
+      "name": "createComment",
       "discriminator": [
-        97,
-        6,
-        227,
-        255,
-        124,
-        165,
-        3,
-        148
+        236,
+        232,
+        11,
+        180,
+        70,
+        206,
+        73,
+        145
       ],
       "accounts": [
-        {
-          "name": "scout",
-          "writable": true,
-          "pda": {
-            "seeds": [
-              {
-                "kind": "account",
-                "path": "scout"
-              }
-            ]
-          }
-        },
-        {
-          "name": "scoutWallet",
-          "writable": true,
-          "signer": true
-        },
-        {
-          "name": "systemProgram",
-          "address": "11111111111111111111111111111111"
-        }
-      ],
-      "args": [
-        {
-          "name": "amount",
-          "type": "u64"
-        }
-      ]
-    },
-    {
-      "name": "handleLocationReveal",
-      "discriminator": [
-        87,
-        149,
-        160,
-        93,
-        8,
-        146,
-        24,
-        103
-      ],
-      "accounts": [
-        {
-          "name": "renter",
-          "writable": true
-        },
-        {
-          "name": "scout",
-          "writable": true
-        },
-        {
-          "name": "property",
-          "writable": true,
-          "pda": {
-            "seeds": [
-              {
-                "kind": "account",
-                "path": "property.property_id",
-                "account": "property"
-              }
-            ]
-          }
-        },
-        {
-          "name": "accessRecord",
-          "writable": true,
-          "pda": {
-            "seeds": [
-              {
-                "kind": "account",
-                "path": "property.property_id",
-                "account": "property"
-              },
-              {
-                "kind": "account",
-                "path": "renter"
-              }
-            ]
-          }
-        },
-        {
-          "name": "systemProgram",
-          "address": "11111111111111111111111111111111"
-        }
-      ],
-      "args": [
-        {
-          "name": "fee",
-          "type": "u64"
-        }
-      ]
-    },
-    {
-      "name": "registerProperty",
-      "discriminator": [
-        25,
-        115,
-        131,
-        71,
-        59,
-        22,
-        25,
-        16
-      ],
-      "accounts": [
-        {
-          "name": "property",
-          "writable": true,
-          "pda": {
-            "seeds": [
-              {
-                "kind": "arg",
-                "path": "propertyId"
-              }
-            ]
-          }
-        },
         {
           "name": "owner",
           "writable": true,
           "signer": true
         },
         {
-          "name": "systemProgram",
-          "address": "11111111111111111111111111111111"
-        }
-      ],
-      "args": [
-        {
-          "name": "propertyId",
-          "type": "string"
+          "name": "listing",
+          "writable": true
         },
         {
-          "name": "details",
-          "type": {
-            "vec": "string"
-          }
-        },
-        {
-          "name": "encryptedLocation",
-          "type": "bytes"
-        }
-      ]
-    },
-    {
-      "name": "submitReview",
-      "discriminator": [
-        106,
-        30,
-        50,
-        83,
-        89,
-        46,
-        213,
-        239
-      ],
-      "accounts": [
-        {
-          "name": "review",
+          "name": "comment",
           "writable": true,
           "pda": {
             "seeds": [
               {
-                "kind": "arg",
-                "path": "propertyId"
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  109,
+                  109,
+                  101,
+                  110,
+                  116
+                ]
               },
               {
                 "kind": "account",
-                "path": "renter"
+                "path": "listing"
+              },
+              {
+                "kind": "account",
+                "path": "owner"
               }
             ]
           }
         },
         {
-          "name": "renter",
-          "writable": true,
-          "signer": true
-        },
-        {
           "name": "systemProgram",
           "address": "11111111111111111111111111111111"
         }
       ],
       "args": [
         {
-          "name": "reviewContent",
-          "type": "string"
-        },
-        {
-          "name": "propertyId",
+          "name": "content",
           "type": "string"
         }
       ]
     },
     {
-      "name": "updateProperty",
+      "name": "createListing",
       "discriminator": [
-        232,
-        71,
-        59,
-        188,
-        98,
-        74,
-        94,
+        18,
+        168,
+        45,
+        24,
+        191,
+        31,
+        117,
         54
       ],
       "accounts": [
         {
-          "name": "property",
+          "name": "creator",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "listing",
           "writable": true,
           "pda": {
             "seeds": [
               {
+                "kind": "const",
+                "value": [
+                  108,
+                  105,
+                  115,
+                  116,
+                  105,
+                  110,
+                  103
+                ]
+              },
+              {
                 "kind": "account",
-                "path": "property.property_id",
-                "account": "property"
+                "path": "creator"
+              },
+              {
+                "kind": "arg",
+                "path": "location.long"
+              },
+              {
+                "kind": "arg",
+                "path": "location.lat"
               }
             ]
           }
         },
         {
-          "name": "owner",
-          "signer": true,
-          "relations": [
-            "property"
-          ]
+          "name": "systemProgram",
+          "address": "11111111111111111111111111111111"
         }
       ],
       "args": [
         {
-          "name": "newDetails",
+          "name": "listing",
           "type": {
-            "vec": "string"
+            "defined": {
+              "name": "listingData"
+            }
           }
         }
       ]
     },
     {
-      "name": "verifyAccess",
+      "name": "updateListing",
       "discriminator": [
-        198,
-        35,
-        119,
-        166,
-        140,
-        214,
-        241,
-        222
+        192,
+        174,
+        210,
+        68,
+        116,
+        40,
+        242,
+        253
       ],
       "accounts": [
         {
-          "name": "accessRecord",
+          "name": "creator",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "listing"
+          ]
+        },
+        {
+          "name": "listing",
+          "writable": true,
           "pda": {
             "seeds": [
               {
-                "kind": "account",
-                "path": "property.property_id",
-                "account": "property"
+                "kind": "const",
+                "value": [
+                  108,
+                  105,
+                  115,
+                  116,
+                  105,
+                  110,
+                  103
+                ]
               },
               {
                 "kind": "account",
-                "path": "user"
-              }
-            ]
-          }
-        },
-        {
-          "name": "user",
-          "signer": true
-        },
-        {
-          "name": "property",
-          "pda": {
-            "seeds": [
+                "path": "creator"
+              },
               {
                 "kind": "account",
-                "path": "property.property_id",
-                "account": "property"
+                "path": "listing.location.long",
+                "account": "listing"
+              },
+              {
+                "kind": "account",
+                "path": "listing.location.lat",
+                "account": "listing"
               }
             ]
           }
         }
       ],
-      "args": []
+      "args": [
+        {
+          "name": "newLocation",
+          "type": {
+            "option": {
+              "defined": {
+                "name": "location"
+              }
+            }
+          }
+        },
+        {
+          "name": "newStatus",
+          "type": {
+            "option": {
+              "defined": {
+                "name": "listingStatus"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "voteOnListing",
+      "discriminator": [
+        58,
+        58,
+        96,
+        70,
+        32,
+        247,
+        249,
+        138
+      ],
+      "accounts": [
+        {
+          "name": "listing",
+          "writable": true
+        },
+        {
+          "name": "vote",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  108,
+                  105,
+                  115,
+                  116,
+                  105,
+                  110,
+                  103,
+                  95,
+                  118,
+                  111,
+                  116,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "listing"
+              },
+              {
+                "kind": "account",
+                "path": "voter"
+              }
+            ]
+          }
+        },
+        {
+          "name": "voter",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "systemProgram",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "isUpVote",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "voteOnListingComment",
+      "discriminator": [
+        245,
+        164,
+        225,
+        65,
+        13,
+        250,
+        38,
+        26
+      ],
+      "accounts": [
+        {
+          "name": "comment",
+          "writable": true
+        },
+        {
+          "name": "vote",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  109,
+                  109,
+                  101,
+                  110,
+                  116,
+                  95,
+                  118,
+                  111,
+                  116,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "comment"
+              },
+              {
+                "kind": "account",
+                "path": "voter"
+              }
+            ]
+          }
+        },
+        {
+          "name": "voter",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "systemProgram",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "isUpVote",
+          "type": "bool"
+        }
+      ]
     }
   ],
   "accounts": [
     {
-      "name": "property",
+      "name": "comment",
       "discriminator": [
-        195,
-        247,
-        69,
-        181,
-        195,
-        47,
-        152,
-        19
+        150,
+        135,
+        96,
+        244,
+        55,
+        199,
+        50,
+        65
       ]
     },
     {
-      "name": "propertyAccess",
+      "name": "listing",
       "discriminator": [
-        19,
-        7,
         218,
-        222,
-        166,
-        66,
-        79,
-        255
+        32,
+        50,
+        73,
+        43,
+        134,
+        26,
+        58
       ]
     },
     {
-      "name": "review",
+      "name": "vote",
       "discriminator": [
-        124,
-        63,
-        203,
-        215,
-        226,
-        30,
-        222,
-        15
+        96,
+        91,
+        104,
+        57,
+        145,
+        35,
+        172,
+        155
       ]
-    },
-    {
-      "name": "user",
-      "discriminator": [
-        159,
-        117,
-        95,
-        227,
-        239,
-        151,
-        58,
-        236
-      ]
-    }
-  ],
-  "events": [
-    {
-      "name": "locationRevealed",
-      "discriminator": [
-        103,
-        211,
-        103,
-        62,
-        164,
-        133,
-        251,
-        18
-      ]
-    },
-    {
-      "name": "rewardDistributed",
-      "discriminator": [
-        36,
-        65,
-        223,
-        38,
-        136,
-        162,
-        10,
-        30
-      ]
-    },
-    {
-      "name": "voteEvent",
-      "discriminator": [
-        195,
-        71,
-        250,
-        105,
-        120,
-        119,
-        234,
-        134
-      ]
-    }
-  ],
-  "errors": [
-    {
-      "code": 6000,
-      "name": "insufficientFunds",
-      "msg": "Insufficient Funds"
-    },
-    {
-      "code": 6001,
-      "name": "overflow",
-      "msg": "Overflow occurred during token operations"
-    },
-    {
-      "code": 6002,
-      "name": "unauthorizedAccess",
-      "msg": "Unauthorized Access"
     }
   ],
   "types": [
     {
-      "name": "locationRevealed",
-      "type": {
-        "kind": "struct",
-        "fields": [
-          {
-            "name": "renter",
-            "type": "pubkey"
-          },
-          {
-            "name": "feePaid",
-            "type": "u64"
-          },
-          {
-            "name": "remainingBalance",
-            "type": "u64"
-          }
-        ]
-      }
-    },
-    {
-      "name": "property",
+      "name": "comment",
       "type": {
         "kind": "struct",
         "fields": [
@@ -455,154 +407,153 @@ export type OpenHouse = {
             "type": "pubkey"
           },
           {
-            "name": "propertyId",
-            "type": "string"
-          },
-          {
-            "name": "details",
-            "type": {
-              "vec": "string"
-            }
-          },
-          {
-            "name": "encryptedLocation",
-            "type": "bytes"
-          }
-        ]
-      }
-    },
-    {
-      "name": "propertyAccess",
-      "type": {
-        "kind": "struct",
-        "fields": [
-          {
-            "name": "propertyId",
-            "type": "string"
-          },
-          {
-            "name": "user",
+            "name": "listing",
             "type": "pubkey"
           },
-          {
-            "name": "timestamp",
-            "type": "i64"
-          }
-        ]
-      }
-    },
-    {
-      "name": "review",
-      "type": {
-        "kind": "struct",
-        "fields": [
           {
             "name": "content",
             "type": "string"
           },
           {
-            "name": "votes",
+            "name": "voteCount",
             "type": "i64"
           },
           {
-            "name": "propertyId",
-            "type": "string"
-          },
-          {
-            "name": "renter",
-            "type": "pubkey"
-          },
-          {
-            "name": "votedUsers",
-            "type": {
-              "vec": "pubkey"
-            }
+            "name": "bump",
+            "type": "u8"
           }
         ]
       }
     },
     {
-      "name": "rewardDistributed",
+      "name": "listing",
       "type": {
         "kind": "struct",
         "fields": [
           {
-            "name": "scout",
+            "name": "creator",
             "type": "pubkey"
           },
           {
-            "name": "amount",
-            "type": "u64"
-          },
-          {
-            "name": "previousBalance",
-            "type": "u64"
-          },
-          {
-            "name": "newBalance",
-            "type": "u64"
-          }
-        ]
-      }
-    },
-    {
-      "name": "user",
-      "type": {
-        "kind": "struct",
-        "fields": [
-          {
-            "name": "tokens",
-            "type": "u64"
-          },
-          {
-            "name": "upvotes",
-            "type": "u64"
-          },
-          {
-            "name": "key",
-            "type": "pubkey"
-          }
-        ]
-      }
-    },
-    {
-      "name": "voteEvent",
-      "type": {
-        "kind": "struct",
-        "fields": [
-          {
-            "name": "review",
-            "type": "pubkey"
-          },
-          {
-            "name": "voter",
-            "type": "pubkey"
-          },
-          {
-            "name": "voteType",
+            "name": "location",
             "type": {
               "defined": {
-                "name": "voteType"
+                "name": "location"
               }
             }
           },
           {
-            "name": "newVoteCount",
+            "name": "created",
             "type": "i64"
+          },
+          {
+            "name": "updated",
+            "type": "i64"
+          },
+          {
+            "name": "status",
+            "type": {
+              "defined": {
+                "name": "listingStatus"
+              }
+            }
+          },
+          {
+            "name": "voteCount",
+            "type": "i16"
           }
         ]
       }
     },
     {
-      "name": "voteType",
+      "name": "listingData",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "location",
+            "type": {
+              "defined": {
+                "name": "location"
+              }
+            }
+          },
+          {
+            "name": "creator",
+            "type": "pubkey"
+          },
+          {
+            "name": "created",
+            "type": "i64"
+          },
+          {
+            "name": "updated",
+            "type": "i64"
+          },
+          {
+            "name": "status",
+            "type": {
+              "defined": {
+                "name": "listingStatus"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "listingStatus",
       "type": {
         "kind": "enum",
         "variants": [
           {
-            "name": "upvote"
+            "name": "active"
           },
           {
-            "name": "downvote"
+            "name": "sold"
+          },
+          {
+            "name": "deleted"
+          }
+        ]
+      }
+    },
+    {
+      "name": "location",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "long",
+            "type": "u64"
+          },
+          {
+            "name": "lat",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "vote",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "owner",
+            "type": "pubkey"
+          },
+          {
+            "name": "target",
+            "type": "pubkey"
+          },
+          {
+            "name": "isUpvote",
+            "type": "bool"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
           }
         ]
       }

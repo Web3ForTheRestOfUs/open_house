@@ -1,16 +1,18 @@
+[toolchain]
+
 [features]
-seeds = false
+resolution = true
 skip-lint = false
 
-[programs.testnet]
-open_house = "H1L8bkSuCsSvs7ZMzHtLaA6iK4zZhCKxkLhx7VfUpA9x"
+[programs.devnet]
+open_house = "AtYkYubaFzxfaKkU6DUa4RK1U9DC8krqaNyEA9e9RNmW"
 
 [registry]
 url = "https://api.apr.dev"
 
 [provider]
-cluster = "https://rpc.testnet.soo.network/rpc"
-wallet = "~/.config/solana/soon.json"
+cluster = "Localnet"
+wallet = "~/.config/solana/id.json"
 
 [scripts]
 test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"

@@ -1,61 +1,75 @@
 use anchor_lang::prelude::*;
-declare_id!("H1L8bkSuCsSvs7ZMzHtLaA6iK4zZhCKxkLhx7VfUpA9x");
+use crate::state::listing::{ ListingData, ListingStatus, Location };
+use crate::instructions::listing::{ create::*, update::*, vote::* };
+use crate::instructions::comment::create::*;
 
-pub mod property_registry;
-pub mod review_system;
-pub mod token_management;
-pub mod space;
+pub mod state;
+pub mod instructions;
+pub mod constants;
 
-
-use property_registry::*;
-use review_system::*;
-use token_management::*;
+declare_id!("AtYkYubaFzxfaKkU6DUa4RK1U9DC8krqaNyEA9e9RNmW");
 
 #[program]
 pub mod open_house {
     use super::*;
 
-    pub fn register_property(
-        ctx: Context<RegisterProperty>,
-        property_id: String,
-        details: Vec<String>,
-        encrypted_location: Vec<u8>,
-    ) -> Result<()> {
-        property_registry::register_property(ctx, property_id, details, encrypted_location)
+    pub fn create_listing(ctx: Context<CreateListing>, listing: ListingData) -> Result<()> {
+        instructions::listing::create::create_listing(ctx, listing)
     }
 
-    pub fn update_property(
-        ctx: Context<UpdateProperty>,
-        new_details: Vec<String>,
+    pub fn update_listing(
+        ctx: Context<UpdateListing>,
+        new_location: Option<Location>,
+        new_status: Option<ListingStatus>
     ) -> Result<()> {
-        property_registry::update_property(ctx, new_details)
+        instructions::listing::update::update_listing(ctx, new_location, new_status)
     }
 
-    pub fn submit_review(
-        ctx: Context<SubmitReview>,
-        review_content: String,
-        property_id: String,
-    ) -> Result<()> {
-        review_system::submit_review(ctx, review_content, property_id)
+    pub fn vote_on_listing(ctx: Context<VoteOnListing>, is_up_vote: bool) -> Result<()> {
+        if is_up_vote {
+            return instructions::listing::vote::up_vote_listing(ctx);
+        } else {
+            return instructions::listing::vote::down_vote_listing(ctx);
+        }
     }
 
-    pub fn distribute_rewards(
-        ctx: Context<DistributeRewards>,
-        amount: u64,
-    ) -> Result<()> {
-        token_management::distribute_rewards(ctx, amount)
+    pub fn vote_on_listing_comment(ctx: Context<VoteOnComment>, is_up_vote: bool) -> Result<()> {
+        if is_up_vote {
+            return instructions::listing::vote::up_vote_comment(ctx);
+        } else {
+            return instructions::listing::vote::down_vote_comment(ctx);
+        }
     }
 
-    pub fn handle_location_reveal(
-        ctx: Context<HandleLocationReveal>,
-        fee: u64,
-    ) -> Result<()> {
-        token_management::handle_location_reveal(ctx, fee)
-    }
-
-    pub fn verify_access(
-        ctx: Context<VerifyAccess>,
-    ) -> Result<()> {
-        token_management::verify_access(ctx)
+    pub fn create_comment(ctx: Context<CreateComment>, content: String) -> Result<()> {
+        instructions::comment::create::create_comment(ctx, content)
     }
 }
+
+// property_id: String,
+// verify_access
+// handle location reveal
+// submit_review(
+// distribute_rewards(
+
+// #[derive(AnchorSerialize, AnchorDeserialize, Clone)]
+// pub enum VoteType {
+//     Upvote,
+//     Downvote,
+// }
+
+// #[account]
+// try to implement initspace later, feels cleaner
+// pub struct Review {
+//     pub content: String,
+//     pub votes: i64,
+//     pub property_id: String,
+//     pub renter: Pubkey,
+//     pub voted_users: Vec<Pubkey>,
+// }
+
+// Validate property ID length
+//   require!(
+//     property_id.len() <= MAX_PROPERTY_ID_LENGTH,
+//     CustomError::PropertyIdTooLong);
+// do we need a property id?
