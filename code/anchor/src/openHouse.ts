@@ -18,9 +18,10 @@ export function getCounterProgramId(cluster: Cluster) {
   switch (cluster) {
     case 'devnet':
     case 'testnet':
-      return new PublicKey('H1L8bkSuCsSvs7ZMzHtLaA6iK4zZhCKxkLhx7VfUpA9x');
+      return new PublicKey('4A6rJDG44QbfBsYByLbHV31RrBADVSimesYjTqCdUGpE');
     case 'mainnet-beta':
     default:
       return PROGRAM_ID;
   }
 }
+
